@@ -1,14 +1,26 @@
-## EMu Data Prep Script -- to prep exported table-field data for re-import
-#...in cases where need to overwrite whole table
-#   (in order to not duplicate rows/get stuff out of sync if nested/multivalue-table)
+## collections-dashboard-prep
+#  Prep accessions data from EMu for dashboard-prep
+#
+# 1) In EMu, retrieve Accession records for dashboard, 
+#       06-Apr-2017 dataset includes all efmnhtransactions records where:
+#           AccAccessionNo = \*
+#
+# 2) Report them out with "Dashboard v2" report
+#       - see collections-dashboard "Help" page for details on which fields are included in report
+#       - If under 200k records, report all at one time.
+#       - Don't rename reported files. Keep them together in one folder.
+#
+# 3) Run this script  
+#       - NOTE: May need to re-set working directory to folder containing reported csv's
+#         (see line 22)
 
-# install.packages("tidyr")  # uncomment if not already installed
-detach("package:plyr")
-library("tidyr")
-library("dplyr")
-# point to your csv's directory
-setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest\\accessions")
+print(paste(date(), "-- starting Accession data import"))
 
+detach("package:plyr")  # uncomment this if plyr/dplyr functions misbehave
+
+
+# point to the directory containg the set of "Group" csv's from EMu
+setwd(paste0(getwd(),"/data01raw/emuAcc"))
 
 
 # Import raw EMu Accession data ####
@@ -81,10 +93,11 @@ IPTaccBL1 <- IPTacc[which(IPTacc$backlog >= 0),]
 AccGeographyLUT <- as.data.frame(cbind("WhereLUT"=as.character(IPTaccBL1$AccGeography)), stringsAsFactors = F)
 AccGeographyLUT <- unique(AccGeographyLUT)
 
-setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest")
+#setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest")
+setwd("..")  # up to /collprep/data01raw/
 write.csv(AccGeographyLUT, file="AccGeographyLUT.csv", row.names = F)
 
-setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest\\accessions")
+#setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest\\accessions")
 
 
 # check & split duplicate Botany records
@@ -145,7 +158,7 @@ IPTaccBL1mult2$AccGeography <- IPTaccBL1mult2$AccGeogConcat
 
 
 #  If add AccCatalogueNo field:  ####
-#  NEED TO ADJUST column numbers in the rbind section below
+#  May NEED TO ADJUST column numbers in the rbind section below
 
 
 # rbind dup & single datasets back together
@@ -170,6 +183,11 @@ IPTaccBL3 <- merge(IPTaccBL2, IPTbasOfRec, by="efmnhtransactions_key", all.x=T)
 # subset only the columns needed for subsequent calculations
 IPTaccBL3 <- IPTaccBL3[,-1]
 
+#setwd(paste0(getwd(), "/emuAcc"))
 # export &/or prep for rbind with cat data
-setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest")
-write.csv(IPTaccBL3, file="AccBacklog.csv", row.names = F)
+write.csv(IPTaccBL3, file="AccBacklogBU.csv", row.names = F, na = "")
+
+#setwd("..")  # up to /collprep/data01raw/
+setwd("..")  # up to /collprep/
+
+print(paste(date(), "-- finishing Accession data import"))

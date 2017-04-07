@@ -8,57 +8,45 @@ print(paste(date(), "-- merging Accessions & Catalogue data"))
 setwd(paste0(getwd(),"/data01raw"))
 
 # Import raw EMu data ####
-CatDash2 <- read.csv(file="CatDash4BU.csv", stringsAsFactors = F, na.strings = "")
+#CatDash2 <- read.csv(file="CatDash3BU_old.csv", stringsAsFactors = F, na.strings = "")
+if (exists("CatDash03")==TRUE) {
+  CatDash2 <- CatDash03
+  } else {
+    CatDash2 <- read.csv(file="CatDash03bu.csv", stringsAsFactors = F, na.strings = "")
+  }
 
 
-# Merge any missing columns, e.g.:
+# Merge any other missing columns, e.g.: 
+#  NOTE -- (Try to restrict this to dash010 script)
+
 #IPTlatlon <- read.csv(file="dashbdLatLong.csv")
 #IPTlatlon <- IPTlatlon[,2:4]
 #CatDash2 <- merge(IPTlatlon, CatDash2, by="irn", all.y=T)
 #rm(IPTlatlon)
-
-DescDarRelated <- read.csv(file="ecat3DarRelIn.csv", stringsAsFactors = F)
-DescDarRelated <- DescDarRelated[,3:4]
-CatDash2 <- merge(CatDash2, DescDarRelated, by="irn", all.x=T)
-rm(DescDarRelated)
 
 
 CatDash3 <- unique(CatDash2)
 #check <- dplyr::count(CatDash3, irn)
 
 
-taxlist = list.files(path="./catTaxClaRank/", pattern="dashbd.*")
-setwd("./catTaxClaRank/")
-CatTaxClaRank <- do.call(rbind, lapply(taxlist, read.csv))
-setwd("..")
-CatTaxClaRank <- CatTaxClaRank[,3:4]
-CatTaxClaRank$ClaRank <- as.character(CatTaxClaRank$ClaRank)
-CatTaxClaRank <- unique(CatTaxClaRank)
-# if somehow can't filter out all duplicate irn's, take only "1st"
-CatTaxClaRank <- CatTaxClaRank[order(CatTaxClaRank$irn),]
-CatTaxClaRank$irnseq <- sequence(rle(as.character(CatTaxClaRank$irn))$lengths)
-CatTaxClaRank <- CatTaxClaRank[which(CatTaxClaRank$irnseq==1),]
-CatTaxClaRank <- CatTaxClaRank[,1:2]
+#taxlist = list.files(path="./catTaxClaRank/", pattern="dashbd.*")
+#setwd("./catTaxClaRank/")
+#CatTaxClaRank <- do.call(rbind, lapply(taxlist, read.csv))
+#setwd("..")
+#CatTaxClaRank <- CatTaxClaRank[,3:4]
+#CatTaxClaRank$ClaRank <- as.character(CatTaxClaRank$ClaRank)
+#CatTaxClaRank <- unique(CatTaxClaRank)
+## if somehow can't filter out all duplicate irn's, take only 1st
+## NOTE -- should actually add EMu field + filter for "IdeFiledAs_tab"=="Yes"
+#CatTaxClaRank <- CatTaxClaRank[order(CatTaxClaRank$irn),]
+#CatTaxClaRank$irnseq <- sequence(rle(as.character(CatTaxClaRank$irn))$lengths)
+#CatTaxClaRank <- CatTaxClaRank[which(CatTaxClaRank$irnseq==1),]
+#CatTaxClaRank <- CatTaxClaRank[,1:2]
 
-CatDash3 <- merge(CatDash3, CatTaxClaRank, by="irn", all.x=T)
-rm(taxlist)
+#CatDash3 <- merge(CatDash3, CatTaxClaRank, by="irn", all.x=T)
+#rm(taxlist)
 
-CatDash3 <- unique(CatDash3)
-
-
-# Merge EconBotany "Name of Object" Field:
-ecblist = list.files(path="./catEconBot/", pattern="dashbd.*")
-setwd("./catEconBot/")
-CatEconBot <- do.call(rbind, lapply(ecblist, read.csv))
-setwd("..")
-CatEconBot <- CatEconBot[,3:4]
-CatEconBot$EcbNameOfObject <- as.character(CatEconBot$EcbNameOfObject)
-CatEconBot <- unique(CatEconBot)
-
-CatDash3 <- merge(CatDash3, CatEconBot, by="irn", all.x=T)
-rm(ecblist)
-
-CatDash3 <- unique(CatDash3)
+#CatDash3 <- unique(CatDash3)
 
 
 # Add/Adjust columns for Quality calculation
@@ -83,8 +71,15 @@ CatDash3$TaxIDRank[which(CatDash3$ClaRank %in% phylum)] <- "Phylum"
 CatDash3$TaxIDRank[which(CatDash3$ClaRank == "Kingdom")] <- "Kingdom"
 
 
-# Import Accession data
-AccDash1 <- read.csv(file="AccBacklog.csv", stringsAsFactors = F, na.strings = "")
+
+# Import Accession data ####
+
+if (exists("IPTaccBL3")==TRUE) {
+  AccDash1 <- IPTaccBL3
+} else {
+  AccDash1 <- read.csv(file="AccBacklogBU.csv", stringsAsFactors = F, na.strings = "")
+}
+
 
 # Map Acc fields to Cat fields
 AccDash2 <- as.data.frame(cbind("irn" = AccDash1$irn,
@@ -92,13 +87,13 @@ AccDash2 <- as.data.frame(cbind("irn" = AccDash1$irn,
                                 "DarContinent" = AccDash1$LocContinent_tab,
                                 "DarWaterBody" = AccDash1$LocOcean_tab,
                                 "DarCollectionCode" = AccDash1$AccCatalogue,
-                                #                                "DesKDescription0" = paste(AccDash1$AccAccessionDescription,"|",AccDash1$AccDescription),
+                              # "DesKDescription0" = paste(AccDash1$AccAccessionDescription,"|",AccDash1$AccDescription),
                                 "AccDescription" = AccDash1$AccDescription,
                                 "AccDescription2" = AccDash1$AccAccessionDescription,
                                 "DarIndividualCount"= as.numeric(AccDash1$CatTotal),
-                                #                                "AccTotalObjects"= AccDash1$AccTotalObjects,
-                                #                                "AccTotBothItOb"= as.integer(0),
-                                #                                "AccTotalObjects" = AccDash1$AccTotalObjects,
+                               # "AccTotalObjects"= AccDash1$AccTotalObjects,
+                               # "AccTotBothItOb"= as.integer(0),
+                               # "AccTotalObjects" = AccDash1$AccTotalObjects,
                                 "AccLocality" = AccDash1$AccLocality,
                                 "AccGeography" = AccDash1$AccGeography,
                                 "AccCatalogueNo" = AccDash1$AccCatalogueNo,
