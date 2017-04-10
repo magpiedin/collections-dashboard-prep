@@ -15,11 +15,9 @@ To run Master.R in RStudio:
 
 
 ### Notes about fields in the raw input data
-Datasets here were exported from the FMNH EMu collections database. 
+Datasets here were exported from the FMNH EMu collections database. Darwin Core fields were used when possible, but not all fields mapped directly to Darwin Core fields.  For example, "description" fields in accession records often includes information about "Where" as well as about "What".
 
-Darwin Core fields were used when possible, but not all fields mapped directly to Darwin Core fields.  For example, "description" fields in accession records often includes information about "Where" as well as about "What".
-
-The full list of ecatalogue fields is as follows:
+#### The full list of ecatalogue fields is as follows:
 + _Core and Quality-related fields:_
  - irn
  - DarGlobalUniqueIdentifier
@@ -62,7 +60,7 @@ The full list of ecatalogue fields is as follows:
  - DarYearCollected
  - DarMonthCollected
 
-The full list of efmnhtransactions (accession record) fields is as follows:
+#### The full list of efmnhtransactions (accession record) fields is as follows:
 + _Count-related fields (used for calculating backlogged items):_
  - irn
  - AccCatalogue
