@@ -184,7 +184,7 @@ WhenDash3 <- dplyr::select(WhenDash3, -c(WhenAgeMin,WhenAgeMax))
 Depts <- read.csv(file="Departments.csv", stringsAsFactors = F)
 Depts2 <- CatDash3[,c("irn","RecordType","DarCollectionCode", "DarYearCollected")]
 Depts3 <- merge(Depts2, Depts, by=c("DarCollectionCode"), all.x=T)
-Depts3 <- Depts3[,c("irn","RecordType","DarYearCollected")]
+Depts3 <- Depts3[,c("irn","RecordType","DarYearCollected","Department")]
 
 WhenDash4 <- merge(WhenDash3, Depts3, by=c("irn","RecordType"), all.x=T)
 rm(Depts, Depts2, Depts3)
@@ -202,7 +202,25 @@ WhenDash4$Order <- .bincode(WhenDash4$WhenAgeMid, WhenChart$From, right=F, inclu
 
 WhenChart <- WhenChart[,3:4]
 WhenDash5 <- merge(WhenDash4, WhenChart, by="Order", all.x=T)
+WhenDash5 <- select(WhenDash5, -Department)
 colnames(WhenDash5)[c(1,NCOL(WhenDash5))] <- c("WhenOrder","WhenTimeLabel")
+
+WhenDash5$WhenAgeFrom[is.na(WhenDash5$WhenAgeFrom)==T] <- ""
+WhenDash5$WhenAgeFrom[which((WhenDash5$WhenAgeFrom)=="NA")] <- ""
+WhenDash5$WhenAgeTo[is.na(WhenDash5$WhenAgeTo)==T] <- ""
+WhenDash5$WhenAgeTo[which((WhenDash5$WhenAgeTo)=="NA")] <- ""
+WhenDash5$WhenAgeMid[is.na(WhenDash5$WhenAgeMid)==T] <- ""
+WhenDash5$WhenAgeMid[which((WhenDash5$WhenAgeMid)=="NA")] <- ""
+
+WhenDash5$WhenOrder[is.na(WhenDash5$WhenOrder)==T] <- ""
+WhenDash5$WhenOrder[which((WhenDash5$WhenOrder)=="NA")] <- ""
+
+WhenDash5$WhenTimeLabel[is.na(WhenDash5$WhenTimeLabel)==T] <- ""
+WhenDash5$WhenTimeLabel[which((WhenDash5$WhenTimeLabel)=="NA")] <- ""
+
+WhenDash5$DarYearCollected[is.na(WhenDash5$DarYearCollected)==T] <- ""
+WhenDash5$DarYearCollected[which((WhenDash5$DarYearCollected)=="NA")] <- ""
+
 
 
 # p2 -- &/or re-insert AttPeriod_tab which(grep("\\d{3,4}" ==1) ... smooth that out?
