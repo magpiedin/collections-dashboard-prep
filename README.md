@@ -20,7 +20,7 @@ Datasets here were exported from the FMNH EMu collections database.
 Darwin Core fields were used when possible, but not all fields mapped directly to Darwin Core fields.  For example, "description" fields in accession records often includes information about "Where" as well as about "What".
 
 The full list of ecatalogue fields is as follows:
-_Core and Quality-related fields:_
++ _Core and Quality-related fields:_
  - irn
  - DarGlobalUniqueIdentifier
  - CatDepartment
@@ -33,16 +33,16 @@ _Core and Quality-related fields:_
  - DarImageURL (to be replaced by "MulHasMultiMedia")
  - DarCollector
  - CatLegalStatus
-_Where-related fields:_
++ _Where-related fields:_
  - DarLatitude
  - DarLongitude
  - DarCountry
  - DarContinent
  - DarContinentOcean
  - DarWaterBody
-_Who-related fields:_
++ _Who-related fields:_
  - DesEthnicGroupSubgroup_tab
-_What-related fields:_
++ _What-related fields:_
  - EcbNameOfObject
  - DesMaterials_tab
  - DarOrder
@@ -52,7 +52,7 @@ _What-related fields:_
  - DarRelatedInformation
  - CatProject_tab
  - IdeFiledAs_tab (to be added)
-_WhenAge-related fields:_
++ _WhenAge-related fields:_
  - DarEarliestAge
  - DarEarliestEon
  - DarEarliestEpoch
@@ -63,7 +63,7 @@ _WhenAge-related fields:_
  - DarMonthCollected
 
 The full list of efmnhtransactions (accession record) fields is as follows:
-_Core, quality- and count-related fields:_
++ _Count-related fields (used for calculating backlogged items):_
  - irn
  - AccCatalogue
  - AccTotalItems
@@ -74,8 +74,10 @@ _Core, quality- and count-related fields:_
  - PriAccessionNumberRef.irn
  - PriAccessionNumberRef.DarBasisOfRecord
  - PriAccessionNumberRef.CatItemsInv
++ _What- & Who-related fields:_
  - AccDescription_tab
  - AccAccessionDescription
++ _Where-related fields:_
  - AccGeography_tab
  - AccLocality
  - AccCollectionEventRef.ColSiteRef.LocContinent_tab
