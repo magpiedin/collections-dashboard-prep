@@ -8,194 +8,50 @@ print(paste(date(), "-- started setting up 'Who' data."))
 setwd(paste0(getwd(),"/data01raw"))
 
 
-#  Who LUTs ####
+#  Who ####
 #  1-Who: Clean "Who" fields
 
 WhoDashBU <- FullDash3[,c("irn", "RecordType", "DesEthnicGroupSubgroup_tab", "EcbNameOfObject")]
 WhoDash <- WhoDashBU
 
 date() 
-WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub("^NA$|[/()?]|\\[\\]", " ", x, ignore.case = T))
+WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub("^NA$|^'| a |[/()?]|\\[\\]|probably", " ", x, ignore.case = T))
 WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub(", | - |;", " | ", x))
 WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub("\\s+", " ", x))
 WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub("^\\s+|\\s+$", "", x))
+WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub("^NA$|^NANA$", "", x, ignore.case = T))
 date()
 
 
-WhoDash$DesEthnicGroupSubgroup_tab <- sapply (WhoDash$DesEthnicGroupSubgroup_tab, simpleCap)
-WhoDash$DesEthnicGroupSubgroup_tab <- gsub("^Na$|NANA", "", WhoDash$DesEthnicGroupSubgroup_tab)
+WhoDash$DesEthnicGroupSubgroup_tab <- gsub("^Na ", "North American ", WhoDash$DesEthnicGroupSubgroup_tab, ignore.case = T)
+WhoDash$DesEthnicGroupSubgroup_tab[which(substr(WhoDash$DesEthnicGroupSubgroup_tab,1,1)!="!")] <- sapply(WhoDash$DesEthnicGroupSubgroup_tab[which(substr(WhoDash$DesEthnicGroupSubgroup_tab,1,1)!="!")], simpleCap)
 
+WhoDash$EcbNameOfObject[is.na(WhoDash$EcbNameOfObject)==T] <- ""
 WhoDash$EcbNameOfObject <- sapply (WhoDash$EcbNameOfObject, simpleCap)
-WhoDash$EcbNameOfObject <- gsub("^Na$|NANA", "", WhoDash$EcbNameOfObject)
 date()
 
 
-#  2-When: calculate numeric date
-#WhenDash$DateFrom <- as.numeric(WhenDash$AttPeriod_tab)
-WhenDash$Date <- as.numeric(0)
-WhenDash$Date[which(grepl("[Dd]ynasty", WhenDash$AttPeriod_tab)<1)] <- gsub("[[:alpha:]]", "", WhenDash$AttPeriod_tab[which(grepl("[Dd]ynasty", WhenDash$AttPeriod_tab)<1)])
-WhenDash$Date[which(grepl("\\d{3,4}", WhenDash$AttPeriod_tab)>0)] <- gsub("[[:alpha:]]", "", WhenDash$AttPeriod_tab[which(grepl("\\d{3,4}", WhenDash$AttPeriod_tab)>0)])
-
-AttPerLUT <- data.frame("AttPer" = levels(as.factor(WhenDash$AttPeriod_tab[which(WhenDash$DateFrom==0)])))
-AttCheck <- dplyr::count(WhenDash, AttPeriod_tab)
-AttCheck2 <- AttCheck[which(AttCheck$AttPeriod_tab %in% AttPerLUT$AttPer),]
-
-WhenDash$Date <- gsub("\\s+", " ", WhenDash$Date)
-WhenDash$Date <- gsub("^\\s+|\\s+$", "", WhenDash$Date)
-
-WhenDash$DateBU <- WhenDash$Date  # remove this if not needed
-WhenDash <- WhenDash %>% separate(Date, c("DateFrom", "DateTo"), sep=" ", extra="merge")
-WhenDash$DateFrom <- as.numeric(WhenDash$DateFrom)
-WhenDash$DateTo <- as.numeric(WhenDash$DateTo)
-WhenDash$DateFrom[which(grepl("[Bb]c", WhenDash$AttPeriod_tab)>0)] <- -1 * WhenDash$DateFrom[which(grepl("[Bb]c", WhenDash$AttPeriod_tab)>0)]
-WhenDash$DateTo[which(grepl("[Bb]c", WhenDash$AttPeriod_tab)>0)] <- -1 * WhenDash$DateTo[which(grepl("[Bb]c", WhenDash$AttPeriod_tab)>0)]
+#  2-Wh0 LUTs ####
+# unsplit = 2907
+WhoLUT <- data.frame("WhoLUT" = WhoDash$DesEthnicGroupSubgroup_tab[which(nchar(WhoDash$DesEthnicGroupSubgroup_tab)>1 & is.na(WhoDash$DesEthnicGroupSubgroup_tab)==F )], stringsAsFactors = F)
+WhoLUT <- strsplit(WhoLUT$WhoLUT, "\\|")
+WhoLUT <- data.frame("WhoLUT" = unlist(WhoLUT), stringsAsFactors = F)
+WhoLUT$WhoLUT <- gsub("^\\s+|\\s+$", "", WhoLUT$WhoLUT)
+WhoCount <- dplyr::count(WhoLUT, WhoLUT)
+WhoCount <- WhoCount[which(WhoCount$n > 2),]
+WhoLUT <- data.frame("WhoLUT" = unique(WhoLUT[which((WhoLUT$WhoLUT %in% WhoCount$WhoLUT) &
+                                                     nchar(WhoLUT$WhoLUT)>1),]),
+                     stringsAsFactors = F)
 
 
-AttPerLUT <- as.data.frame(levels(as.factor(WhenDash$AttPeriod_tab[which((abs(WhenDash$DateFrom + WhenDash$DateTo)<1 | is.na(WhenDash$DateFrom)+is.na(WhenDash$DateTo)==2) & nchar(WhenDash$AttPeriod_tab)>2)])))
-AttPerLUT2 <- dplyr::count(WhenDash, AttPeriod_tab)
-AttPerLUT2 <- AttPerLUT2[which(AttPerLUT2$n>100),]
-
-# # # # # # # # 
-
-# 00 -- TOO MUCH; one more pass to clean AttPeriod_tab -- WD$AttPeriod_tab[which(grepl(kinda matches WhenLUT)>0] -- leave messy data as is
-
-# 0 -- merge geo & anthro Chrono & AttPer fields --> one column, WhenAge
-
-WhenDash$DarEarliestEon[which(nchar(WhenDash$DarEarliestEon)<3)] = NA
-WhenDash$DarEarliestEra[which(nchar(WhenDash$DarEarliestEra)<3)] = NA
-WhenDash$DarEarliestPeriod[which(nchar(WhenDash$DarEarliestPeriod)<3)] = NA
-WhenDash$DarEarliestEpoch[which(nchar(WhenDash$DarEarliestEpoch)<3)] = NA
-WhenDash$DarEarliestAge[which(nchar(WhenDash$DarEarliestAge)<3)] = NA
-WhenDash$col <- 0
-WhenDash$col <- is.na(WhenDash$DarEarliestEon) + is.na(WhenDash$DarEarliestEra) + is.na(WhenDash$DarEarliestPeriod) + is.na(WhenDash$DarEarliestEpoch) + is.na(WhenDash$DarEarliestAge)
-WhenDash$WhenAge <- ""
-WhenDash$WhenAge[which(WhenDash$col==0)] <- WhenDash$DarEarliestAge[which(WhenDash$col==0)]
-WhenDash$WhenAge[which(WhenDash$col==1)] <- WhenDash$DarEarliestEpoch[which(WhenDash$col==1)]
-WhenDash$WhenAge[which(WhenDash$col==2)] <- WhenDash$DarEarliestPeriod[which(WhenDash$col==2)]
-WhenDash$WhenAge[which(WhenDash$col==3)] <- WhenDash$DarEarliestEra[which(WhenDash$col==3)]
-WhenDash$WhenAge[which(WhenDash$col==4)] <- WhenDash$DarEarliestEon[which(WhenDash$col==4)]
-
-WhenDash$AttPeriod_tab[which(nchar(WhenDash$AttPeriod_tab)<2 | WhenDash$AttPeriod_tab=="NANA")] = NA
-WhenDash$WhenAge[which(is.na(WhenDash$AttPeriod_tab)==F)] <- WhenDash$AttPeriod_tab[which(is.na(WhenDash$AttPeriod_tab)==F)]
-
-# fill in missing dates by:
-# 1 -- merge with WhenLUTs 
-
-AgeAnthroLUT <- read.csv(file="WhenAttPerLUT.csv", stringsAsFactors = F)
-
-AgeGeoLUT <- read.csv(file="WhenChronoLUTemu.csv", stringsAsFactors = F)
-AgeGeoLUT$Eon[which(nchar(AgeGeoLUT$Eon)<1)] = NA
-AgeGeoLUT$Era[which(nchar(AgeGeoLUT$Era)<1)] = NA
-AgeGeoLUT$Period[which(nchar(AgeGeoLUT$Period)<1)] = NA
-AgeGeoLUT$Epoch[which(nchar(AgeGeoLUT$Epoch)<1)] = NA
-AgeGeoLUT$Age[which(nchar(AgeGeoLUT$Age)<1)] = NA
-AgeGeoLUT$col <- 0
-AgeGeoLUT$col <- is.na(AgeGeoLUT$Eon) + is.na(AgeGeoLUT$Era) + is.na(AgeGeoLUT$Period) + is.na(AgeGeoLUT$Epoch) + is.na(AgeGeoLUT$Age)
-AgeGeoLUT$WhenLUT <- ""
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==0)] <- AgeGeoLUT$Age[which(AgeGeoLUT$col==0)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==1)] <- AgeGeoLUT$Epoch[which(AgeGeoLUT$col==1)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==2)] <- AgeGeoLUT$Period[which(AgeGeoLUT$col==2)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==3)] <- AgeGeoLUT$Era[which(AgeGeoLUT$col==3)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==4)] <- AgeGeoLUT$Eon[which(AgeGeoLUT$col==4)]
-
-AgeGeoLUT2 <- unique(AgeGeoLUT[which(is.na(AgeGeoLUT$WhenLUT)==F),c("WhenLUT", "DateFrom", "DateTo")])
-AgeGeoLUT2$DateFrom[which(AgeGeoLUT2$WhenLUT=="Eoarchean")] <- -4000000000
-AgeGeoLUT2$DateFrom[which(AgeGeoLUT2$WhenLUT=="Archean")] <- -4000000000
-AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("[[:punct:]]", " ", x))
-AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("\\s+", " ", x))
-AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("^\\s+|\\s+$", " ", x))
+#  3-Concat 'Who' data ####
+WhoDash2 <- unite(WhoDash, "Who", DesEthnicGroupSubgroup_tab:EcbNameOfObject, sep=" | ", remove=TRUE)
+WhoDash2$Who <- gsub("^ \\| $", "NA", WhoDash2$Who)
+#FullDash3 <- subset(FullDash3, select=-c(DarCountry, DarContinent, DarContinentOcean, DarWaterBody, AccLocality, AccGeography))
 
 
-#AttPeriodLUT <- data.frame("WhenLUT" = levels(as.factor(WhenDash$AttPeriod_tab)), stringsAsFactors = F)
-#AttPeriodLUT <- unique(AttPeriodLUT)
-
-WhenAgeLUT <- rbind(AgeGeoLUT2, AgeAnthroLUT)
-WhenAgeLUT <- unique(WhenAgeLUT)
-WhenAgeLUTcheck <- dplyr::count(WhenAgeLUT, WhenLUT)
-WhenAgeLUTcheck <- WhenAgeLUTcheck[which(WhenAgeLUTcheck$n>1),]
-WhenAgeLUT <- WhenAgeLUT[order(WhenAgeLUT$WhenLUT),]
-WhenAgeLUT$seq <- sequence(rle(as.character(WhenAgeLUT$WhenLUT))$lengths)
-WhenAgeLUT <- WhenAgeLUT[which(WhenAgeLUT$seq==1),]
-WhenAgeLUT <- WhenAgeLUT[,-4]
-WhenAgeLUT$WhenLUT <- sapply (WhenAgeLUT$WhenLUT, simpleCap)
-
-
-WhenDash2 <- merge(WhenDash, WhenAgeLUT, by.x="WhenAge", by.y="WhenLUT", all.x=T)
-
-NROW(WhenDash2[which(abs(WhenDash2$DateFrom.x)<1),])
-NROW(WhenDash2[which(abs(WhenDash2$DateTo.x)<1),])
-
-WhenDash2$DateFrom.x[which(abs(WhenDash2$DateFrom.x)<1 | is.na(WhenDash2$DateFrom.x)==T)] <- WhenDash2$DateFrom.y[which(abs(WhenDash2$DateFrom.x)<1  | is.na(WhenDash2$DateFrom.x)==T)]
-WhenDash2$DateTo.x[which(abs(WhenDash2$DateTo.x)<1 | is.na(WhenDash2$DateTo.x)==T)] <- WhenDash2$DateTo.y[which(abs(WhenDash2$DateTo.x)<1 | is.na(WhenDash2$DateTo.x)==T)]
-WhenDash2$DateFrom.x[which((abs(WhenDash2$DateFrom.x)<1 | is.na(WhenDash2$DateFrom.x)==T) & abs(WhenDash2$DateTo.x)>0)] <- WhenDash2$DateTo.x[which((abs(WhenDash2$DateFrom.x)<1 | is.na(WhenDash2$DateFrom.x)==T) & abs(WhenDash2$DateTo.x)>0)]
-
-WhenDash2$DateTo.x[which(abs(WhenDash2$DateFrom.x)>0 & abs(WhenDash2$DateTo.x)<1)] <- WhenDash2$DateFrom.x[which(abs(WhenDash2$DateFrom.x)>0 & abs(WhenDash2$DateTo.x)<1)]
-#WhenDash2$DateFrom.x[which(abs(WhenDash2$DateTo.x)>0 & abs(WhenDash2$DateTo.x)<1)] <- WhenDash2$DateFrom.x[which(abs(WhenDash2$DateFrom.x)>0 & abs(WhenDash2$DateTo.x)<1)]
-
-NROW(WhenDash2[which(abs(WhenDash2$DateFrom.x)<1),])
-NROW(WhenDash2[which(abs(WhenDash2$DateTo.x)<1),])
-
-WhenDash2$WhenAgeFrom <- WhenDash2$DateFrom.x
-WhenDash2$WhenAgeTo <- WhenDash2$DateTo.x
-
-
-#WhenDash3 <- unite(WhenDash2, "WhenAge", DarEarliestEon:AccDescription2, sep=" | ", remove=TRUE)
-WhenDash3 <- unite(WhenDash2, "WhenAge2", DarEarliestEon:AttPeriod_tab, sep=" | ", remove=TRUE)
-WhenDash3 <- WhenDash3[,c("irn", "RecordType", "WhenAge2", "WhenAgeFrom", "WhenAgeTo")]
-colnames(WhenDash3)[3] <- "WhenAge"
-
-#WhenDash3$WhenAge <- gsub("NA \\| ", "", WhenDash3$WhenAge)
-#WhenDash3$WhenAge <- gsub(" \\| NA", "", WhenDash3$WhenAge)
-WhenDash3$WhenAge <- gsub("NA", "", WhenDash3$WhenAge)
-WhenDash3$WhenAge <- gsub("\\s+", " ", WhenDash3$WhenAge)
-WhenDash3$WhenAge <- gsub("^\\s+|\\s+$", "", WhenDash3$WhenAge)
-WhenDash3$WhenAge <- gsub("(\\|\\s+)+","| ",WhenDash3$WhenAge)
-WhenDash3$WhenAge <- gsub("^\\|\\s+\\|$","",WhenDash3$WhenAge)
-
-# Make sure AgeFrom = Min & AgeTo = Max
-WhenDash3$WhenAgeMin <- pmin(WhenDash3$WhenAgeFrom,WhenDash3$WhenAgeTo)
-WhenDash3$WhenAgeMax <- pmax(WhenDash3$WhenAgeFrom,WhenDash3$WhenAgeTo)
-# Calculate mid-point of Age
-WhenDash3$WhenAgeMid <-  WhenDash3$WhenAgeMin + 0.5 * (WhenDash3$WhenAgeMax - WhenDash3$WhenAgeMin)
-
-# Replace From/To data 
-WhenDash3$WhenAgeFrom <- WhenDash3$WhenAgeMin
-WhenDash3$WhenAgeTo <- WhenDash3$WhenAgeMax
-# Drop Min/Max columns
-WhenDash3 <- dplyr::select(WhenDash3, -c(WhenAgeMin,WhenAgeMax))
-
-
-# Include Zoo & Bot collections' ages (from DarYearCollected)
-# 1 - Merge Department column
-Depts <- read.csv(file="Departments.csv", stringsAsFactors = F)
-Depts2 <- CatDash3[,c("irn","RecordType","DarCollectionCode", "DarYearCollected")]
-Depts3 <- merge(Depts2, Depts, by=c("DarCollectionCode"), all.x=T)
-Depts3 <- Depts3[,c("irn","RecordType","DarYearCollected")]
-
-WhenDash4 <- merge(WhenDash3, Depts3, by=c("irn","RecordType"), all.x=T)
-rm(Depts, Depts2, Depts3)
-
-WhenDash4$WhenAgeFrom[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
-WhenDash4$WhenAgeTo[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
-WhenDash4$WhenAgeMid[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
-
-
-# Add in AgePeriod Order & Name for WhenAge chart
-WhenChart <- read.csv("WhenYearRanges2.csv", stringsAsFactors = F)
-colnames(WhenChart)[4] <- "TimePeriodName"
-
-WhenDash4$Order <- .bincode(WhenDash4$WhenAgeMid, WhenChart$From, right=F, include.lowest = T)
-
-WhenChart <- WhenChart[,3:4]
-WhenDash5 <- merge(WhenDash4, WhenChart, by="Order", all.x=T)
-colnames(WhenDash5)[c(1,NCOL(WhenDash5))] <- c("WhenOrder","WhenTimeLabel")
-
-
-# p2 -- &/or re-insert AttPeriod_tab which(grep("\\d{3,4}" ==1) ... smooth that out?
-
-
-#  3-When: merge WHERE+WHAT+WHEN ####
-FullDash6csv <- merge(FullDash5csv, WhenDash5, by=c("irn","RecordType"), all.x=T)
+#  4-Merge WHERE+WHAT+WHEN-WHO ####
+FullDash7csv <- merge(FullDash6csv, WhoDash2, by=c("irn","RecordType"), all.x=T)
 
 
 setwd("..")
