@@ -1,0 +1,593 @@
+"tsn","unit_name1","unit_name2","unit_name3","unit_name4","rank_id","complete_name","vernacular_name","language","approved_ind","update_Date","vern_id"
+9419,"Charales","","","",100,"Charales","stoneworts","English","N","2012-03-29",145201
+14109,"Uredinales","","","",100,"Uredinales","rust fungi","English","N","2004-01-28",11524
+14109,"Uredinales","","","",100,"Uredinales","rusts","English","N","2004-01-28",11528
+17011,"Lycopodiales","","","",100,"Lycopodiales","clubmosses","English","N","2012-03-29",145210
+17062,"Selaginellales","","","",100,"Selaginellales","spikemosses","English","N","2012-03-29",145211
+17118,"Isoetales","","","",100,"Isoetales","quillworts","English","N","2012-03-29",145209
+18004,"Salviniales","","","",100,"Salviniales","water ferns","English","N","2012-12-21",152971
+18004,"Salviniales","","","",100,"Salviniales","heterosporous ferns","English","N","2012-12-21",152972
+18055,"Ephedrales","","","",100,"Ephedrales","ephedra","English","N","2012-03-29",145225
+18056,"Gnetales","","","",100,"Gnetales","gnetophytes","English","N","2012-03-29",145226
+18057,"Welwitschiales","","","",100,"Welwitschiales","welwitschia","English","N","2012-03-29",145227
+44030,"Foraminiferida","","","",100,"Foraminiferida","forams","unspecified","Y","2003-05-09",2701
+44030,"Foraminiferida","","","",100,"Foraminiferida","foraminifères","French","N","2003-05-21",85652
+46088,"Radiolaria","","","",100,"Radiolaria","radiolarians","unspecified","Y","2003-05-09",2703
+48740,"Hydroida","","","",100,"Hydroida","medusae","unspecified","Y","2003-05-09",2720
+48740,"Hydroida","","","",100,"Hydroida","méduses","French","N","2003-05-21",85658
+51484,"Stauromedusae","","","",100,"Stauromedusae","stalked jellyfish","English","N","2007-03-13",111035
+51484,"Stauromedusae","","","",100,"Stauromedusae","stalked jellyfishes","unspecified","Y","2003-05-09",2781
+51552,"Coronatae","","","",100,"Coronatae","crown jellyfish","English","N","2007-03-13",111036
+51552,"Coronatae","","","",100,"Coronatae","crown jellyfishes","unspecified","Y","2003-05-09",2782
+51940,"Antipatharia","","","",100,"Antipatharia","thorny corals","English","N","2007-03-13",111193
+51940,"Antipatharia","","","",100,"Antipatharia","black corals","English","N","2007-03-13",111120
+51984,"Ceriantharia","","","",100,"Ceriantharia","tube-dwelling anemones","English","N","2007-03-13",111131
+51984,"Ceriantharia","","","",100,"Ceriantharia","tube-dwelling anemones","unspecified","Y","2003-05-09",2802
+52016,"Alcyonacea","","","",100,"Alcyonacea","soft corals","English","N","2007-03-13",111132
+52016,"Alcyonacea","","","",100,"Alcyonacea","soft corals","unspecified","Y","2003-05-09",2803
+52079,"Gorgonacea","","","",100,"Gorgonacea","gorgonians","unspecified","Y","2003-05-09",2808
+52079,"Gorgonacea","","","",100,"Gorgonacea","sea fans","unspecified","","2003-05-09",2809
+52079,"Gorgonacea","","","",100,"Gorgonacea","sea feathers","unspecified","","2003-05-09",2810
+52079,"Gorgonacea","","","",100,"Gorgonacea","évantails de mer","French","N","2003-05-21",85663
+52079,"Gorgonacea","","","",100,"Gorgonacea","gorgones","French","N","2003-05-21",85664
+52348,"Pennatulacea","","","",100,"Pennatulacea","sea pens","English","N","2007-03-13",111176
+52348,"Pennatulacea","","","",100,"Pennatulacea","sea panzies","unspecified","Y","2003-05-09",2843
+52348,"Pennatulacea","","","",100,"Pennatulacea","sea pens","unspecified","","2003-05-09",2844
+52431,"Zoantharia","","","",100,"Zoantharia","zoanthids","English","N","2007-03-13",111179
+52431,"Zoantharia","","","",100,"Zoantharia","zoanthids","unspecified","Y","2003-05-09",2847
+52485,"Actiniaria","","","",100,"Actiniaria","anemones","English","N","2002-07-03",2856
+52485,"Actiniaria","","","",100,"Actiniaria","sea anemones","English","N","2002-07-03",70747
+52485,"Actiniaria","","","",100,"Actiniaria","actinies","French","N","2003-05-21",85665
+52485,"Actiniaria","","","",100,"Actiniaria","anémones","French","N","2003-05-21",85666
+52839,"Scleractinia","","","",100,"Scleractinia","stony corals","unspecified","N","2003-05-09",2901
+52839,"Scleractinia","","","",100,"Scleractinia","madrépores","French","N","2003-05-21",85667
+54073,"Polycladida","","","",100,"Polycladida","polyclads","English","N","2013-11-04",2986
+54468,"Tricladida","","","",100,"Tricladida","triclads","unspecified","Y","2003-05-09",2987
+57410,"Dicyemida","","","",100,"Dicyemida","dicyemids","English","N","1999-11-08",61461
+68396,"Archiannelida","","","",100,"Archiannelida","bristle-footed annelids","English","N","2005-01-24",3001
+68439,"Lumbriculida","","","",100,"Lumbriculida","aquatic oligochaete worm","English","N","2015-06-03",161942
+68498,"Haplotaxida","","","",100,"Haplotaxida","aquatic oligochaete worm","English","N","2015-06-03",161941
+69168,"Branchiobdellida","","","",100,"Branchiobdellida","branchiobdellidans","English","N","2015-06-03",162311
+78156,"Nudibranchia","","","",100,"Nudibranchia","nudibranchs","English","N","2000-03-31",5432
+78156,"Nudibranchia","","","",100,"Nudibranchia","nudibranches","French","N","2003-05-21",85686
+78810,"Neoloricata","","","",100,"Neoloricata","chitons","English","N","2000-03-31",5803
+78810,"Neoloricata","","","",100,"Neoloricata","chitons","French","N","2003-05-21",85687
+78810,"Neoloricata","","","",100,"Neoloricata","oscabrions","French","N","2003-05-21",85688
+82709,"Palpigradi","","","",100,"Palpigradi","microscorpions","English","N","2005-11-23",7236
+82709,"Palpigradi","","","",100,"Palpigradi","palpigrades","English","N","2005-11-23",98245
+82710,"Uropygi","","","",100,"Uropygi","uropygids","English","N","2005-11-23",7237
+82710,"Uropygi","","","",100,"Uropygi","escorpião vinagre","Portuguese","N","2003-05-21",85387
+82710,"Uropygi","","","",100,"Uropygi","whip-scorpions","English","N","2005-11-23",98246
+82711,"Amblypigi","","","",100,"Amblypigi","amblypygids","English","N","2005-11-23",7238
+82711,"Amblypigi","","","",100,"Amblypigi","amblipígio","Portuguese","N","2003-05-21",85388
+82712,"Ricinulei","","","",100,"Ricinulei","ricinuleids","English","N","2005-11-23",98243
+82713,"Scorpiones","","","",100,"Scorpiones","scorpions","English","N","2005-11-23",7239
+82713,"Scorpiones","","","",100,"Scorpiones","escorpião","Portuguese","N","2003-05-21",85389
+82721,"Pseudoscorpionida","","","",100,"Pseudoscorpionida","book scorpions","English","N","2005-11-23",7240
+82721,"Pseudoscorpionida","","","",100,"Pseudoscorpionida","false scorpions","English","N","2005-11-23",7241
+82721,"Pseudoscorpionida","","","",100,"Pseudoscorpionida","pseudo escorpião","Portuguese","N","2003-05-21",85390
+82721,"Pseudoscorpionida","","","",100,"Pseudoscorpionida","pseudoscorpions","French","N","2003-05-21",85698
+82731,"Solpugida","","","",100,"Solpugida","solpugids","English","N","2005-11-23",7244
+82731,"Solpugida","","","",100,"Solpugida","sun spiders","English","N","2005-11-23",7245
+82732,"Araneae","","","",100,"Araneae","spiders","English","N","2005-11-23",7246
+82732,"Araneae","","","",100,"Araneae","aranhas","Portuguese","N","2012-04-26",85391
+82732,"Araneae","","","",100,"Araneae","araignées","French","N","2012-04-26",145956
+82732,"Araneae","","","",100,"Araneae","arañas","Spanish","N","2012-04-26",145957
+82753,"Opiliones","","","",100,"Opiliones","Daddy Longlegs","English","N","2016-09-27",7248
+82753,"Opiliones","","","",100,"Opiliones","Harvestmen","English","N","2016-09-27",7249
+82753,"Opiliones","","","",100,"Opiliones","aranha bode","Portuguese","N","2003-05-21",85392
+82753,"Opiliones","","","",100,"Opiliones","aranha de chão","Portuguese","N","2003-05-21",85393
+82753,"Opiliones","","","",100,"Opiliones","giramundo","Portuguese","N","2003-05-21",85394
+82753,"Opiliones","","","",100,"Opiliones","opilhões","Portuguese","N","2003-05-21",85395
+82753,"Opiliones","","","",100,"Opiliones","tabijuá","Portuguese","N","2003-05-21",85396
+82753,"Opiliones","","","",100,"Opiliones","daddy-longlegs","English","N","2016-09-27",163011
+83688,"Anostraca","","","",100,"Anostraca","brine shrimp","English","N","2003-09-26",7256
+83688,"Anostraca","","","",100,"Anostraca","fairy shrimp","English","N","2004-04-05",87176
+83756,"Notostraca","","","",100,"Notostraca","fairy shrimp","English","N","2003-09-26",7257
+83756,"Notostraca","","","",100,"Notostraca","phyllopods","English","N","2003-09-26",7258
+83768,"Conchostraca","","","",100,"Conchostraca","conchostracans","English","N","2003-09-26",7595
+89807,"Mysidacea","","","",100,"Mysidacea","opossom shrimp","English","N","2003-09-26",7263
+89808,"Lophogastrida","","","",100,"Lophogastrida","opossum shrimp","English","N","2005-07-21",97195
+89855,"Mysida","","","",100,"Mysida","opossum shrimp","English","N","2005-07-21",97196
+90745,"Cumacea","","","",100,"Cumacea","cumaceans","English","N","2003-09-26",7264
+90745,"Cumacea","","","",100,"Cumacea","cumacés","French","N","2003-05-21",85709
+91061,"Tanaidacea","","","",100,"Tanaidacea","tanaidaceans","English","N","2003-09-26",7265
+92120,"Isopoda","","","",100,"Isopoda","isopods","English","N","2003-09-26",7266
+92120,"Isopoda","","","",100,"Isopoda","pillbugs","English","N","2003-09-26",7267
+92120,"Isopoda","","","",100,"Isopoda","sowbugs","English","N","2003-09-26",7268
+92120,"Isopoda","","","",100,"Isopoda","cloportes","French","N","2003-05-21",85710
+92120,"Isopoda","","","",100,"Isopoda","isopodes","French","N","2003-05-21",85711
+93294,"Amphipoda","","","",100,"Amphipoda","amphipods","English","N","2003-09-26",70931
+93294,"Amphipoda","","","",100,"Amphipoda","amphipodes","French","N","2003-05-21",85712
+95496,"Euphausiacea","","","",100,"Euphausiacea","krill","English","N","2003-09-26",7275
+95599,"Decapoda","","","",100,"Decapoda","crabs","English","N","2003-09-26",7276
+95599,"Decapoda","","","",100,"Decapoda","crayfishes","English","N","2003-09-26",7277
+95599,"Decapoda","","","",100,"Decapoda","lobsters","English","N","2003-09-26",7278
+95599,"Decapoda","","","",100,"Decapoda","prawns","English","N","2003-09-26",7279
+95599,"Decapoda","","","",100,"Decapoda","shrimp","English","N","2003-09-26",7280
+95599,"Decapoda","","","",100,"Decapoda","crabes","French","N","2003-05-21",85713
+95599,"Decapoda","","","",100,"Decapoda","crevettes","French","N","2003-05-21",85714
+95599,"Decapoda","","","",100,"Decapoda","écrevisses","French","N","2003-05-21",85715
+95599,"Decapoda","","","",100,"Decapoda","homards","French","N","2003-05-21",85716
+99140,"Stomatopoda","","","",100,"Stomatopoda","mantis shrimp","English","N","2003-09-26",8459
+99140,"Stomatopoda","","","",100,"Stomatopoda","mantis shrimps","English","N","2005-07-21",97181
+99210,"Protura","","","",100,"Protura","proturans","English","N","1999-08-31",8462
+99228,"Diplura","","","",100,"Diplura","diplurans","English","N","1999-08-31",8470
+99228,"Diplura","","","",100,"Diplura","tesourinha","Portuguese","N","2003-05-21",85413
+99237,"Collembola","","","",100,"Collembola","snow flies","English","N","1999-08-31",8471
+99237,"Collembola","","","",100,"Collembola","springtails","English","N","1999-08-31",8472
+99237,"Collembola","","","",100,"Collembola","colêmbolo","Portuguese","N","2003-05-21",85414
+99237,"Collembola","","","",100,"Collembola","collemboles","French","N","2003-05-21",85724
+99237,"Collembola","","","",100,"Collembola","puces des neiges","French","N","2003-05-21",85725
+100502,"Ephemeroptera","","","",100,"Ephemeroptera","mayflies","English","N","2001-12-20",9868
+100502,"Ephemeroptera","","","",100,"Ephemeroptera","éphémères","French","N","2003-05-21",85727
+100502,"Ephemeroptera","","","",100,"Ephemeroptera","efêmera","Portuguese","N","2003-05-21",85415
+100502,"Ephemeroptera","","","",100,"Ephemeroptera","efeméride","Portuguese","N","2003-05-21",85416
+101593,"Odonata","","","",100,"Odonata","libélula","Portuguese","N","2003-05-21",85417
+101593,"Odonata","","","",100,"Odonata","damselflies","English","N","2004-04-12",87181
+101593,"Odonata","","","",100,"Odonata","dragonflies","English","N","2004-04-12",87182
+102160,"Orthoptera","","","",100,"Orthoptera","grasshoppers","English","N","1999-08-31",9882
+102160,"Orthoptera","","","",100,"Orthoptera","locusts","English","N","1999-08-31",9883
+102160,"Orthoptera","","","",100,"Orthoptera","criquet-locustes","French","N","2003-05-21",85731
+102160,"Orthoptera","","","",100,"Orthoptera","locustes","French","N","2003-05-21",85732
+102160,"Orthoptera","","","",100,"Orthoptera","sauterelles","French","N","2003-05-21",85733
+102160,"Orthoptera","","","",100,"Orthoptera","gafanhoto","Portuguese","N","2003-05-21",85418
+102160,"Orthoptera","","","",100,"Orthoptera","grilo","Portuguese","N","2003-05-21",85419
+102160,"Orthoptera","","","",100,"Orthoptera","crickets","English","N","2004-04-12",87183
+102160,"Orthoptera","","","",100,"Orthoptera","katydids","English","N","2004-04-12",87184
+102385,"Phasmatoptera","","","",100,"Phasmatoptera","bicho pau","Portuguese","N","2003-05-21",85420
+102428,"Grylloblattodea","","","",100,"Grylloblattodea","rock crawlers","English","N","2004-04-12",87185
+102428,"Grylloblattodea","","","",100,"Grylloblattodea","grylloblattids","English","N","2005-01-24",94854
+102428,"Grylloblattodea","","","",100,"Grylloblattodea","ice-crawlers","English","N","2012-09-26",151232
+102428,"Grylloblattodea","","","",100,"Grylloblattodea","ice crawlers","English","N","2012-09-26",151231
+102430,"Isoptera","","","",100,"Isoptera","termites","English","N","1999-08-31",10018
+102430,"Isoptera","","","",100,"Isoptera","cupim","Portuguese","N","2003-05-21",85423
+102451,"Dermaptera","","","",100,"Dermaptera","earwigs","English","N","1999-08-31",10020
+102451,"Dermaptera","","","",100,"Dermaptera","lacrainha","Portuguese","N","2003-05-21",85424
+102451,"Dermaptera","","","",100,"Dermaptera","tesourinha","Portuguese","N","2003-05-21",85425
+102463,"Embioptera","","","",100,"Embioptera","webspinners","English","N","1999-08-31",10021
+102463,"Embioptera","","","",100,"Embioptera","web-spinners","English","N","2004-04-12",87186
+102467,"Plecoptera","","","",100,"Plecoptera","stoneflies","English","N","2002-02-08",10022
+102467,"Plecoptera","","","",100,"Plecoptera","plécoptères","French","N","2003-05-21",85734
+103320,"Psocoptera","","","",100,"Psocoptera","psocids","English","N","1999-08-31",10032
+103320,"Psocoptera","","","",100,"Psocoptera","piolho de livro","Portuguese","N","2003-05-21",85426
+103320,"Psocoptera","","","",100,"Psocoptera","psócidos","Portuguese","N","2003-05-21",85427
+103320,"Psocoptera","","","",100,"Psocoptera","psocóptero","Portuguese","N","2003-05-21",85428
+103320,"Psocoptera","","","",100,"Psocoptera","bark lice","English","N","2004-04-12",87187
+103320,"Psocoptera","","","",100,"Psocoptera","book lice","English","N","2004-04-12",87188
+103335,"Zoraptera","","","",100,"Zoraptera","zorapterans","English","N","1999-08-31",10033
+103335,"Zoraptera","","","",100,"Zoraptera","zoráptero","Portuguese","N","2003-05-21",85429
+103348,"Thysanoptera","","","",100,"Thysanoptera","thrips","English","N","1999-08-31",10036
+103348,"Thysanoptera","","","",100,"Thysanoptera","trips","Portuguese","N","2003-05-21",85430
+103359,"Hemiptera","","","",100,"Hemiptera","true bugs","English","N","2005-05-24",96240
+103359,"Hemiptera","","","",100,"Hemiptera","hemipterans","English","N","2005-05-24",96241
+109166,"Homoptera","","","",100,"Homoptera","scale insects","English","N","2004-04-12",10163
+109166,"Homoptera","","","",100,"Homoptera","treehoppers","English","N","2004-04-12",10164
+109166,"Homoptera","","","",100,"Homoptera","whiteflies","English","N","2004-04-12",10165
+109166,"Homoptera","","","",100,"Homoptera","aleurodes","French","N","2003-05-21",85743
+109166,"Homoptera","","","",100,"Homoptera","cochenilles","French","N","2003-05-21",85744
+109166,"Homoptera","","","",100,"Homoptera","membracides","French","N","2003-05-21",85745
+109166,"Homoptera","","","",100,"Homoptera","afídeo","Portuguese","N","2003-05-21",85434
+109166,"Homoptera","","","",100,"Homoptera","cigarra","Portuguese","N","2003-05-21",85435
+109166,"Homoptera","","","",100,"Homoptera","coccídeo","Portuguese","N","2003-05-21",85436
+109166,"Homoptera","","","",100,"Homoptera","cochonilha","Portuguese","N","2003-05-21",85437
+109166,"Homoptera","","","",100,"Homoptera","pulgão","Portuguese","N","2003-05-21",85438
+109216,"Coleoptera","","","",100,"Coleoptera","beetles","English","N","2001-02-22",8481
+109216,"Coleoptera","","","",100,"Coleoptera","coléoptères","French","N","2003-05-21",85747
+109216,"Coleoptera","","","",100,"Coleoptera","besouro","Portuguese","N","2003-05-21",85439
+114989,"Strepsiptera","","","",100,"Strepsiptera","parasitic insects","English","N","1999-08-31",8760
+114989,"Strepsiptera","","","",100,"Strepsiptera","twisted-winged parasites","English","N","1999-08-31",8761
+114989,"Strepsiptera","","","",100,"Strepsiptera","estrepsítero","Portuguese","N","2003-05-21",85440
+114989,"Strepsiptera","","","",100,"Strepsiptera","twisted-wing parasites","English","N","2004-04-12",87190
+114989,"Strepsiptera","","","",100,"Strepsiptera","strepsipterans","English","N","2015-01-27",159919
+114994,"Mecoptera","","","",100,"Mecoptera","scorpion flies","English","N","1999-08-31",8762
+114994,"Mecoptera","","","",100,"Mecoptera","hangingflies","English","N","2004-04-12",87191
+114994,"Mecoptera","","","",100,"Mecoptera","scorpionflies","English","N","2004-04-12",87192
+114994,"Mecoptera","","","",100,"Mecoptera","snowflies","English","N","2004-04-12",87193
+114999,"Neuroptera","","","",100,"Neuroptera","ant lions","English","N","2004-04-12",87194
+114999,"Neuroptera","","","",100,"Neuroptera","lacewings","English","N","2004-04-12",87195
+114999,"Neuroptera","","","",100,"Neuroptera","mantisflies","English","N","2004-04-12",87196
+114999,"Neuroptera","","","",100,"Neuroptera","owlflies","English","N","2004-04-12",87197
+114999,"Neuroptera","","","",100,"Neuroptera","spongillaflies","English","N","2004-04-12",87198
+114999,"Neuroptera","","","",100,"Neuroptera","bichos lixeiros","Portuguese","N","2003-05-21",85441
+114999,"Neuroptera","","","",100,"Neuroptera","formigas leão","Portuguese","N","2003-05-21",85442
+114999,"Neuroptera","","","",100,"Neuroptera","antlions","English","N","2005-03-07",95190
+114999,"Neuroptera","","","",100,"Neuroptera","mantispids","English","N","2005-03-07",95191
+115000,"Megaloptera","","","",100,"Megaloptera","alderflies","English","N","2004-04-12",87199
+115000,"Megaloptera","","","",100,"Megaloptera","dobsonflies","English","N","2004-04-12",87200
+115000,"Megaloptera","","","",100,"Megaloptera","fishflies","English","N","2004-04-12",87201
+115095,"Trichoptera","","","",100,"Trichoptera","caddisflies","English","N","2001-12-20",8787
+115095,"Trichoptera","","","",100,"Trichoptera","tricóptero","Portuguese","N","2003-05-21",85443
+115095,"Trichoptera","","","",100,"Trichoptera","phryganes","French","N","2003-05-21",85762
+115095,"Trichoptera","","","",100,"Trichoptera","porte-bois","French","N","2003-05-21",85763
+117232,"Lepidoptera","","","",100,"Lepidoptera","butterflies","English","N","1999-08-31",8798
+117232,"Lepidoptera","","","",100,"Lepidoptera","moths","English","N","1999-08-31",8799
+117232,"Lepidoptera","","","",100,"Lepidoptera","papillons","French","N","2003-05-21",85764
+117232,"Lepidoptera","","","",100,"Lepidoptera","papillons de nuit","French","N","2003-05-21",85765
+117232,"Lepidoptera","","","",100,"Lepidoptera","Borboleta","Portuguese","N","2003-05-21",85444
+117232,"Lepidoptera","","","",100,"Lepidoptera","Mariposa","Portuguese","N","2003-05-21",85445
+118831,"Diptera","","","",100,"Diptera","mosca","Portuguese","N","2003-05-21",85446
+118831,"Diptera","","","",100,"Diptera","mosquito","Portuguese","N","2003-05-21",85447
+118831,"Diptera","","","",100,"Diptera","gnats","English","N","2004-04-12",87202
+118831,"Diptera","","","",100,"Diptera","mosquitoes","English","N","2004-04-12",87203
+118831,"Diptera","","","",100,"Diptera","true flies","English","N","2004-04-12",87204
+152732,"Siphonaptera","","","",100,"Siphonaptera","fleas","English","N","2002-07-11",9586
+152732,"Siphonaptera","","","",100,"Siphonaptera","pulga","Portuguese","N","2003-05-21",85448
+152741,"Hymenoptera","","","",100,"Hymenoptera","abelha","Portuguese","N","2003-05-21",85449
+152741,"Hymenoptera","","","",100,"Hymenoptera","formiga","Portuguese","N","2003-05-21",85450
+152741,"Hymenoptera","","","",100,"Hymenoptera","vespa","Portuguese","N","2003-05-21",85451
+152741,"Hymenoptera","","","",100,"Hymenoptera","ants","English","N","2004-04-12",87205
+152741,"Hymenoptera","","","",100,"Hymenoptera","bees","English","N","2004-04-12",87206
+152741,"Hymenoptera","","","",100,"Hymenoptera","wasps","English","N","2004-04-12",87207
+154974,"Echiuroidea","","","",100,"Echiuroidea","spoon worms","English","N","2006-05-09",101923
+157329,"Phrynophiurida","","","",100,"Phrynophiurida","euryhaline brittle stars","unspecified","","2003-05-09",10321
+157329,"Phrynophiurida","","","",100,"Phrynophiurida","euryhaline brittle stars","English","N","2004-12-27",94482
+157382,"Ophiurida","","","",100,"Ophiurida","basket stars","unspecified","Y","2003-05-09",10324
+157382,"Ophiurida","","","",100,"Ophiurida","serpent stars","unspecified","","2003-05-09",10325
+157382,"Ophiurida","","","",100,"Ophiurida","basket stars","English","N","2004-12-27",94491
+157382,"Ophiurida","","","",100,"Ophiurida","serpent stars","English","N","2004-12-27",94492
+157823,"Cidaroida","","","",100,"Cidaroida","pencil urchins","unspecified","Y","2003-05-09",10348
+157823,"Cidaroida","","","",100,"Cidaroida","pencil urchins","English","N","2004-12-27",94531
+157984,"Clypeasteroida","","","",100,"Clypeasteroida","sand dollars","unspecified","Y","2003-05-09",10357
+157984,"Clypeasteroida","","","",100,"Clypeasteroida","sand dollars","English","N","2004-12-27",94508
+158069,"Spatangoida","","","",100,"Spatangoida","heart urchins","unspecified","Y","2003-05-09",10362
+158069,"Spatangoida","","","",100,"Spatangoida","heart urchins","English","N","2004-12-27",94515
+159643,"Salpida","","","",100,"Salpida","salps","English","N","2013-11-04",10396
+159696,"Petromyzontiformes","","","",100,"Petromyzontiformes","lampreys","English","N","2013-08-14",153580
+159696,"Petromyzontiformes","","","",100,"Petromyzontiformes","lampreas","Spanish","N","2013-08-14",153581
+159696,"Petromyzontiformes","","","",100,"Petromyzontiformes","lamproies","French","N","2013-08-14",153582
+159788,"Heterodontiformes","","","",100,"Heterodontiformes","bullhead sharks","English","N","2003-05-09",10419
+159810,"Hexanchiformes","","","",100,"Hexanchiformes","cow sharks","English","N","2000-03-01",10431
+159810,"Hexanchiformes","","","",100,"Hexanchiformes","frilled sharks","English","N","2000-03-01",10432
+159851,"Lamniformes","","","",100,"Lamniformes","mackerel sharks","English","N","2003-05-09",10444
+160602,"Squaliformes","","","",100,"Squaliformes","dogfish sharks","English","N","2004-09-28",94032
+160806,"Rajiformes","","","",100,"Rajiformes","rays","English","N","2003-05-09",10796
+160806,"Rajiformes","","","",100,"Rajiformes","sawfishes","English","N","2003-05-09",10797
+160806,"Rajiformes","","","",100,"Rajiformes","skates","English","N","2003-05-09",10798
+160806,"Rajiformes","","","",100,"Rajiformes","poissons-scie","French","N","2003-05-21",85846
+160806,"Rajiformes","","","",100,"Rajiformes","raies","French","N","2003-05-21",85847
+161009,"Chimaeriformes","","","",100,"Chimaeriformes","chimaeras","English","N","2003-05-09",83331
+161063,"Acipenseriformes","","","",100,"Acipenseriformes","sturgeons","English","N","2000-09-18",10948
+161063,"Acipenseriformes","","","",100,"Acipenseriformes","spoonfishes","English","N","2000-09-18",10949
+161063,"Acipenseriformes","","","",100,"Acipenseriformes","paddlefishes","English","N","2000-09-18",60672
+161090,"Semionotiformes","","","",100,"Semionotiformes","gars","English","N","2000-04-28",61196
+161100,"Amiiformes","","","",100,"Amiiformes","bowfin","English","N","2000-04-28",60678
+161107,"Elopiformes","","","",100,"Elopiformes","tarpons","English","N","1998-09-16",60862
+161123,"Anguilliformes","","","",100,"Anguilliformes","eels","English","N","1998-09-16",10992
+161123,"Anguilliformes","","","",100,"Anguilliformes","anguilles","French","N","2003-05-21",85852
+161656,"Notacanthiformes","","","",100,"Notacanthiformes","spiny eels","English","N","2004-08-25",90568
+161656,"Notacanthiformes","","","",100,"Notacanthiformes","tapirfishes","English","N","2004-08-25",90569
+161694,"Clupeiformes","","","",100,"Clupeiformes","anchois","French","N","2003-05-21",85853
+161694,"Clupeiformes","","","",100,"Clupeiformes","harengs","French","N","2003-05-21",85854
+161694,"Clupeiformes","","","",100,"Clupeiformes","anchovies","English","N","2000-05-23",60723
+161694,"Clupeiformes","","","",100,"Clupeiformes","herrings","English","N","2000-05-23",60724
+161886,"Osteoglossiformes","","","",100,"Osteoglossiformes","bonytongues","English","N","1998-09-16",60931
+161929,"Salmoniformes","","","",100,"Salmoniformes","saumons","French","N","2003-05-21",85859
+161929,"Salmoniformes","","","",100,"Salmoniformes","salmons","English","N","1998-09-16",61173
+162830,"Gonorhynchiformes","","","",100,"Gonorhynchiformes","milkfish","English","N","1998-09-16",61264
+162830,"Gonorhynchiformes","","","",100,"Gonorhynchiformes","shellears","English","N","1998-09-16",61265
+162846,"Cypriniformes","","","",100,"Cypriniformes","cyprins","French","N","2003-05-21",85861
+162846,"Cypriniformes","","","",100,"Cypriniformes","meuniers","French","N","2003-05-21",85862
+162846,"Cypriniformes","","","",100,"Cypriniformes","minnows","English","N","1998-09-16",60738
+162846,"Cypriniformes","","","",100,"Cypriniformes","suckers","English","N","1998-09-16",60739
+163992,"Siluriformes","","","",100,"Siluriformes","silures","French","N","2003-05-21",85867
+163992,"Siluriformes","","","",100,"Siluriformes","catfishes","English","N","1998-09-16",61199
+164386,"Percopsiformes","","","",100,"Percopsiformes","percopsiforms","English","N","2005-10-04",98131
+164386,"Percopsiformes","","","",100,"Percopsiformes","trout-perches","English","N","1998-09-16",61162
+164411,"Batrachoidiformes","","","",100,"Batrachoidiformes","batrachoidiforms","English","N","2005-10-04",97970
+164495,"Lophiiformes","","","",100,"Lophiiformes","baudroies","French","N","2003-05-21",85868
+164495,"Lophiiformes","","","",100,"Lophiiformes","anglerfishes","English","N","1998-09-16",60900
+164665,"Gadiformes","","","",100,"Gadiformes","grenadiers","English","N","2004-01-21",86882
+164665,"Gadiformes","","","",100,"Gadiformes","merlus","French","N","2003-05-21",85869
+164665,"Gadiformes","","","",100,"Gadiformes","morues","French","N","2003-05-21",85870
+164665,"Gadiformes","","","",100,"Gadiformes","gadiforms","English","N","2005-10-04",98142
+164665,"Gadiformes","","","",100,"Gadiformes","cods","English","N","1998-09-16",60874
+164665,"Gadiformes","","","",100,"Gadiformes","hakes","English","N","1998-09-16",60875
+165429,"Atheriniformes","","","",100,"Atheriniformes","silversides","English","N","1998-09-16",60706
+166271,"Zeiformes","","","",100,"Zeiformes","boarfishes","English","N","1998-09-16",13017
+166271,"Zeiformes","","","",100,"Zeiformes","dories","English","N","1998-09-16",13018
+166271,"Zeiformes","","","",100,"Zeiformes","john dories","English","N","2004-06-02",13019
+166321,"Lampridiformes","","","",100,"Lampridiformes","opahs","English","N","2002-12-23",13048
+166321,"Lampridiformes","","","",100,"Lampridiformes","ribbonfishes","English","N","2002-12-23",13049
+166361,"Gasterosteiformes","","","",100,"Gasterosteiformes","pipefishes","English","N","1998-09-16",60881
+166361,"Gasterosteiformes","","","",100,"Gasterosteiformes","sticklebacks","English","N","1998-09-16",60882
+166686,"Synbranchiformes","","","",100,"Synbranchiformes","swamp eels","English","N","1998-09-16",61216
+166702,"Scorpaeniformes","","","",100,"Scorpaeniformes","chabots","French","N","2003-05-21",85875
+166702,"Scorpaeniformes","","","",100,"Scorpaeniformes","rascasses","French","N","2003-05-21",85876
+166702,"Scorpaeniformes","","","",100,"Scorpaeniformes","mail-cheeked fishes","English","N","2004-09-20",92360
+166702,"Scorpaeniformes","","","",100,"Scorpaeniformes","scorpion fishes","English","N","1998-09-16",61189
+166702,"Scorpaeniformes","","","",100,"Scorpaeniformes","sculpins","English","N","1998-09-16",61190
+167621,"Dactylopteriformes","","","",100,"Dactylopteriformes","flying gurnards","English","N","2004-09-20",92278
+167632,"Pegasiformes","","","",100,"Pegasiformes","dragonfishes","English","N","2006-04-04",13913
+167632,"Pegasiformes","","","",100,"Pegasiformes","sea moths","English","N","2006-04-04",13914
+167640,"Perciformes","","","",100,"Perciformes","perch-like fishes","English","N","1998-09-16",13921
+172702,"Pleuronectiformes","","","",100,"Pleuronectiformes","flatfishes","English","N","2003-05-05",17017
+172702,"Pleuronectiformes","","","",100,"Pleuronectiformes","flounders","English","N","2003-05-05",17018
+172702,"Pleuronectiformes","","","",100,"Pleuronectiformes","soles","English","N","2003-05-05",17019
+172702,"Pleuronectiformes","","","",100,"Pleuronectiformes","limandes","French","N","2003-05-21",85920
+172702,"Pleuronectiformes","","","",100,"Pleuronectiformes","plies","French","N","2003-05-21",85921
+172702,"Pleuronectiformes","","","",100,"Pleuronectiformes","poissons plats","French","N","2003-05-21",85922
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","leatherjackets","English","N","1998-09-16",17281
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","cowfishes","English","N","1998-09-16",17282
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","filefishes","English","N","1998-09-16",17283
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","puffers","English","N","1998-09-16",17284
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","triggerfishes","English","N","1998-09-16",17285
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","trunkfishes","English","N","1998-09-16",17286
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","balistes","French","N","2003-05-21",85923
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","poissons-coffres","French","N","2003-05-21",85924
+173112,"Tetraodontiformes","","","",100,"Tetraodontiformes","poissons-globes","French","N","2003-05-21",85925
+173423,"Anura","","","",100,"Anura","Frogs","English","N","2005-04-25",17510
+173423,"Anura","","","",100,"Anura","perereca","Portuguese","N","2003-05-21",85504
+173423,"Anura","","","",100,"Anura","rã","Portuguese","N","2003-05-21",85505
+173423,"Anura","","","",100,"Anura","sapo","Portuguese","N","2003-05-21",85506
+173423,"Anura","","","",100,"Anura","crapauds","French","N","2003-05-21",85928
+173423,"Anura","","","",100,"Anura","grenouilles","French","N","2003-05-21",85929
+173423,"Anura","","","",100,"Anura","Toads","English","N","2005-04-25",61453
+173584,"Caudata","","","",100,"Caudata","salamandres","French","N","2003-05-21",85935
+173584,"Caudata","","","",100,"Caudata","salamandra","Portuguese","N","2003-05-21",85507
+173584,"Caudata","","","",100,"Caudata","Salamanders","English","N","2005-04-25",58459
+173746,"Gymnophiona","","","",100,"Gymnophiona","Caecilians","English","N","2005-04-25",17995
+173749,"Testudines","","","",100,"Testudines","terrapins","English","N","2005-05-09",18002
+173749,"Testudines","","","",100,"Testudines","tortoises","English","N","2005-05-09",18003
+173749,"Testudines","","","",100,"Testudines","tortues","French","N","2003-05-21",85937
+173749,"Testudines","","","",100,"Testudines","Turtles","English","N","2005-05-09",96052
+173860,"Rhynchocephalia","","","",100,"Rhynchocephalia","Tuataras","English","N","2005-04-25",18185
+173861,"Squamata","","","",100,"Squamata","Amphisbaenians","English","N","2005-09-23",19267
+173861,"Squamata","","","",100,"Squamata","Lizards","English","N","2005-09-23",19301
+173861,"Squamata","","","",100,"Squamata","Snakes","English","N","2005-09-23",19341
+173861,"Squamata","","","",100,"Squamata","amphisbènes","French","N","2005-09-23",85938
+173861,"Squamata","","","",100,"Squamata","lézards","French","N","2005-09-23",85939
+173861,"Squamata","","","",100,"Squamata","serpents","French","N","2005-09-23",85940
+174372,"Struthioniformes","","","",100,"Struthioniformes","Ostriches","English","N","2005-04-25",19126
+174376,"Rheiformes","","","",100,"Rheiformes","Rheas","English","N","2016-04-29",162734
+174382,"Casuariiformes","","","",100,"Casuariiformes","Cassowaries","English","N","2016-04-29",162735
+174382,"Casuariiformes","","","",100,"Casuariiformes","Emus","English","N","2016-04-29",162736
+174391,"Apterygiformes","","","",100,"Apterygiformes","Kiwis","English","N","2016-04-29",162737
+174397,"Tinamiformes","","","",100,"Tinamiformes","Tinamous","English","N","2005-06-28",19135
+174442,"Sphenisciformes","","","",100,"Sphenisciformes","Penguins","English","N","2011-09-22",132510
+174442,"Sphenisciformes","","","",100,"Sphenisciformes","pingouins","French","N","2011-09-22",132511
+174466,"Gaviiformes","","","",100,"Gaviiformes","Loons","English","N","2005-10-06",98214
+174466,"Gaviiformes","","","",100,"Gaviiformes","huarts","French","N","2011-09-22",132518
+174476,"Podicipediformes","","","",100,"Podicipediformes","Grebes","English","N","2005-10-06",98215
+174476,"Podicipediformes","","","",100,"Podicipediformes","grèbes","French","N","2011-09-22",132522
+174512,"Procellariiformes","","","",100,"Procellariiformes","Tube-nosed Swimmers","English","N","2005-10-06",98216
+174512,"Procellariiformes","","","",100,"Procellariiformes","albatros","French","N","2011-09-22",132530
+174512,"Procellariiformes","","","",100,"Procellariiformes","tubinares","French","N","2011-09-22",132512
+174512,"Procellariiformes","","","",100,"Procellariiformes","pétrels","French","N","2011-09-22",132513
+174670,"Pelecaniformes","","","",100,"Pelecaniformes","Pelicans","English","N","2005-10-06",98221
+174670,"Pelecaniformes","","","",100,"Pelecaniformes","pélicans","French","N","2011-09-22",132514
+174670,"Pelecaniformes","","","",100,"Pelecaniformes","Ibises","English","N","2011-09-22",132515
+174670,"Pelecaniformes","","","",100,"Pelecaniformes","ibis","French","N","2011-09-22",132516
+174670,"Pelecaniformes","","","",100,"Pelecaniformes","Herons","English","N","2011-09-22",132519
+174670,"Pelecaniformes","","","",100,"Pelecaniformes","hérons","French","N","2011-09-22",132520
+174770,"Ciconiiformes","","","",100,"Ciconiiformes","Storks","English","N","2005-04-25",19214
+174770,"Ciconiiformes","","","",100,"Ciconiiformes","cigognes","French","N","2003-05-21",85950
+174982,"Anseriformes","","","",100,"Anseriformes","Ducks","English","N","2005-10-06",19251
+174982,"Anseriformes","","","",100,"Anseriformes","Geese","English","N","2005-10-06",19252
+174982,"Anseriformes","","","",100,"Anseriformes","Screamers","English","N","2005-10-06",19253
+174982,"Anseriformes","","","",100,"Anseriformes","Swans","English","N","2005-10-06",19254
+174982,"Anseriformes","","","",100,"Anseriformes","Waterfowl","English","N","2005-10-06",19255
+174982,"Anseriformes","","","",100,"Anseriformes","canards","French","N","2003-05-21",85967
+174982,"Anseriformes","","","",100,"Anseriformes","cygnes","French","N","2003-05-21",85968
+174982,"Anseriformes","","","",100,"Anseriformes","oies","French","N","2003-05-21",85969
+174982,"Anseriformes","","","",100,"Anseriformes","sauvagine","French","N","2003-05-21",85970
+175262,"Falconiformes","","","",100,"Falconiformes","Falcons","English","N","2005-10-06",98212
+175262,"Falconiformes","","","",100,"Falconiformes","Falconiforms","English","N","2005-10-06",98213
+175262,"Falconiformes","","","",100,"Falconiformes","faucons","French","N","2011-09-22",132524
+175693,"Galliformes","","","",100,"Galliformes","Fowls","English","N","2005-06-08",19374
+175693,"Galliformes","","","",100,"Galliformes","Gallinaceous Birds","English","N","2005-06-08",19375
+175693,"Galliformes","","","",100,"Galliformes","gallinacées","French","N","2003-05-21",85977
+175693,"Galliformes","","","",100,"Galliformes","volaille","French","N","2003-05-21",85978
+176147,"Gruiformes","","","",100,"Gruiformes","Cranes","English","N","2005-10-06",19452
+176147,"Gruiformes","","","",100,"Gruiformes","Rails","English","N","2005-10-06",19453
+176147,"Gruiformes","","","",100,"Gruiformes","grues","French","N","2003-05-21",85981
+176147,"Gruiformes","","","",100,"Gruiformes","râles","French","N","2003-05-21",85982
+176445,"Charadriiformes","","","",100,"Charadriiformes","Shore Birds","English","N","2005-10-06",98228
+176445,"Charadriiformes","","","",100,"Charadriiformes","Gulls","English","N","2005-10-06",98229
+176445,"Charadriiformes","","","",100,"Charadriiformes","Alcids","English","N","2005-10-06",98230
+176445,"Charadriiformes","","","",100,"Charadriiformes","Plovers","English","N","2005-10-06",98231
+176445,"Charadriiformes","","","",100,"Charadriiformes","Oystercatchers","English","N","2005-10-06",98232
+176445,"Charadriiformes","","","",100,"Charadriiformes","goélands","French","N","2011-09-22",132525
+176445,"Charadriiformes","","","",100,"Charadriiformes","alcidés","French","N","2011-09-22",132521
+176445,"Charadriiformes","","","",100,"Charadriiformes","Auks","English","N","2011-09-22",132529
+176445,"Charadriiformes","","","",100,"Charadriiformes","huîtriers","French","N","2011-09-22",132517
+177038,"Columbiformes","","","",100,"Columbiformes","Doves","English","N","2005-05-26",19667
+177038,"Columbiformes","","","",100,"Columbiformes","colombes","French","N","2003-05-21",85993
+177038,"Columbiformes","","","",100,"Columbiformes","pigeons","French","N","2003-05-21",85994
+177038,"Columbiformes","","","",100,"Columbiformes","Pigeons","English","N","2005-10-06",98233
+177404,"Psittaciformes","","","",100,"Psittaciformes","Parrots","English","N","2005-10-06",19717
+177404,"Psittaciformes","","","",100,"Psittaciformes","perroquets","French","N","2003-05-21",85997
+177816,"Cuculiformes","","","",100,"Cuculiformes","Cuckoos","English","N","2005-10-06",19776
+177816,"Cuculiformes","","","",100,"Cuculiformes","coucoua","French","N","2003-05-21",86001
+177848,"Strigiformes","","","",100,"Strigiformes","Owls","English","N","2005-04-25",19795
+177848,"Strigiformes","","","",100,"Strigiformes","chouettes","French","N","2003-05-21",86002
+177848,"Strigiformes","","","",100,"Strigiformes","engoulevents","French","N","2003-05-21",86003
+177848,"Strigiformes","","","",100,"Strigiformes","hiboux","French","N","2003-05-21",86004
+177848,"Strigiformes","","","",100,"Strigiformes","Goatsuckers","English","N","2005-04-25",20495
+177993,"Apodiformes","","","",100,"Apodiformes","Swifts","English","N","2005-04-25",19846
+177993,"Apodiformes","","","",100,"Apodiformes","Hummingbirds","English","N","2005-10-06",98234
+178091,"Coliiformes","","","",100,"Coliiformes","Colies","English","N","2005-06-17",19915
+178093,"Trogoniformes","","","",100,"Trogoniformes","Trogons","English","N","2005-06-29",19916
+178102,"Coraciiformes","","","",100,"Coraciiformes","Kingfishers","English","N","2005-10-06",19922
+178102,"Coraciiformes","","","",100,"Coraciiformes","Rollers","English","N","2005-10-06",19923
+178102,"Coraciiformes","","","",100,"Coraciiformes","martins-pêcheurs","French","N","2003-05-21",86007
+178140,"Piciformes","","","",100,"Piciformes","Woodpeckers","unspecified","N","2005-04-25",19940
+178140,"Piciformes","","","",100,"Piciformes","pic-bois","French","N","2003-05-21",86008
+178265,"Passeriformes","","","",100,"Passeriformes","Perching Birds","English","N","2005-04-25",19967
+178265,"Passeriformes","","","",100,"Passeriformes","passereaux","French","N","2003-05-21",86011
+179926,"Insectivora","","","",100,"Insectivora","insectivores","English","N","1998-10-14",20927
+179984,"Dermoptera","","","",100,"Dermoptera","Flying Lemurs","English","N","2007-08-15",20983
+179985,"Chiroptera","","","",100,"Chiroptera","morcego","Portuguese","N","2003-05-21",85513
+179985,"Chiroptera","","","",100,"Chiroptera","quiróptero","Portuguese","N","2003-05-21",85514
+179985,"Chiroptera","","","",100,"Chiroptera","bats","English","N","1998-10-14",20984
+180089,"Primates","","","",100,"Primates","homem","Portuguese","N","2003-05-21",85515
+180089,"Primates","","","",100,"Primates","macaco","Portuguese","N","2003-05-21",85516
+180089,"Primates","","","",100,"Primates","primata","Portuguese","N","2003-05-21",85517
+180089,"Primates","","","",100,"Primates","sagui","Portuguese","N","2003-05-21",85518
+180089,"Primates","","","",100,"Primates","primates","French","N","2003-05-21",86027
+180089,"Primates","","","",100,"Primates","primates","English","N","2000-06-22",21100
+180100,"Edentata","","","",100,"Edentata","anteaters","English","N","1998-10-14",21111
+180100,"Edentata","","","",100,"Edentata","armadillos","English","N","1998-10-14",21112
+180100,"Edentata","","","",100,"Edentata","edentates","English","N","1998-10-14",21113
+180100,"Edentata","","","",100,"Edentata","sloths","English","N","1998-10-14",21114
+180104,"Pholidota","","","",100,"Pholidota","Pangolins","English","N","2007-08-15",21118
+180104,"Pholidota","","","",100,"Pholidota","scaly anteaters","English","N","1998-10-14",21119
+180104,"Pholidota","","","",100,"Pholidota","pholidotes","English","N","2007-08-15",112208
+180105,"Lagomorpha","","","",100,"Lagomorpha","coelho","Portuguese","N","2003-05-21",85519
+180105,"Lagomorpha","","","",100,"Lagomorpha","tapeti","Portuguese","N","2003-05-21",85520
+180105,"Lagomorpha","","","",100,"Lagomorpha","lagomorphs","English","N","1998-10-14",21120
+180105,"Lagomorpha","","","",100,"Lagomorpha","Rabbits","English","N","2007-08-15",21121
+180105,"Lagomorpha","","","",100,"Lagomorpha","Hares","English","N","2007-08-15",112303
+180105,"Lagomorpha","","","",100,"Lagomorpha","Pikas","English","N","2007-08-15",112304
+180130,"Rodentia","","","",100,"Rodentia","esquilo","Portuguese","N","2003-05-21",85521
+180130,"Rodentia","","","",100,"Rodentia","preá","Portuguese","N","2003-05-21",85522
+180130,"Rodentia","","","",100,"Rodentia","rato","Portuguese","N","2003-05-21",85523
+180130,"Rodentia","","","",100,"Rodentia","roedor","Portuguese","N","2003-05-21",85524
+180130,"Rodentia","","","",100,"Rodentia","rongeurs","French","N","2003-05-21",86028
+180130,"Rodentia","","","",100,"Rodentia","rodents","English","N","2001-05-02",21150
+180403,"Cetacea","","","",100,"Cetacea","baleines","French","N","2003-05-21",86034
+180403,"Cetacea","","","",100,"Cetacea","cétacés","French","N","2003-05-21",86035
+180403,"Cetacea","","","",100,"Cetacea","dauphins","French","N","2003-05-21",86036
+180403,"Cetacea","","","",100,"Cetacea","mammfères marins","French","N","2003-05-21",86037
+180403,"Cetacea","","","",100,"Cetacea","marsouins","French","N","2003-05-21",86038
+180403,"Cetacea","","","",100,"Cetacea","baleia","Portuguese","N","2003-05-21",85525
+180403,"Cetacea","","","",100,"Cetacea","cetáceo","Portuguese","N","2003-05-21",85526
+180403,"Cetacea","","","",100,"Cetacea","golfinho","Portuguese","N","2003-05-21",85527
+180403,"Cetacea","","","",100,"Cetacea","cetaceans","English","N","2002-08-06",20585
+180403,"Cetacea","","","",100,"Cetacea","whales","English","N","2002-08-06",20586
+180403,"Cetacea","","","",100,"Cetacea","dolphins","English","N","2002-08-06",78626
+180403,"Cetacea","","","",100,"Cetacea","marine mammals","English","N","2002-08-06",78627
+180403,"Cetacea","","","",100,"Cetacea","porpoises","English","N","2002-08-06",78628
+180539,"Carnivora","","","",100,"Carnivora","cachorro do mato","Portuguese","N","2003-05-21",85528
+180539,"Carnivora","","","",100,"Carnivora","carnívoro","Portuguese","N","2003-05-21",85529
+180539,"Carnivora","","","",100,"Carnivora","gato do mato","Portuguese","N","2003-05-21",85530
+180539,"Carnivora","","","",100,"Carnivora","lontra","Portuguese","N","2003-05-21",85531
+180539,"Carnivora","","","",100,"Carnivora","carnivores","French","N","2003-05-21",86039
+180539,"Carnivora","","","",100,"Carnivora","carnivores","English","N","1998-10-14",20688
+180673,"Tubulidentata","","","",100,"Tubulidentata","aardvarks","English","N","1998-10-14",20832
+180674,"Proboscidea","","","",100,"Proboscidea","Elephants","English","N","2007-08-15",20833
+180675,"Hyracoidea","","","",100,"Hyracoidea","cories","English","N","1998-10-14",20834
+180675,"Hyracoidea","","","",100,"Hyracoidea","dassies","English","N","1998-10-14",20835
+180675,"Hyracoidea","","","",100,"Hyracoidea","Hyraxes","English","N","2007-08-15",20836
+180676,"Sirenia","","","",100,"Sirenia","dugongs","English","N","2002-08-06",20837
+180676,"Sirenia","","","",100,"Sirenia","manatees","English","N","2002-08-06",20838
+180676,"Sirenia","","","",100,"Sirenia","sea cows","English","N","2002-08-06",20839
+180676,"Sirenia","","","",100,"Sirenia","sirens","English","N","2002-08-06",21477
+180687,"Perissodactyla","","","",100,"Perissodactyla","antas","Portuguese","N","2003-05-21",85532
+180687,"Perissodactyla","","","",100,"Perissodactyla","Odd-toed Ungulates","English","N","2013-11-04",154182
+180692,"Artiodactyla","","","",100,"Artiodactyla","artiodactyls","English","N","2004-04-22",87295
+180692,"Artiodactyla","","","",100,"Artiodactyla","porco do mato","Portuguese","N","2003-05-21",85533
+180692,"Artiodactyla","","","",100,"Artiodactyla","veado","Portuguese","N","2003-05-21",85534
+180692,"Artiodactyla","","","",100,"Artiodactyla","cloven-hoofed ungulates","English","N","1998-10-14",20856
+180692,"Artiodactyla","","","",100,"Artiodactyla","even-toed ungulates","English","N","1998-10-14",20857
+181554,"Leptomitales","","","",100,"Leptomitales","water molds","unspecified","Y","2003-05-09",1022
+500028,"Pinales","","","",100,"Pinales","pines","English","N","2012-03-29",145230
+551498,"Pristiophoriformes","","","",100,"Pristiophoriformes","saw sharks","English","N","2000-03-01",59715
+551499,"Orectolobiformes","","","",100,"Orectolobiformes","gatas nodrizas","Spanish","N","2003-05-09",83345
+551499,"Orectolobiformes","","","",100,"Orectolobiformes","requins-tapis","French","N","2003-05-09",83346
+551499,"Orectolobiformes","","","",100,"Orectolobiformes","tiburones tapiceros","Spanish","N","2003-05-09",83347
+551499,"Orectolobiformes","","","",100,"Orectolobiformes","carpet sharks","English","N","2003-05-09",59722
+551500,"Carcharhiniformes","","","",100,"Carcharhiniformes","ground sharks","English","N","2003-05-09",19177
+551734,"Crocodilia","","","",100,"Crocodilia","crocodilo","Portuguese","N","2003-05-21",85540
+551734,"Crocodilia","","","",100,"Crocodilia","jacaré","Portuguese","N","2003-05-21",85541
+551734,"Crocodilia","","","",100,"Crocodilia","Crocodilians","English","N","2005-05-11",96163
+551734,"Crocodilia","","","",100,"Crocodilia","crocodiles","English","N","2005-05-09",59810
+551734,"Crocodilia","","","",100,"Crocodilia","alligators","English","N","2005-05-09",59811
+551734,"Crocodilia","","","",100,"Crocodilia","caimans","English","N","2005-05-09",59812
+551734,"Crocodilia","","","",100,"Crocodilia","gavials","English","N","2005-05-09",59813
+552289,"Xenarthra","","","",100,"Xenarthra","preguiça","Portuguese","N","2003-05-21",85542
+552289,"Xenarthra","","","",100,"Xenarthra","tamanduá","Portuguese","N","2003-05-21",85543
+552289,"Xenarthra","","","",100,"Xenarthra","tatu","Portuguese","N","2003-05-21",85544
+552289,"Xenarthra","","","",100,"Xenarthra","edentates","English","N","1998-10-14",60221
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","cuica","Portuguese","N","2003-05-21",85545
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","didelfimorfo","Portuguese","N","2003-05-21",85546
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","gambá","Portuguese","N","2003-05-21",85547
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","marsupial","Portuguese","N","2003-05-21",85548
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","mucura","Portuguese","N","2003-05-21",85549
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","marsupials","English","N","2002-01-24",60219
+552290,"Didelphimorphia","","","",100,"Didelphimorphia","American marsupials","English","N","2002-01-24",60479
+552291,"Scandentia","","","",100,"Scandentia","Tree Shrews","English","N","2007-08-15",112169
+552291,"Scandentia","","","",100,"Scandentia","Treeshrews","English","N","2007-08-15",112171
+552296,"Notoryctemorphia","","","",100,"Notoryctemorphia","marsupial 'moles'","English","N","1998-10-14",60344
+553126,"Aphredoderiformes","","","",100,"Aphredoderiformes","cavefishes","English","N","1998-09-16",60696
+553126,"Aphredoderiformes","","","",100,"Aphredoderiformes","pirate perches","English","N","1998-09-16",60697
+553127,"Aulopiformes","","","",100,"Aulopiformes","salmons","English","N","2004-09-21",92442
+553127,"Aulopiformes","","","",100,"Aulopiformes","aulopiforms","English","N","2005-05-03",95740
+553128,"Beloniformes","","","",100,"Beloniformes","aiguilles de mer","French","N","2003-05-21",86047
+553128,"Beloniformes","","","",100,"Beloniformes","orphies","French","N","2003-05-21",86048
+553128,"Beloniformes","","","",100,"Beloniformes","needlefishes","English","N","1998-09-16",60713
+553129,"Characiformes","","","",100,"Characiformes","piranhas","French","N","2003-05-21",86049
+553129,"Characiformes","","","",100,"Characiformes","leporins","English","N","1998-09-16",60720
+553129,"Characiformes","","","",100,"Characiformes","piranhas","English","N","1998-09-16",60721
+553130,"Cyprinodontiformes","","","",100,"Cyprinodontiformes","cyprinodonts","English","N","2004-09-27",93452
+553130,"Cyprinodontiformes","","","",100,"Cyprinodontiformes","cyprinodontiforms","English","N","2004-09-27",93451
+553130,"Cyprinodontiformes","","","",100,"Cyprinodontiformes","cyprinodontes","French","N","2003-05-21",86050
+553130,"Cyprinodontiformes","","","",100,"Cyprinodontiformes","killifishes","English","N","1998-09-16",60834
+553131,"Esociformes","","","",100,"Esociformes","mudminnows","English","N","1998-09-16",60867
+553131,"Esociformes","","","",100,"Esociformes","pikes","English","N","1998-09-16",60868
+553132,"Mugiliformes","","","",100,"Mugiliformes","mullets","English","N","1998-09-16",60903
+553133,"Osmeriformes","","","",100,"Osmeriformes","argentines","French","N","2003-05-21",86051
+553133,"Osmeriformes","","","",100,"Osmeriformes","éperlans","French","N","2003-05-21",86052
+553133,"Osmeriformes","","","",100,"Osmeriformes","argentines","English","N","1998-09-16",60922
+553133,"Osmeriformes","","","",100,"Osmeriformes","smelts","English","N","1998-09-16",60923
+553139,"Ophidiiformes","","","",100,"Ophidiiformes","ophidiiforms","English","N","2005-10-04",97974
+553433,"Phoenicopteriformes","","","",100,"Phoenicopteriformes","Flamingos","English","N","2005-10-06",98223
+553433,"Phoenicopteriformes","","","",100,"Phoenicopteriformes","flamants","French","N","2011-09-22",132523
+553437,"Trochiliformes","","","",100,"Trochiliformes","colibris","French","N","2003-05-21",86054
+553437,"Trochiliformes","","","",100,"Trochiliformes","oiseaux-mouches","French","N","2003-05-21",86055
+553437,"Trochiliformes","","","",100,"Trochiliformes","Hummingbirds","English","N","2005-04-25",25952
+584892,"Macroscelidea","","","",100,"Macroscelidea","Elephant Shrews","English","N","2007-08-15",112191
+612137,"Mantophasmatodea","","","",100,"Mantophasmatodea","heelwalkers","English","N","2005-01-25",94858
+612137,"Mantophasmatodea","","","",100,"Mantophasmatodea","African rock crawlers","English","N","2005-01-25",94855
+612137,"Mantophasmatodea","","","",100,"Mantophasmatodea","gladiator-bugs","English","N","2005-01-25",94856
+612137,"Mantophasmatodea","","","",100,"Mantophasmatodea","gladiators","English","N","2002-12-02",79073
+621153,"Pedunculata","","","",100,"Pedunculata","stalked barnacles","English","N","2004-12-27",94544
+621154,"Sessilia","","","",100,"Sessilia","sessile barnacles","English","N","2004-12-27",94546
+624281,"Archaeognatha","","","",100,"Archaeognatha","jumping bristletails","English","N","2004-04-12",87213
+624282,"Phthiraptera","","","",100,"Phthiraptera","biting lice","English","N","2004-04-12",87214
+624282,"Phthiraptera","","","",100,"Phthiraptera","sucking lice","English","N","2004-04-12",87215
+624282,"Phthiraptera","","","",100,"Phthiraptera","chewing lice","English","N","2007-06-13",111751
+649685,"Myliobatiformes","","","",100,"Myliobatiformes","stingrays","English","N","2004-09-28",94242
+649687,"Rhinobatiformes","","","",100,"Rhinobatiformes","guitarfishes","English","N","2004-09-28",94243
+666109,"Rhaphidioptera","","","",100,"Rhaphidioptera","snake flies","English","N","2005-03-07",95188
+666109,"Rhaphidioptera","","","",100,"Rhaphidioptera","snakeflies","English","N","2005-03-07",95189
+666755,"Phasmida","","","",100,"Phasmida","phasmids","English","N","2013-11-04",153669
+666811,"Embiidina","","","",100,"Embiidina","webspinners","English","N","2005-03-11",95243
+666811,"Embiidina","","","",100,"Embiidina","web-spinners","English","N","2005-03-11",95244
+685008,"Zygentoma","","","",100,"Zygentoma","silverfish","English","N","2005-08-29",97484
+690741,"Pseudoscorpiones","","","",100,"Pseudoscorpiones","pseudoscorpions","English","N","2005-11-23",98255
+690742,"Solifugae","","","",100,"Solifugae","sun-spiders","English","N","2005-11-23",98251
+690742,"Solifugae","","","",100,"Solifugae","camel-spiders","English","N","2005-11-23",98252
+690742,"Solifugae","","","",100,"Solifugae","wind-scorpions","English","N","2005-11-23",98253
+690742,"Solifugae","","","",100,"Solifugae","solifuges","English","N","2005-11-23",98254
+690743,"Schizomida","","","",100,"Schizomida","schizomids","English","N","2005-11-23",98244
+690744,"Amblypygi","","","",100,"Amblypygi","whip-spiders","English","N","2005-11-23",98247
+690744,"Amblypygi","","","",100,"Amblypygi","amblypygids","English","N","2005-11-23",98248
+690744,"Amblypygi","","","",100,"Amblypygi","tail-less whip scorpions","English","N","2005-11-23",98249
+690744,"Amblypygi","","","",100,"Amblypygi","whip spiders","English","N","2005-11-23",98250
+696107,"Heterocyemida","","","",100,"Heterocyemida","heterocyemids","English","N","2005-12-27",98421
+705712,"Echiuroinea","","","",100,"Echiuroinea","spoon worms","English","N","2006-05-09",101924
+718925,"Anthoathecatae","","","",100,"Anthoathecatae","athecate hydroids","English","N","2007-03-13",111048
+718925,"Anthoathecatae","","","",100,"Anthoathecatae","hydromedusae","English","N","2007-03-13",111078
+718926,"Leptothecatae","","","",100,"Leptothecatae","thecate hydroids","English","N","2007-03-13",111084
+718926,"Leptothecatae","","","",100,"Leptothecatae","hydromedusae","English","N","2007-03-13",111112
+718928,"Siphonophorae","","","",100,"Siphonophorae","siphonophores","English","N","2007-03-13",111118
+733320,"Raphidioptera","","","",100,"Raphidioptera","snake flies","English","N","2007-10-11",112513
+733320,"Raphidioptera","","","",100,"Raphidioptera","snakeflies","English","N","2007-10-11",112514
+823960,"Suliformes","","","",100,"Suliformes","Cormorants","English","N","2011-09-22",132527
+823960,"Suliformes","","","",100,"Suliformes","cormorans","French","N","2011-09-22",132528
+823961,"Accipitriformes","","","",100,"Accipitriformes","éperviers","French","N","2011-09-22",132526
+823961,"Accipitriformes","","","",100,"Accipitriformes","Hawks","English","N","2011-09-22",132531
+823962,"Phaethontiformes","","","",100,"Phaethontiformes","Tropicbirds","English","N","2011-09-22",132554
+823963,"Pteroclidiformes","","","",100,"Pteroclidiformes","Sandgrouse","English","N","2011-09-22",132553
+846599,"Cyatheales","","","",100,"Cyatheales","tree ferns","English","N","2012-03-29",145213
+846601,"Hymenophyllales","","","",100,"Hymenophyllales","filmy ferns","English","N","2012-03-29",145214
+846634,"Araucariales","","","",100,"Araucariales","araucária","Portuguese","N","2012-03-29",145229
+913655,"Scutigeromorpha","","","",100,"Scutigeromorpha","house centipedes","English","N","2013-07-25",153420
+914219,"Blattodea","","","",100,"Blattodea","cockroaches","English","N","2013-11-04",153667
+914219,"Blattodea","","","",100,"Blattodea","termites","English","N","2013-11-04",153668
+948936,"Testudines","","","",100,"Testudines","tortues","French","N","2014-08-27",159242
+948936,"Testudines","","","",100,"Testudines","Turtles","English","N","2014-08-27",159243
+948936,"Testudines","","","",100,"Testudines","Terrapins","English","N","2014-08-27",159244
+948936,"Testudines","","","",100,"Testudines","Tortoises","English","N","2014-08-27",159245
+974252,"Tubificida","","","",100,"Tubificida","aquatic oligochaete worm","English","N","2015-06-03",161943
