@@ -87,13 +87,13 @@ AccDash2 <- as.data.frame(cbind("irn" = AccDash1$irn,
                                 "DarContinent" = AccDash1$LocContinent_tab,
                                 "DarWaterBody" = AccDash1$LocOcean_tab,
                                 "DarCollectionCode" = AccDash1$AccCatalogue,
-                              # "DesKDescription0" = paste(AccDash1$AccAccessionDescription,"|",AccDash1$AccDescription),
+                                # "DesKDescription0" = paste(AccDash1$AccAccessionDescription,"|",AccDash1$AccDescription),
                                 "AccDescription" = AccDash1$AccDescription,
                                 "AccDescription2" = AccDash1$AccAccessionDescription,
                                 "DarIndividualCount"= as.numeric(AccDash1$CatTotal),
-                               # "AccTotalObjects"= AccDash1$AccTotalObjects,
-                               # "AccTotBothItOb"= as.integer(0),
-                               # "AccTotalObjects" = AccDash1$AccTotalObjects,
+                                # "AccTotalObjects"= AccDash1$AccTotalObjects,
+                                # "AccTotBothItOb"= as.integer(0),
+                                # "AccTotalObjects" = AccDash1$AccTotalObjects,
                                 "AccLocality" = AccDash1$AccLocality,
                                 "AccGeography" = AccDash1$AccGeography,
                                 "AccCatalogueNo" = AccDash1$AccCatalogueNo,
@@ -122,9 +122,10 @@ FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==8
 FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==7 & is.na(FullDash2$AccCatalogueNo)==FALSE)] <- 6
 FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==6 & FullDash2$DarIndividualCount>0)] <- 5
 
-# Set AccTotal = 1 for Quality=9 (in order to count minimum #records/backlog)
-FullDash2$Backlog[which(FullDash2$Quality==9)] <- 1
-
+# Set Backlog = 1 for Quality=9 (in order to count minimum #records/backlog)
+FullDash2$Backlog[which(FullDash2$Quality==9 & FullDash2$RecordType=="Accession")] <- 1
+# Set Backlog = 0 for Catalogue records
+FullDash2$Backlog[which(FullDash2$RecordType=="Catalog")] <- 0
 
 # Catalog Partial data measure -- higher = better
 FullDash2$DarCountry[which(FullDash2$DarCountry=="NA")] = NA
