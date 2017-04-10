@@ -30,7 +30,7 @@ FullDash9csv <- FullDash8csv[,c("irn","DarLatitude","DarLongitude","Where",
                                 "WhenAge", "WhenAgeFrom", "WhenAgeTo","DarYearCollected",
                                 "WhenOrder", "WhenTimeLabel", "WhenAgeMid",
                                 "Department", "DarIndividualCount", "Who"
-                                )]
+)]
 
 FullDash9csv$DarYearCollected <- as.numeric(FullDash9csv$DarYearCollected)
 
@@ -38,7 +38,7 @@ FullDash9csv$DarYearCollected <- as.numeric(FullDash9csv$DarYearCollected)
 # Last Check/Clean ####
 FullDash9csv$What <- gsub("\\|\\s+NA\\s+\\||\\|\\s+NANA\\s+\\|", "|", FullDash9csv$What, ignore.case = T)
 FullDash9csv$What <- gsub("NANA", "", FullDash9csv$What, ignore.case = F)
-FullDash9csv$What <- gsub("^NA\\s+|\\s+NA$|^NANA\\s+|\\s+NANA$", "", FullDash9csv$What, ignore.case = T)
+FullDash9csv$What <- gsub("^NA\\s+|\\s+NA$|^NANA\\s+|\\s+NANA$|\\s+\\|\\s+$", "", FullDash9csv$What, ignore.case = T)
 FullDash9csv$What <- gsub("\\|\\s+NA\\s+|\\s+NA\\s+\\|", "", FullDash9csv$What, ignore.case = T)
 FullDash9csv$What <- gsub("(\\|\\s+)+", "| ", FullDash9csv$What, ignore.case = T)
 FullDash9csv$What <- gsub("(\\s+\\|)+", " |", FullDash9csv$What, ignore.case = T)
@@ -46,6 +46,7 @@ FullDash9csv$Where <- gsub("(\\|\\s+)+", "| ", FullDash9csv$Where, ignore.case =
 FullDash9csv$Where <- gsub("(\\s+\\|)+", " |", FullDash9csv$Where, ignore.case = T)
 FullDash9csv$Where <- gsub(" Usa ", " U.S.A. ", FullDash9csv$Where, ignore.case = T)
 FullDash9csv$What <- gsub("\\| and \\|", "", FullDash9csv$What, ignore.case = T)
+FullDash9csv$Who <- gsub("^ $|^NA$", "", FullDash9csv$Who, ignore.case = T)
 
 
 print(paste(date(), "-- finished final prep; starting export of final dataset & LUTs."))
@@ -54,7 +55,7 @@ print(paste(date(), "-- finished final prep; starting export of final dataset & 
 # Export dataset CSV ####
 setwd("../output")
 
-write.csv(FullDash9csv, file = "FullDash10.csv", na="NULL", row.names = FALSE)
+write.csv(FullDash9csv, file = "FullDash11.csv", na="NULL", row.names = FALSE)
 
 
 #  Who LUTs ####

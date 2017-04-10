@@ -11,7 +11,10 @@ setwd(paste0(getwd(),"/data01raw"))
 #  Who ####
 #  1-Who: Clean "Who" fields
 
-WhoDashBU <- FullDash3[,c("irn", "RecordType", "DesEthnicGroupSubgroup_tab", "EcbNameOfObject")]
+WhoDashBU <- FullDash3[,c("irn", "RecordType", 
+                          "DesEthnicGroupSubgroup_tab", 
+                          "AccDescription", "AccDescription2", # might need to cut these?
+                          "EcbNameOfObject")]
 WhoDash <- WhoDashBU
 
 date() 
@@ -30,6 +33,24 @@ WhoDash$EcbNameOfObject[is.na(WhoDash$EcbNameOfObject)==T] <- ""
 WhoDash$EcbNameOfObject <- sapply (WhoDash$EcbNameOfObject, simpleCap)
 date()
 
+WhoDash$AccDescription[is.na(WhoDash$AccDescription)==T] <- ""
+WhoDash$AccDescription <- gsub("\\|| ", " | ", WhoDash$AccDescription)
+WhoDash$AccDescription <- sapply (WhoDash$AccDescription, simpleCap)
+date()
+
+WhoDash$AccDescription2[is.na(WhoDash$AccDescription2)==T] <- ""
+#WhoDash$AccDescription2 <- gsub("[[:punct:]]", " ", WhoDash$AccDescription2)
+WhoDash$AccDescription2 <- gsub(paste(CutFirst, collapse="|"), " ", WhoDash$AccDescription2, ignore.case = T)
+WhoDash$AccDescription2 <- gsub(paste0(CutWords, collapse="|"), " ", WhoDash$AccDescription2, ignore.case = T)
+WhoDash$AccDescription2 <- gsub(" [[:alpha:]]{1} ", " ", WhoDash$AccDescription2, ignore.case = T)
+WhoDash$AccDescription2 <- gsub("^\\s+|\\s+$", "", WhoDash$AccDescription2)
+WhoDash$AccDescription2 <- gsub("\\s+", " ", WhoDash$AccDescription2)
+WhoDash$AccDescription2 <- gsub(" ", " | ", WhoDash$AccDescription2)
+WhoDash$AccDescription2 <- gsub("(\\|\\s+)+", "| ", WhoDash$AccDescription2)
+WhoDash$AccDescription2 <- sapply (WhoDash$AccDescription2, simpleCap)
+date()
+
+
 
 #  2-Wh0 LUTs ####
 # unsplit = 2907
@@ -40,13 +61,14 @@ WhoLUT$WhoLUT <- gsub("^\\s+|\\s+$", "", WhoLUT$WhoLUT)
 WhoCount <- dplyr::count(WhoLUT, WhoLUT)
 WhoCount <- WhoCount[which(WhoCount$n > 2),]
 WhoLUT <- data.frame("WhoLUT" = unique(WhoLUT[which((WhoLUT$WhoLUT %in% WhoCount$WhoLUT) &
-                                                     nchar(WhoLUT$WhoLUT)>1),]),
+                                                      nchar(WhoLUT$WhoLUT)>1),]),
                      stringsAsFactors = F)
-
+WhoLUT <- data.frame("WhoLUT"=WhoLUT[order(WhoLUT$WhoLUT),], stringsAsFactors = F)
 
 #  3-Concat 'Who' data ####
 WhoDash2 <- unite(WhoDash, "Who", DesEthnicGroupSubgroup_tab:EcbNameOfObject, sep=" | ", remove=TRUE)
-WhoDash2$Who <- gsub("^ \\| $", "NA", WhoDash2$Who)
+WhoDash2$Who <- gsub("(\\|\\s+)+", "| ", WhoDash2$Who)
+WhoDash2$Who <- gsub("^\\s+\\|\\s+$", "", WhoDash2$Who)
 #FullDash3 <- subset(FullDash3, select=-c(DarCountry, DarContinent, DarContinentOcean, DarWaterBody, AccLocality, AccGeography))
 
 
