@@ -104,14 +104,13 @@ A ranking based on the following criteria (poor = 9; good = 1):
  - 1 = PriCoordinateIndicator = Yes AND HasMultimedia = Yes AND Has _Full Data_ = Yes
  
  _Partial Data_ = Has 3 or 4 of the following:
- - DarScientificName Not NULL
+ - IdeTaxonRef_tab.ClaRank = Family, Genus, Species, Subpecies or Variety
  - DarStateProvince Not NULL
  - DarCollector Not NULL
  - DarYearCollected Not NULL
  - DarCatalogNumber Not NULL
  
  _Full Data_ = Has all 5 of the above
- (Note: "DarScientificName Not NULL" should be replaced by "IdeTaxonRef_tab.ClaRank = Family, Genus, Species, Subpecies or Variety")
  
 #### RecordType
 Indicates whether the record is "Catalog" or "Accession" data, and therefore part of the catalogged or backlogged items.
