@@ -114,8 +114,10 @@ A ranking based on the following criteria (poor = 9; good = 1):
  
 #### RecordType
 Indicates whether the record is "Catalog" or "Accession" data, and therefore part of the catalogged or backlogged items.
-#### DarIndividualCount & Backlog
-The count of items catalogged or backlogged represented by a given catalog or accession record.
+#### DarIndividualCount
+The number of items catalogged, from the DarIndividualCount field of a catalogue record.
+#### Backlog
+The number of items backlogged = the number of catalogued items subtracted from the number accessioned items.
 #### TaxIDRank
 The level to which a specimen has been identified
 #### HasMM
