@@ -92,47 +92,9 @@ WhenDash$WhenAge[which(WhenDash$col==4)] <- WhenDash$DarEarliestEon[which(WhenDa
 WhenDash$AttPeriod_tab[which(nchar(WhenDash$AttPeriod_tab)<2 | WhenDash$AttPeriod_tab=="NANA")] = NA
 WhenDash$WhenAge[which(is.na(WhenDash$AttPeriod_tab)==F)] <- WhenDash$AttPeriod_tab[which(is.na(WhenDash$AttPeriod_tab)==F)]
 
+
+# Add in / Fix up When-Dates
 # fill in missing dates by:
-# 1 -- merge with WhenLUTs 
-
-AgeAnthroLUT <- read.csv(file="WhenAttPerLUT.csv", stringsAsFactors = F)
-
-AgeGeoLUT <- read.csv(file="WhenChronoLUTemu.csv", stringsAsFactors = F)
-AgeGeoLUT$Eon[which(nchar(AgeGeoLUT$Eon)<1)] = NA
-AgeGeoLUT$Era[which(nchar(AgeGeoLUT$Era)<1)] = NA
-AgeGeoLUT$Period[which(nchar(AgeGeoLUT$Period)<1)] = NA
-AgeGeoLUT$Epoch[which(nchar(AgeGeoLUT$Epoch)<1)] = NA
-AgeGeoLUT$Age[which(nchar(AgeGeoLUT$Age)<1)] = NA
-AgeGeoLUT$col <- 0
-AgeGeoLUT$col <- is.na(AgeGeoLUT$Eon) + is.na(AgeGeoLUT$Era) + is.na(AgeGeoLUT$Period) + is.na(AgeGeoLUT$Epoch) + is.na(AgeGeoLUT$Age)
-AgeGeoLUT$WhenLUT <- ""
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==0)] <- AgeGeoLUT$Age[which(AgeGeoLUT$col==0)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==1)] <- AgeGeoLUT$Epoch[which(AgeGeoLUT$col==1)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==2)] <- AgeGeoLUT$Period[which(AgeGeoLUT$col==2)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==3)] <- AgeGeoLUT$Era[which(AgeGeoLUT$col==3)]
-AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==4)] <- AgeGeoLUT$Eon[which(AgeGeoLUT$col==4)]
-
-AgeGeoLUT2 <- unique(AgeGeoLUT[which(is.na(AgeGeoLUT$WhenLUT)==F),c("WhenLUT", "DateFrom", "DateTo")])
-AgeGeoLUT2$DateFrom[which(AgeGeoLUT2$WhenLUT=="Eoarchean")] <- -4000000000
-AgeGeoLUT2$DateFrom[which(AgeGeoLUT2$WhenLUT=="Archean")] <- -4000000000
-AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("[[:punct:]]", " ", x))
-AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("\\s+", " ", x))
-AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("^\\s+|\\s+$", " ", x))
-
-
-#AttPeriodLUT <- data.frame("WhenLUT" = levels(as.factor(WhenDash$AttPeriod_tab)), stringsAsFactors = F)
-#AttPeriodLUT <- unique(AttPeriodLUT)
-
-WhenAgeLUT <- rbind(AgeGeoLUT2, AgeAnthroLUT)
-WhenAgeLUT <- unique(WhenAgeLUT)
-WhenAgeLUTcheck <- dplyr::count(WhenAgeLUT, WhenLUT)
-WhenAgeLUTcheck <- WhenAgeLUTcheck[which(WhenAgeLUTcheck$n>1),]
-WhenAgeLUT <- WhenAgeLUT[order(WhenAgeLUT$WhenLUT),]
-WhenAgeLUT$seq <- sequence(rle(as.character(WhenAgeLUT$WhenLUT))$lengths)
-WhenAgeLUT <- WhenAgeLUT[which(WhenAgeLUT$seq==1),]
-WhenAgeLUT <- WhenAgeLUT[,-4]
-WhenAgeLUT$WhenLUT <- sapply (WhenAgeLUT$WhenLUT, simpleCap)
-
 
 WhenDash2 <- merge(WhenDash, WhenAgeLUT, by.x="WhenAge", by.y="WhenLUT", all.x=T)
 
@@ -189,6 +151,7 @@ Depts3 <- Depts3[,c("irn","RecordType","DarYearCollected","Department")]
 WhenDash4 <- merge(WhenDash3, Depts3, by=c("irn","RecordType"), all.x=T)
 rm(Depts, Depts2, Depts3)
 
+WhenDash4$WhenAge[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
 WhenDash4$WhenAgeFrom[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
 WhenDash4$WhenAgeTo[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
 WhenDash4$WhenAgeMid[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
@@ -221,6 +184,52 @@ WhenDash5$WhenTimeLabel[which((WhenDash5$WhenTimeLabel)=="NA")] <- ""
 WhenDash5$DarYearCollected[is.na(WhenDash5$DarYearCollected)==T] <- ""
 WhenDash5$DarYearCollected[which((WhenDash5$DarYearCollected)=="NA")] <- ""
 
+
+
+# Merge WhenLUTs ####
+
+AgeAnthroLUT <- read.csv(file="WhenAttPerLUT.csv", stringsAsFactors = F)
+
+AgeGeoLUT <- read.csv(file="WhenChronoLUTemu.csv", stringsAsFactors = F)
+AgeGeoLUT$Eon[which(nchar(AgeGeoLUT$Eon)<1)] = NA
+AgeGeoLUT$Era[which(nchar(AgeGeoLUT$Era)<1)] = NA
+AgeGeoLUT$Period[which(nchar(AgeGeoLUT$Period)<1)] = NA
+AgeGeoLUT$Epoch[which(nchar(AgeGeoLUT$Epoch)<1)] = NA
+AgeGeoLUT$Age[which(nchar(AgeGeoLUT$Age)<1)] = NA
+AgeGeoLUT$col <- 0
+AgeGeoLUT$col <- is.na(AgeGeoLUT$Eon) + is.na(AgeGeoLUT$Era) + is.na(AgeGeoLUT$Period) + is.na(AgeGeoLUT$Epoch) + is.na(AgeGeoLUT$Age)
+AgeGeoLUT$WhenLUT <- ""
+AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==0)] <- AgeGeoLUT$Age[which(AgeGeoLUT$col==0)]
+AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==1)] <- AgeGeoLUT$Epoch[which(AgeGeoLUT$col==1)]
+AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==2)] <- AgeGeoLUT$Period[which(AgeGeoLUT$col==2)]
+AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==3)] <- AgeGeoLUT$Era[which(AgeGeoLUT$col==3)]
+AgeGeoLUT$WhenLUT[which(AgeGeoLUT$col==4)] <- AgeGeoLUT$Eon[which(AgeGeoLUT$col==4)]
+
+AgeGeoLUT2 <- unique(AgeGeoLUT[which(is.na(AgeGeoLUT$WhenLUT)==F),c("WhenLUT", "DateFrom", "DateTo")])
+AgeGeoLUT2$DateFrom[which(AgeGeoLUT2$WhenLUT=="Eoarchean")] <- -4000000000
+AgeGeoLUT2$DateFrom[which(AgeGeoLUT2$WhenLUT=="Archean")] <- -4000000000
+AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("[[:punct:]]", " ", x))
+AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("\\s+", " ", x))
+AgeGeoLUT2$WhenLUT <- sapply(AgeGeoLUT2$WhenLUT, function (x) gsub("^\\s+|\\s+$", " ", x))
+
+
+#AttPeriodLUT <- data.frame("WhenLUT" = levels(as.factor(WhenDash$AttPeriod_tab)), stringsAsFactors = F)
+#AttPeriodLUT <- unique(AttPeriodLUT)
+
+
+BioAgeLUT <- data.frame("WhenLUT" = unique(WhenDash4$DarYearCollected[which((WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology") & WhenDash4$Order>0 & as.numeric(WhenDash4$DarYearCollected)>1850 & as.numeric(WhenDash4$DarYearCollected)<2018)]), stringsAsFactors = F)
+BioAgeLUT$DateFrom <- as.numeric(BioAgeLUT$WhenLUT)
+BioAgeLUT$DateTo <- as.numeric(BioAgeLUT$WhenLUT)
+
+WhenAgeLUT <- rbind(AgeGeoLUT2, AgeAnthroLUT, BioAgeLUT)
+WhenAgeLUT <- unique(WhenAgeLUT)
+WhenAgeLUTcheck <- dplyr::count(WhenAgeLUT, WhenLUT)
+WhenAgeLUTcheck <- WhenAgeLUTcheck[which(WhenAgeLUTcheck$n>1),]
+WhenAgeLUT <- WhenAgeLUT[order(WhenAgeLUT$WhenLUT),]
+WhenAgeLUT$seq <- sequence(rle(as.character(WhenAgeLUT$WhenLUT))$lengths)
+WhenAgeLUT <- WhenAgeLUT[which(WhenAgeLUT$seq==1),]
+WhenAgeLUT <- WhenAgeLUT[,-4]
+WhenAgeLUT$WhenLUT <- sapply (WhenAgeLUT$WhenLUT, simpleCap)
 
 
 # p2 -- &/or re-insert AttPeriod_tab which(grep("\\d{3,4}" ==1) ... smooth that out?
