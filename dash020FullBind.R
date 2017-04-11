@@ -27,25 +27,6 @@ if (exists("CatDash03")==TRUE) {
 
 CatDash3 <- unique(CatDash2)
 #check <- dplyr::count(CatDash3, irn)
-
-
-#taxlist = list.files(path="./catTaxClaRank/", pattern="dashbd.*")
-#setwd("./catTaxClaRank/")
-#CatTaxClaRank <- do.call(rbind, lapply(taxlist, read.csv))
-#setwd("..")
-#CatTaxClaRank <- CatTaxClaRank[,3:4]
-#CatTaxClaRank$ClaRank <- as.character(CatTaxClaRank$ClaRank)
-#CatTaxClaRank <- unique(CatTaxClaRank)
-## if somehow can't filter out all duplicate irn's, take only 1st
-## NOTE -- should actually add EMu field + filter for "IdeFiledAs_tab"=="Yes"
-#CatTaxClaRank <- CatTaxClaRank[order(CatTaxClaRank$irn),]
-#CatTaxClaRank$irnseq <- sequence(rle(as.character(CatTaxClaRank$irn))$lengths)
-#CatTaxClaRank <- CatTaxClaRank[which(CatTaxClaRank$irnseq==1),]
-#CatTaxClaRank <- CatTaxClaRank[,1:2]
-
-#CatDash3 <- merge(CatDash3, CatTaxClaRank, by="irn", all.x=T)
-#rm(taxlist)
-
 #CatDash3 <- unique(CatDash3)
 
 
@@ -120,7 +101,7 @@ FullDash2$Quality <- 9
 FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$AccTotal>0)] <- 8
 FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==8 & (is.na(FullDash2$AccLocality) + is.na(FullDash2$AccGeography) < 2))] <- 7
 FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==7 & is.na(FullDash2$AccCatalogueNo)==FALSE)] <- 6
-FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==6 & FullDash2$DarIndividualCount>0)] <- 5
+FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality<=7 & FullDash2$DarIndividualCount>0)] <- 5
 
 # Set Backlog = 1 for Quality=9 (in order to count minimum #records/backlog)
 FullDash2$Backlog[which(FullDash2$Quality==9 & FullDash2$RecordType=="Accession")] <- 1
@@ -137,7 +118,18 @@ FullDash2$DarImageURL[which(FullDash2$DarImageURL=="NA")] = NA
 FullDash2$DarLatitude[which(FullDash2$DarLatitude=="NA")] = NA
 FullDash2$DarLongitude[which(FullDash2$DarLongitude=="NA")] = NA
 
-FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)+is.na(FullDash2$DarScientificName)+is.na(FullDash2$DarMonthCollected)+is.na(FullDash2$DarCatalogNumber)+is.na(FullDash2$DarCollector))
+#FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)
+#                          +is.na(FullDash2$DarMonthCollected)
+#                          +is.na(FullDash2$DarCatalogNumber)
+#                          +is.na(FullDash2$DarCollector)
+#                          +is.na(FullDash2$DarScientificName))
+
+FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)
+                          +is.na(FullDash2$DarMonthCollected)
+                          +is.na(FullDash2$DarCatalogNumber)
+                          +is.na(FullDash2$DarCollector)
+                          +as.numeric(FullDash2$ClaRank %in% c("Family", "Genus", "Species","Subspecies","Variety")))
+
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog")] <- 4
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>0)] <- 3
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>2 & (is.na(FullDash2$DarLatitude)+is.na(FullDash2$DarImageURL)<2))] <- 2
