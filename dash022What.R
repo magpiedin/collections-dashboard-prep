@@ -47,7 +47,10 @@ WhatDash4[,3:NCOL(WhatDash4)] <- sapply(WhatDash4[,3:NCOL(WhatDash4)], function 
 #WhatDash4[,6:NCOL(WhatDash4)] <- sapply(WhatDash4[,6:NCOL(WhatDash4)], simpleCap)
 date()
 
+WhatDash4$DarCollectionCode <- gsub("Invertebrate Zoology", "Invertebrates", WhatDash4$DarCollectionCode)
+WhatDash4$DarCollectionCode <- gsub("and", "", WhatDash4$DarCollectionCode)
 WhatDash4$DarCollectionCode <- gsub("\\|| ", " | ", WhatDash4$DarCollectionCode)
+WhatDash4$DarCollectionCode <- gsub("Physical \\| Geology", "Physical Geology", WhatDash4$DarCollectionCode)
 
 WhatDash4$AccDesc01 <- gsub("\\|| ", " | ", WhatDash4$AccDescription)
 WhatDash4$AccDesc01 <- sapply(WhatDash4$AccDesc01, simpleCap)
