@@ -1,0 +1,15 @@
+irn,AccCatalogue,AccLocality,AccTotalItems,AccTotalObjects,AccAccessionDescription,AccCatalogueNo,LocContinent_tab,LocCountry_tab,LocOcean_tab,AccDescription,AccGeography,AccCount,AccTotal,CatTotal,backlog,DarBasisOfRecord
+123,Birds,USA,3,NA,3 birds,,,,NA,NA,NA,NA,3,0,3,NA
+234,Physical Geology,,NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+345,Physical Geology,,NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+456,Birds,,NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+567,Fossil Invertebrates,USA,NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+678,Fossil Invertebrates,"Spain, USA",NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+1234,Fossil Invertebrates,"Sweden, USA",NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+5678,Paleobotany,USA,NA,NA,,,,,NA,NA,NA,NA,0,0,0,Specimen
+2345,Paleobotany,USA,NA,NA,"Purchase, 1895",,,,NA,NA,NA,NA,0,0,0,Specimen
+3456,Amphibians and Reptiles,USA,1,NA,1 frog,,,,NA,NA,NA,NA,1,0,1,NA
+4567,Amphibians and Reptiles,USA,2,NA,2 frogs,123-234,,,NA,NA,NA,NA,2,0,2,NA
+5678,Botany,,NA,NA,,,,,NA,,Europe,5,5,1,4,NA
+6789,Mammals,North Dakota,3,3,3 deer skins (no skulls),234-345,,,NA,NA,NA,NA,3,0,3,Specimen
+7890,Fishes,Mexico,1,NA,Notropis,2345,,,NA,NA,NA,NA,1,1,0,Lot
