@@ -5,7 +5,7 @@ print(paste(date(), "-- merging Accessions & Catalogue data"))
 
 
 # point to csv's directory
-setwd(paste0(getwd(),"/data01raw"))
+setwd(paste0(origdir,"/data01raw"))
 
 # Import raw EMu data ####
 #CatDash2 <- read.csv(file="CatDash3BU_old.csv", stringsAsFactors = F, na.strings = "")
@@ -23,16 +23,17 @@ DashMMa <- read.csv(file="dashMMa.csv", stringsAsFactors = F)
 DashMMbgz <- read.csv(file="dashMMbgz.csv", stringsAsFactors = F)
 DashMM <- rbind(DashMMa, DashMMbgz)
 DashMM <- unique(DashMM[,3:4])
-DashMM$MulHasMultiMedia <- as.integer(gsub("Y",1,DashMM$MulHasMultiMedia))
 #DashMM$MulHasMultiMedia <- gsub("N",0,DashMM$MulHasMultiMedia)
 
 
 if (NROW(CatDash2$MulHasMultiMedia)==0) {
   CatDash2 <- merge(CatDash2, DashMM, by="irn", all.x=T)
-  CatDash2$MulHasMultiMedia[which(is.na(CatDash2$MulHasMultiMedia)==T)] <- 0
-  CatDash2$DarImageURL <- CatDash2$MulHasMultiMedia
 }
 
+CatDash2$MulHasMultiMedia <- gsub("Y","1",CatDash2$MulHasMultiMedia)
+CatDash2$MulHasMultiMedia[which(is.na(CatDash2$MulHasMultiMedia)==T)] <- "0"
+CatDash2$MulHasMultiMedia <- gsub("N","0",CatDash2$MulHasMultiMedia)
+CatDash2$DarImageURL <- as.integer(CatDash2$MulHasMultiMedia)
 
 #IPTlatlon <- read.csv(file="dashbdLatLong.csv")
 #IPTlatlon <- IPTlatlon[,2:4]
@@ -133,12 +134,12 @@ FullDash2$DarImageURL[which(FullDash2$DarImageURL=="NA")] = NA
 FullDash2$DarLatitude[which(FullDash2$DarLatitude=="NA")] = NA
 FullDash2$DarLongitude[which(FullDash2$DarLongitude=="NA")] = NA
 
-FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)
+# Calculate number of Darwin Core fields filled
+FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)  # need to update with DarStateProvince
                           +is.na(FullDash2$DarMonthCollected)
                           +is.na(FullDash2$DarCatalogNumber)
                           +is.na(FullDash2$DarCollector)
-                          #+as.numeric(FullDash2$ClaRank %in% c("Family", "Genus", "Species","Subspecies","Variety")))
-                          +as.numeric(FullDash2$ClaRank %in% c("Family", "Genus", "Species","Subspecies","Variety")))
+                          +as.numeric(!FullDash2$TaxIDRank %in% c("Family", "Genus", "Species")))
 
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog")] <- 4
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>0)] <- 3
@@ -153,6 +154,6 @@ colnames(QualityFull)[1] <- "QualityRank"
 QualityCatDar <- dplyr::count(FullDash2[which(FullDash2$RecordType=="Catalog"),], CatQual)
 colnames(QualityCatDar)[1] <- "DarFieldsFilled"
 
-setwd("..")
+setwd(origdir)
 
 print(paste(date(), "-- finished merging Acc. & Cat. data.  Beginning to build WHERE fields"))

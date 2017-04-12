@@ -1,7 +1,7 @@
 # Run this script to prep a Collections Dashboard dataset.
 
-#origdir <- getwd()
-origdir <- "D:/colldash2/collprep/"
+origdir <- getwd()
+#origdir <- "D:/colldash2/collprep/"
 
 # Instructions
 print("Step 1 - Save scripts repo to computer.")
