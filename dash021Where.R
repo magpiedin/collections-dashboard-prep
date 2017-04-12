@@ -1,11 +1,9 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Setup "Where" data
 
-print(paste(date(), "-- started setting up 'Where' data."))
-
 
 # point to csv's directory
-setwd(paste0(getwd(),"/data01raw"))
+setwd(paste0(origdir,"/data01raw"))
 
 
 # Clean 'Where' data [plus pre-concatenated AccGeography values] ####
@@ -119,14 +117,6 @@ AccGeographyLUT$WhereLUT <- gsub("NANA|^Na$", "", AccGeographyLUT$WhereLUT, igno
 AccGeographyLUT$WhereLUT <- gsub("\\.\\.", ".", AccGeographyLUT$WhereLUT, ignore.case=T)
 
 
-# if there are in fact spaces at end of values, clean out here?
-#substrRight <- function(x, n){
-#  substr(x, nchar(x)-n+1, nchar(x))
-#}
-##NROW(FullDash2$DarContinent[which(substrRight(as.character(FullDash2$DarContinent), 1)==" ")])
-#FullDash2$cleanDarCountry[which(substrRight(as.character(FullDash2$cleanDarCountry), 1)==" ")] <- paste0(substr(FullDash2$cleanDarCountry[which(substrRight(as.character(FullDash2$cleanDarCountry), 1)==" ")],1,nchar(FullDash2$cleanDarCountry[which(substrRight(as.character(FullDash2$cleanDarCountry), 1)==" ")])-1))
-
-
 # Concat 'Where' data ####
 FullDash3 <- unite(FullDash2, "Where", cleanDarCountry:cleanDarWaterBody, sep=" | ", remove=TRUE)
 FullDash3 <- subset(FullDash3, select=-c(DarCountry, DarContinent, DarContinentOcean, DarWaterBody, AccLocality, AccGeography))
@@ -149,8 +139,6 @@ FullDash3csv$Where <- gsub("(\\|\\s+\\|)+","|",FullDash3csv$Where)
 FullDash3csv$Where[which(grepl("[[:alpha:]]",FullDash3csv$Where)<1)] <- ""
 
 colnames(FullDash3csv)[10] <- "HasMM"
-FullDash3csv$HasMM[which(nchar(FullDash3csv$HasMM)<3)] <- 0
-FullDash3csv$HasMM[which(nchar(FullDash3csv$HasMM)>2)] <- 1
 FullDash3csv$HasMM <- as.integer(FullDash3csv$HasMM)
 FullDash3csv$irn <- as.integer(FullDash3csv$irn)
 FullDash3csv$Backlog <- as.integer(FullDash3csv$Backlog)
@@ -215,19 +203,11 @@ WhereLUTall$WhereLUT <- gsub("Localities In |No Data", "", WhereLUTall$WhereLUT,
 WhereLUTall$WhereLUT[which(grepl("[[:alpha:]]",WhereLUTall$WhereLUT)<1)] <- ""
 WhereLUTall <- data.frame("WhereLutClean" = unique(WhereLUTall$WhereLUT[which(nchar(WhereLUTall$WhereLUT)>1)]))
 
-#WhereLUTclean <- strsplit(WhereLUTall$WhereLutClean, " ")
-#WhereLUTclean <- unlist(WhereLUTclean)
-#WhereLUTclean <- WhereLUTclean[which(nchar(WhereLUTclean)>2 & is.na(WhereLUTclean)==FALSE)]
-##WhereLUTclean <- sapply (WhereLUTclean, simpleCap)
-#WhereLUTclean <- data.frame("WhereLUT"=unique(WhereLUTclean), stringsAsFactors=F)
-#WhereLUTclean <- data.frame("WhereLUT"=WhereLUTclean[order(WhereLUTclean$WhereLUT),])
-#WhereLUTclean$WhereLUT <- gsub("^Na$", "", WhereLUTclean$WhereLUT, ignore.case = T)
-#WhereLUTclean$WhereLUT <- as.character(WhereLUTclean$WhereLUT)
-
 rm("WhereLUT1", "WhereLUT2", "WhereLUT3", "WhereLUT4", "WhereLUT5", "WhereLUT6")
 
+
 # reset working directory
-setwd("..")
+setwd(origdir)
 
 
-print(paste(date(), "-- finished setting up 'Where' data."))
+print(paste(date(), "-- finished setting up WHERE.  Beginning to build WHAT."))
