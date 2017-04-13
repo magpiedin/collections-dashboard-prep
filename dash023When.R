@@ -1,8 +1,7 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Setup "When" data
 
-print(paste(date(), "-- started setting up 'When' data."))
-
+print(paste(date(), "-- ...finished setting up WHAT.   Starting dash023When.R"))
 
 # point to csv's directory
 setwd(paste0(origdir,"/data01raw"))
@@ -27,6 +26,9 @@ WhenDash <- FullDash3[,c("irn", "RecordType",
                          # "DarYearCollected"
                          # "AccDescription", "AccDescription2"
 )]
+
+
+print(paste("... ",substr(date(), 12, 19), "- cleaning WHEN data fields..."))
 
 date() 
 WhenDash[,3:NCOL(WhenDash)] <- sapply(WhenDash[,3:NCOL(WhenDash)], function (x) gsub("[[:punct:]]", " ", x))
@@ -96,6 +98,8 @@ WhenDash$WhenAge[which(is.na(WhenDash$AttPeriod_tab)==F)] <- WhenDash$AttPeriod_
 # Add in / Fix up When-Dates
 # fill in missing dates by:
 
+
+print(paste("... ",substr(date(), 12, 19), "- building WHEN lookup table..."))
 
 # Merge WhenLUTs ####
 
@@ -194,7 +198,7 @@ Depts3 <- Depts3[,c("irn","RecordType","DarYearCollected","Department")]
 WhenDash4 <- merge(WhenDash3, Depts3, by=c("irn","RecordType"), all.x=T)
 rm(Depts, Depts2, Depts3)
 
-WhenDash4$WhenAge[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
+#WhenDash4$WhenAge[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
 WhenDash4$WhenAgeFrom[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
 WhenDash4$WhenAgeTo[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
 WhenDash4$WhenAgeMid[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")] <- WhenDash4$DarYearCollected[which(WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology")]
@@ -208,8 +212,23 @@ WhenDash4$Order <- .bincode(WhenDash4$WhenAgeMid, WhenChart$From, right=F, inclu
 
 WhenChart <- WhenChart[,3:4]
 WhenDash5 <- merge(WhenDash4, WhenChart, by="Order", all.x=T)
-WhenDash5 <- select(WhenDash5, -Department)
 colnames(WhenDash5)[c(1,NCOL(WhenDash5))] <- c("WhenOrder","WhenTimeLabel")
+
+# Add/Modify WhenAge for Biological collections; bin by decade
+WhenDash5$WhenAge[which(WhenDash5$Department=="Botany" | WhenDash5$Department=="Zoology")] <- WhenDash5$WhenTimeLabel[which(WhenDash5$Department=="Botany" | WhenDash5$Department=="Zoology")]
+
+# Setup bio-Age luts
+
+BioAgeLUT <- data.frame("WhenLUT" = unique(WhenDash5$WhenTimeLabel[which((WhenDash5$Department=="Botany" | WhenDash5$Department=="Zoology")
+                                                                        # & WhenDash5$Order>0 
+                                                                         & as.numeric(WhenDash5$WhenTimeLabel)>1850
+                                                                         & as.numeric(WhenDash5$DarYearCollected)<2018)]), stringsAsFactors = F)
+BioAgeLUT$DateFrom <- as.integer(BioAgeLUT$WhenLUT)
+BioAgeLUT$DateTo <- as.integer(BioAgeLUT$WhenLUT)
+
+
+WhenDash5 <- select(WhenDash5, -Department)
+
 
 WhenDash5$WhenAgeFrom[is.na(WhenDash5$WhenAgeFrom)==T] <- ""
 WhenDash5$WhenAgeFrom[which((WhenDash5$WhenAgeFrom)=="NA")] <- ""
@@ -230,11 +249,6 @@ WhenDash5$DarYearCollected[which((WhenDash5$DarYearCollected)=="NA")] <- ""
 
 # Append Bot/Zoo WhenAges to WhenAgeLUT
 
-
-BioAgeLUT <- data.frame("WhenLUT" = unique(WhenDash4$DarYearCollected[which((WhenDash4$Department=="Botany" | WhenDash4$Department=="Zoology") & WhenDash4$Order>0 & as.numeric(WhenDash4$DarYearCollected)>1850 & as.numeric(WhenDash4$DarYearCollected)<2018)]), stringsAsFactors = F)
-BioAgeLUT$DateFrom <- as.numeric(BioAgeLUT$WhenLUT)
-BioAgeLUT$DateTo <- as.numeric(BioAgeLUT$WhenLUT)
-
 WhenAgeLUT <- rbind(AgeGeoLUT2, AgeAnthroLUT, BioAgeLUT)
 WhenAgeLUT <- unique(WhenAgeLUT)
 WhenAgeLUTcheck <- dplyr::count(WhenAgeLUT, WhenLUT)
@@ -244,6 +258,7 @@ WhenAgeLUT$seq <- sequence(rle(as.character(WhenAgeLUT$WhenLUT))$lengths)
 WhenAgeLUT <- WhenAgeLUT[which(WhenAgeLUT$seq==1),]
 WhenAgeLUT <- WhenAgeLUT[,-4]
 WhenAgeLUT$WhenLUT <- sapply (WhenAgeLUT$WhenLUT, simpleCap)
+WhenAgeLUT <- WhenAgeLUT[order(WhenAgeLUT$WhenLUT),]
 
 # p2 -- &/or re-insert AttPeriod_tab which(grep("\\d{3,4}" ==1) ... smooth that out?
 
@@ -253,6 +268,3 @@ FullDash6csv <- merge(FullDash5csv, WhenDash5, by=c("irn","RecordType"), all.x=T
 
 
 setwd(origdir)
-
-
-print(paste(date(), "-- finished setting up WHEN.   Beginning to build WHO."))

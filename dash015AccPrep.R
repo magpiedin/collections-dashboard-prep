@@ -12,148 +12,148 @@
 #
 # 3) Run this script  
 #       - NOTE: May need to re-set working directory to folder containing reported csv's
-#         (see line 22)
+#         (see lines 22 & 23)
 
-print(paste(date(), "-- starting Accession data import"))
+print(paste(date(), "-- ...finished importing Cat data.  Starting dash015AccPrep.R"))
 
-detach("package:plyr")  # uncomment this if plyr/dplyr functions misbehave
+detach("package:plyr")  # comment this out if plyr/dplyr functions misbehave
 
 
-# point to the directory containg the set of "Group" csv's from EMu
-setwd(paste0(getwd(),"/data01raw/emuAcc"))
+# point to the directory containing the set of "Group" csv's from EMu
+setwd(paste0(origdir,"/data01raw/emuAcc"))
 
 
 # Import raw EMu Accession data ####
-IPTacc1 <- read.csv(file="efmnhtra.csv", stringsAsFactors = F)
-IPTacc2 <- read.csv(file="Group1.csv", stringsAsFactors = F)
-IPTacc2 <- IPTacc2[,2:NCOL(IPTacc2)]
+Acc1 <- read.csv(file="efmnhtra.csv", stringsAsFactors = F)
+Acc2 <- read.csv(file="Group1.csv", stringsAsFactors = F)
+Acc2 <- Acc2[,2:NCOL(Acc2)]
 
-IPTacc <- merge(IPTacc1, IPTacc2, by="efmnhtransactions_key", all.x=T)
+Acc <- merge(Acc1, Acc2, by="efmnhtransactions_key", all.x=T)
 
-IPTacc3 <- read.csv(file="PriAcces.csv", stringsAsFactors = F)
-IPTacc3 <- IPTacc3[,2:NCOL(IPTacc3)]
-colnames(IPTacc3[4]) <- "CatIRN"
+Acc3 <- read.csv(file="PriAcces.csv", stringsAsFactors = F)
+Acc3 <- Acc3[,2:NCOL(Acc3)]
+colnames(Acc3[4]) <- "CatIRN"
 
 # proxy for CatCatalog 
-IPTaccCat <- IPTacc[,c("efmnhtransactions_key","AccCatalogue","AccTotalItems","AccTotalObjects","AccCount")]
-IPTacc3 <- merge(IPTaccCat, IPTacc3, by="efmnhtransactions_key", all.x=T)
-IPTacc3 <- unique(IPTacc3)
+AccCat <- Acc[,c("efmnhtransactions_key","AccCatalogue","AccTotalItems","AccTotalObjects","AccCount")]
+Acc3 <- merge(AccCat, Acc3, by="efmnhtransactions_key", all.x=T)
+Acc3 <- unique(Acc3)
 
 # Calculate Accession Totals
-IPTacc3$CalAccSum <- as.integer(0)
-IPTacc3$CalAccSum[which(IPTacc3$DarBasisOfRecord=="Lot" | IPTacc3$DarBasisOfRecord=="Preserved Specimen" | IPTacc3$DarBasisOfRecord=="Artefact")] <- IPTacc3$AccTotalItems[which(IPTacc3$DarBasisOfRecord=="Lot" | IPTacc3$DarBasisOfRecord=="Preserved Specimen" | IPTacc3$DarBasisOfRecord=="Artefact")]
-IPTacc3$CalAccSum[which(IPTacc3$DarBasisOfRecord=="Specimen" && IPTacc3$AccCatalogue!="Botany")] <- IPTacc3$AccTotalObjects[which(IPTacc3$DarBasisOfRecord=="Specimen" && IPTacc3$AccCatalogue!="Botany")]
-IPTacc3$CalAccSum[which(IPTacc3$AccCatalogue=="Botany")] <- IPTacc3$AccCount[which(IPTacc3$AccCatalogue=="Botany")]
-IPTacc3$CalAccSum[which(is.na(IPTacc3$CalAccSum)==TRUE)] <- 0
+Acc3$CalAccSum <- as.integer(0)
+Acc3$CalAccSum[which(Acc3$DarBasisOfRecord=="Lot" | Acc3$DarBasisOfRecord=="Preserved Specimen" | Acc3$DarBasisOfRecord=="Artefact")] <- Acc3$AccTotalItems[which(Acc3$DarBasisOfRecord=="Lot" | Acc3$DarBasisOfRecord=="Preserved Specimen" | Acc3$DarBasisOfRecord=="Artefact")]
+Acc3$CalAccSum[which(Acc3$DarBasisOfRecord=="Specimen" && Acc3$AccCatalogue!="Botany")] <- Acc3$AccTotalObjects[which(Acc3$DarBasisOfRecord=="Specimen" && Acc3$AccCatalogue!="Botany")]
+Acc3$CalAccSum[which(Acc3$AccCatalogue=="Botany")] <- Acc3$AccCount[which(Acc3$AccCatalogue=="Botany")]
+Acc3$CalAccSum[which(is.na(Acc3$CalAccSum)==TRUE)] <- 0
 
 # since Accession records without attached Cat records have no DarBasisOfRecord field, need this (at least as proxy for now):
-IPTacc3$CalAccSum[which(IPTacc3$CalAccSum==0 & IPTacc3$AccTotalItems>0)] <- IPTacc3$AccTotalItems[which(IPTacc3$CalAccSum==0 & IPTacc3$AccTotalItems>0)]
+Acc3$CalAccSum[which(Acc3$CalAccSum==0 & Acc3$AccTotalItems>0)] <- Acc3$AccTotalItems[which(Acc3$CalAccSum==0 & Acc3$AccTotalItems>0)]
 
 
 # Split Botany from AGZ to summarize by "sum" (Botany) versus max
-IPTacc3accBot <- IPTacc3[which(IPTacc3$AccCatalogue=="Botany"),]
-IPTacc3accAGZ <- IPTacc3[which(IPTacc3$AccCatalogue!="Botany"),]
+Acc3accBot <- Acc3[which(Acc3$AccCatalogue=="Botany"),]
+Acc3accAGZ <- Acc3[which(Acc3$AccCatalogue!="Botany"),]
 
-IPTacc3accBotTot <- IPTacc3accBot %>% group_by(efmnhtransactions_key) %>% summarise(AccTotal = sum(as.numeric(CalAccSum)))
-IPTacc3accAGZTot <- IPTacc3accAGZ %>% group_by(efmnhtransactions_key) %>% summarise(AccTotal = max(as.numeric(CalAccSum)))
+Acc3accBotTot <- Acc3accBot %>% group_by(efmnhtransactions_key) %>% summarise(AccTotal = sum(as.numeric(CalAccSum)))
+Acc3accAGZTot <- Acc3accAGZ %>% group_by(efmnhtransactions_key) %>% summarise(AccTotal = max(as.numeric(CalAccSum)))
 
-IPTacc3accTot <- rbind(IPTacc3accBotTot, IPTacc3accAGZTot)
+Acc3accTot <- rbind(Acc3accBotTot, Acc3accAGZTot)
 
 
 # Calculate Catalogged Totals
-IPTacc3$CalCatSum <- as.integer(0)
-IPTacc3$CalCatSum[which(IPTacc3$DarBasisOfRecord=="Lot" | IPTacc3$DarBasisOfRecord=="Preserved Specimen")] <- IPTacc3$DarIndividualCount[which(IPTacc3$DarBasisOfRecord=="Lot" | IPTacc3$DarBasisOfRecord=="Preserved Specimen")]
-IPTacc3$CalCatSum[which(IPTacc3$DarBasisOfRecord=="Artefact")] <- IPTacc3$CatItemsInv[which(IPTacc3$DarBasisOfRecord=="Artefact")]
-IPTacc3$CalCatSum[which(IPTacc3$DarBasisOfRecord=="Specimen" && IPTacc3$AccCatalogue!="Botany")] <- 1
-IPTacc3$CalCatSum[which(IPTacc3$AccCatalogue=="Botany")] <- 1
-IPTacc3$CalCatSum[which(is.na(IPTacc3$CalCatSum)==TRUE)] <- 0
+Acc3$CalCatSum <- as.integer(0)
+Acc3$CalCatSum[which(Acc3$DarBasisOfRecord=="Lot" | Acc3$DarBasisOfRecord=="Preserved Specimen")] <- Acc3$DarIndividualCount[which(Acc3$DarBasisOfRecord=="Lot" | Acc3$DarBasisOfRecord=="Preserved Specimen")]
+Acc3$CalCatSum[which(Acc3$DarBasisOfRecord=="Artefact")] <- Acc3$CatItemsInv[which(Acc3$DarBasisOfRecord=="Artefact")]
+Acc3$CalCatSum[which(Acc3$DarBasisOfRecord=="Specimen" && Acc3$AccCatalogue!="Botany")] <- 1
+Acc3$CalCatSum[which(Acc3$AccCatalogue=="Botany")] <- 1
+Acc3$CalCatSum[which(is.na(Acc3$CalCatSum)==TRUE)] <- 0
 
 
-IPTacc3catTot <- IPTacc3 %>% group_by(efmnhtransactions_key) %>% summarise(CatTotal = sum(CalCatSum))
+Acc3catTot <- Acc3 %>% group_by(efmnhtransactions_key) %>% summarise(CatTotal = sum(CalCatSum))
 
 
 # Merge calculations
-IPTacc3tot <- merge(IPTacc3accTot, IPTacc3catTot, by = "efmnhtransactions_key")
+Acc3tot <- merge(Acc3accTot, Acc3catTot, by = "efmnhtransactions_key")
 
-IPTacc <- merge(IPTacc, IPTacc3tot, by="efmnhtransactions_key", all.x=T)
+Acc <- merge(Acc, Acc3tot, by="efmnhtransactions_key", all.x=T)
 
-IPTacc$backlog <- IPTacc$AccTotal - IPTacc$CatTotal
-#write.csv(IPTacc, file="AccBacklog.csv", row.names = F)
+Acc$backlog <- Acc$AccTotal - Acc$CatTotal
+#write.csv(Acc, file="AccBacklog.csv", row.names = F)
 
 # check for duplicates
-check <- count(IPTacc, irn)
+check <- count(Acc, irn)
 check <- check[which(check$n>1),]
-check2 <- IPTacc[which(IPTacc$irn %in% check$irn),]
+check2 <- Acc[which(Acc$irn %in% check$irn),]
 
 
 # filter out negative backlog values (which count as "catalogged above level 8/7/etc")
-IPTaccBL1 <- IPTacc[which(IPTacc$backlog >= 0),]
+AccBL1 <- Acc[which(Acc$backlog >= 0),]
 
 # Export ACC WhereLUTs ... RE-IMPORT to Catalog-Dashboard script
-AccGeographyLUT <- as.data.frame(cbind("WhereLUT"=as.character(IPTaccBL1$AccGeography)), stringsAsFactors = F)
+AccGeographyLUT <- as.data.frame(cbind("WhereLUT"=as.character(AccBL1$AccGeography)), stringsAsFactors = F)
 AccGeographyLUT <- unique(AccGeographyLUT)
 
 #setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest")
-setwd("..")  # up to /collprep/data01raw/
+setwd(paste0(origdir,"/data01raw"))  # up to /collprep/data01raw/
 write.csv(AccGeographyLUT, file="AccGeographyLUT.csv", row.names = F)
 
 #setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest\\accessions")
 
 
 # check & split duplicate Botany records
-checkBL <- count(IPTaccBL1, irn)
+checkBL <- count(AccBL1, irn)
 checkBL <- checkBL[which(checkBL$n>1),]
-IPTaccBL1mult <- IPTaccBL1[which(IPTaccBL1$irn %in% checkBL$irn),]
-IPTaccBL1sing <- IPTaccBL1[which(!IPTaccBL1$irn %in% checkBL$irn),]
+AccBL1mult <- AccBL1[which(AccBL1$irn %in% checkBL$irn),]
+AccBL1sing <- AccBL1[which(!AccBL1$irn %in% checkBL$irn),]
 
 
 # spread & concat (Desc + Geog) & re-merge duplicates
-IPTaccBL1mult <- IPTaccBL1mult[order(IPTaccBL1mult$irn),]
+AccBL1mult <- AccBL1mult[order(AccBL1mult$irn),]
 
 # concatenate Descriptions
-IPTaccBL1multDesc <- IPTaccBL1mult[,c("irn", "AccDescription")]
-IPTaccBL1multDesc <- unique(IPTaccBL1multDesc[which(nchar(as.character(IPTaccBL1multDesc$AccDescription))>0),])
-IPTaccBL1multDesc$AccDescription <- as.character(IPTaccBL1multDesc$AccDescription)
-IPTaccBL1multDesc$irnseq <- paste0("seq", sequence(rle(as.character(IPTaccBL1multDesc$irn))$lengths))
-IPTaccBL1multDesc2 <- spread(IPTaccBL1multDesc, irnseq, AccDescription)
+AccBL1multDesc <- AccBL1mult[,c("irn", "AccDescription")]
+AccBL1multDesc <- unique(AccBL1multDesc[which(nchar(as.character(AccBL1multDesc$AccDescription))>0),])
+AccBL1multDesc$AccDescription <- as.character(AccBL1multDesc$AccDescription)
+AccBL1multDesc$irnseq <- paste0("seq", sequence(rle(as.character(AccBL1multDesc$irn))$lengths))
+AccBL1multDesc2 <- spread(AccBL1multDesc, irnseq, AccDescription)
 
-IPTaccBL1multDesc2$AccDesConcat <- ""
+AccBL1multDesc2$AccDesConcat <- ""
 date()
-for (j in 1:NROW(IPTaccBL1multDesc2)) {
-  for (i in 2:(NCOL(IPTaccBL1multDesc2)-1)) {
-    IPTaccBL1multDesc2$AccDesConcat[j] <- paste0(IPTaccBL1multDesc2$AccDesConcat[j]," | ",IPTaccBL1multDesc2[j,i])
+for (j in 1:NROW(AccBL1multDesc2)) {
+  for (i in 2:(NCOL(AccBL1multDesc2)-1)) {
+    AccBL1multDesc2$AccDesConcat[j] <- paste0(AccBL1multDesc2$AccDesConcat[j]," | ",AccBL1multDesc2[j,i])
   }}
 date()
-IPTaccBL1multDesc2$AccDesConcat <- gsub(" \\| NA", "", substr(IPTaccBL1multDesc2$AccDesConcat, 4, nchar(IPTaccBL1multDesc2$AccDesConcat)), ignore.case = T)
+AccBL1multDesc2$AccDesConcat <- gsub(" \\| NA", "", substr(AccBL1multDesc2$AccDesConcat, 4, nchar(AccBL1multDesc2$AccDesConcat)), ignore.case = T)
 
-IPTaccBL1multDesc2 <- IPTaccBL1multDesc2[,c("irn","AccDesConcat")]
+AccBL1multDesc2 <- AccBL1multDesc2[,c("irn","AccDesConcat")]
 
 
 # concatenate Geography
-IPTaccBL1multGeo <- IPTaccBL1mult[,c("irn", "AccGeography")]
-IPTaccBL1multGeo <- unique(IPTaccBL1multGeo[which(nchar(as.character(IPTaccBL1multGeo$AccGeography))>1),])
-IPTaccBL1multGeo$AccGeography <- as.character(IPTaccBL1multGeo$AccGeography)
-IPTaccBL1multGeo$irnseq <- paste0("seq", sequence(rle(as.character(IPTaccBL1multGeo$irn))$lengths))
-IPTaccBL1multGeo2 <- spread(IPTaccBL1multGeo, irnseq, AccGeography)
+AccBL1multGeo <- AccBL1mult[,c("irn", "AccGeography")]
+AccBL1multGeo <- unique(AccBL1multGeo[which(nchar(as.character(AccBL1multGeo$AccGeography))>1),])
+AccBL1multGeo$AccGeography <- as.character(AccBL1multGeo$AccGeography)
+AccBL1multGeo$irnseq <- paste0("seq", sequence(rle(as.character(AccBL1multGeo$irn))$lengths))
+AccBL1multGeo2 <- spread(AccBL1multGeo, irnseq, AccGeography)
 
-IPTaccBL1multGeo2$AccGeogConcat <- ""
+AccBL1multGeo2$AccGeogConcat <- ""
 date()
-for (j in 1:NROW(IPTaccBL1multGeo2)) {
-  for (i in 2:(NCOL(IPTaccBL1multGeo2)-1)) {
-    IPTaccBL1multGeo2$AccGeogConcat[j] <- paste0(IPTaccBL1multGeo2$AccGeogConcat[j]," | ",IPTaccBL1multGeo2[j,i])
+for (j in 1:NROW(AccBL1multGeo2)) {
+  for (i in 2:(NCOL(AccBL1multGeo2)-1)) {
+    AccBL1multGeo2$AccGeogConcat[j] <- paste0(AccBL1multGeo2$AccGeogConcat[j]," | ",AccBL1multGeo2[j,i])
   }}
 date()
-IPTaccBL1multGeo2$AccGeogConcat <- gsub(" \\| NA", "", substr(IPTaccBL1multGeo2$AccGeogConcat, 4, nchar(IPTaccBL1multGeo2$AccGeogConcat)), ignore.case = T)
+AccBL1multGeo2$AccGeogConcat <- gsub(" \\| NA", "", substr(AccBL1multGeo2$AccGeogConcat, 4, nchar(AccBL1multGeo2$AccGeogConcat)), ignore.case = T)
 
-IPTaccBL1multGeo2 <- IPTaccBL1multGeo2[,c("irn","AccGeogConcat")]
+AccBL1multGeo2 <- AccBL1multGeo2[,c("irn","AccGeogConcat")]
 
 # merge concatenated Geo & Desc
-IPTaccBL1multGD <- merge(IPTaccBL1multDesc2, IPTaccBL1multGeo2, all.x=T, all.y=T)
+AccBL1multGD <- merge(AccBL1multDesc2, AccBL1multGeo2, all.x=T, all.y=T)
 
 # merge to full dup-dataset
-IPTaccBL1mult2 <- merge(IPTaccBL1mult, IPTaccBL1multGD, by="irn", all.x=TRUE)
-IPTaccBL1mult2$AccDescription <- IPTaccBL1mult2$AccDesConcat
-IPTaccBL1mult2$AccGeography <- IPTaccBL1mult2$AccGeogConcat
+AccBL1mult2 <- merge(AccBL1mult, AccBL1multGD, by="irn", all.x=TRUE)
+AccBL1mult2$AccDescription <- AccBL1mult2$AccDesConcat
+AccBL1mult2$AccGeography <- AccBL1mult2$AccGeogConcat
 
 
 
@@ -162,32 +162,28 @@ IPTaccBL1mult2$AccGeography <- IPTaccBL1mult2$AccGeogConcat
 
 
 # rbind dup & single datasets back together
-IPTaccBL1mult3 <- IPTaccBL1mult2[,-c(18:19)]
-IPTaccBL1mult3 <- unique(IPTaccBL1mult3)
+AccBL1mult3 <- AccBL1mult2[,-c(18:19)]
+AccBL1mult3 <- unique(AccBL1mult3)
 
-IPTaccBL2 <- rbind(IPTaccBL1sing, IPTaccBL1mult3)
+AccBL2 <- rbind(AccBL1sing, AccBL1mult3)
 
-#IPTaccBL3 <- as.data.frame(cbind("irn" = IPTaccBL2$irn,
+#AccBL3 <- as.data.frame(cbind("irn" = AccBL2$irn,
 #                                 "DarLatitude" = as.numeric(0),
 #                                 "DarLongitude" = as.numeric(0),
 #                                 "DarGlobalUniqueIdentifier" = "",
-#                                 "AccGeo" = IPTaccBL2$AccGeography,
-#                                 "AccDesConcat" = paste(IPTaccBL2$AccAccessionDescription, "|", IPTaccBL2$AccDescription)
+#                                 "AccGeo" = AccBL2$AccGeography,
+#                                 "AccDesConcat" = paste(AccBL2$AccAccessionDescription, "|", AccBL2$AccDescription)
 #                                 ))
 
-IPTbasOfRec <- IPTacc3[,c(1,9)]
-IPTbasOfRec <- unique(IPTbasOfRec)
+AccBasOfRec <- Acc3[,c(1,9)]
+AccBasOfRec <- unique(AccBasOfRec)
 
-IPTaccBL3 <- merge(IPTaccBL2, IPTbasOfRec, by="efmnhtransactions_key", all.x=T)
+AccBL3 <- merge(AccBL2, AccBasOfRec, by="efmnhtransactions_key", all.x=T)
 
 # subset only the columns needed for subsequent calculations
-IPTaccBL3 <- IPTaccBL3[,-1]
+AccBL3 <- AccBL3[,-1]
 
-#setwd(paste0(getwd(), "/emuAcc"))
 # export &/or prep for rbind with cat data
-write.csv(IPTaccBL3, file="AccBacklogBU.csv", row.names = F, na = "")
+write.csv(AccBL3, file="AccBacklogBU.csv", row.names = F, na = "")
 
-#setwd("..")  # up to /collprep/data01raw/
-setwd("..")  # up to /collprep/
-
-print(paste(date(), "-- finishing Accession data import"))
+setwd(origdir)  # up to /collprep/

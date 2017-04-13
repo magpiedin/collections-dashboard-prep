@@ -1,10 +1,13 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Setup "Where" data
 
+print(paste(date(), "-- ...finished binding Cat & Acc data.    Starting dash021Where.R"))
 
 # point to csv's directory
 setwd(paste0(origdir,"/data01raw"))
 
+
+print(paste("... ",substr(date(), 12, 19), "- cleaning WHERE data..."))
 
 # Clean 'Where' data [plus pre-concatenated AccGeography values] ####
 
@@ -68,13 +71,8 @@ FullDash2$cleanAccGeography <- gsub(" ", " | ", FullDash2$cleanAccGeography)
 AccGeographyLUT$WhereLUT <- gsub(" ", " | ", AccGeographyLUT$WhereLUT)
 
 
-simpleCap <- function(x) {
-  s <- strsplit(tolower(x), " ")[[1]]
-  paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = " ")
-}
+print(paste("... ",substr(date(), 12, 19), "- really cleaning WHERE data (starting simpleCap)..."))
 
-date()
 FullDash2$cleanDarCountry <- sapply (FullDash2$cleanDarCountry, simpleCap)
 FullDash2$cleanAccLocality <- sapply (FullDash2$cleanAccLocality, simpleCap)
 FullDash2$cleanAccGeography <- sapply (FullDash2$cleanAccGeography, simpleCap)
@@ -86,6 +84,7 @@ date()
 AccGeographyLUT$WhereLUT <- sapply (AccGeographyLUT$WhereLUT, simpleCap)
 date()
 
+print(paste("... ",substr(date(), 12, 19), "- still cleaning WHERE data..."))
 
 FullDash2$cleanDarCountry <- gsub("United States| Usa |^Usa$| Us |^Us$", "U.S.A.", FullDash2$cleanDarCountry, ignore.case=T)
 FullDash2$cleanDarCountry <- gsub("U\\.s\\.a(\\.|)", "U.S.A.", FullDash2$cleanDarCountry, ignore.case=T)
@@ -116,6 +115,8 @@ AccGeographyLUT$WhereLUT <- gsub("U\\.s\\.", "U.S.", AccGeographyLUT$WhereLUT, i
 AccGeographyLUT$WhereLUT <- gsub("NANA|^Na$", "", AccGeographyLUT$WhereLUT, ignore.case=F)
 AccGeographyLUT$WhereLUT <- gsub("\\.\\.", ".", AccGeographyLUT$WhereLUT, ignore.case=T)
 
+
+print(paste("... ",substr(date(), 12, 19), "- uniting WHERE data..."))
 
 # Concat 'Where' data ####
 FullDash3 <- unite(FullDash2, "Where", cleanDarCountry:cleanDarWaterBody, sep=" | ", remove=TRUE)
@@ -152,7 +153,7 @@ FullDash3csv <- unique(FullDash3csv)
 #write.csv(FullDash3csv, file = "FullDash6.csv", na="NULL", row.names = FALSE)
 
 
-
+print(paste("... ",substr(date(), 12, 19), "- building WHERE lookup table..."))
 # Build Where LUTs ####
 
 WhereLUT1 <- data.frame("WhereLUT" = levels(as.factor(FullDash2$cleanDarContinent)), stringsAsFactors = F)
@@ -199,15 +200,12 @@ WhereLUTall$WhereLUT <- gsub("^\\s+|\\s+$", "", WhereLUTall$WhereLUT)
 WhereLUTall$WhereLUT <- gsub("[\'|\\.|\'$]", "", WhereLUTall$WhereLUT)
 WhereLUTall$WhereLUT <- gsub("United States| Usa |^Usa$| Usa$| Us |^Us$| Us$", "U.S.A.", WhereLUTall$WhereLUT, ignore.case=T)
 WhereLUTall$WhereLUT <- gsub("NANA|^Na$", "", WhereLUTall$WhereLUT, ignore.case=F)
-WhereLUTall$WhereLUT <- gsub("Localities In |No Data", "", WhereLUTall$WhereLUT, ignore.case=T)
+WhereLUTall$WhereLUT <- gsub("Localities In |No Data|^Aisa$", "", WhereLUTall$WhereLUT, ignore.case=T)
 WhereLUTall$WhereLUT[which(grepl("[[:alpha:]]",WhereLUTall$WhereLUT)<1)] <- ""
 WhereLUTall <- data.frame("WhereLutClean" = unique(WhereLUTall$WhereLUT[which(nchar(WhereLUTall$WhereLUT)>1)]))
-
+WhereLUTall <- data.frame("WhereLutClean"=as.character(WhereLUTall[order(WhereLUTall$WhereLutClean),]), stringsAsFactors = F)
 rm("WhereLUT1", "WhereLUT2", "WhereLUT3", "WhereLUT4", "WhereLUT5", "WhereLUT6")
 
 
 # reset working directory
 setwd(origdir)
-
-
-print(paste(date(), "-- finished setting up WHERE.  Beginning to build WHAT."))

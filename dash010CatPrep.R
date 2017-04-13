@@ -15,24 +15,23 @@
 #
 # 3) Run this script  
 #       - NOTE: May need to re-set working directory to folder containing "Group" csv's
-#         (see line 23)
+#         (see lines 23 & 24)
 
-print(paste(date(), "-- starting Catalogue data import"))
+print(paste(date(), "-- Starting Catalog data import -- dash010CatPrep.R"))
 
 
 # point to the directory containg the set of "Group" csv's from EMu
-#setwd("C:\\Users\\kwebbink\\Desktop\\IPTdashbdTest")
-setwd(paste0(getwd(),"/data01raw/emuCat/"))
+setwd(paste0(origdir,"/data01raw/emuCat/"))
 
 DashList = list.files(pattern="Group.*.csv$")
-CatDash0 <- do.call(rbind, lapply(DashList, read.csv, stringsAsFactors = F))
+CatDash01 <- do.call(rbind, lapply(DashList, read.csv, stringsAsFactors = F))
 
-setwd("..")  # up to /collprep/data01raw/
+setwd(origdir)  # up to /collprep/data01raw/
 
 
-CatDash02 <- CatDash0[order(CatDash0$irn),-c(1,2)]
+CatDash02 <- CatDash0[order(CatDash01$irn),-c(1,2)]
 CatDash02 <- unique(CatDash02)
-
+rm(CatDash01)
 
 # Remove duplicate irn's
 CatIRNcount <- NROW(levels(as.factor(CatDash02$irn)))
@@ -54,22 +53,35 @@ CatDash03 <- dplyr::select(CatDash03, -IRNseq)
 #####   DARCOLLECTOR
 #####   DARCATALOGNO
 
-#CatDash2 <- read.csv(file="CatDash3BU_old.csv", stringsAsFactors = F, na.strings = "")
-TempDarCatnoColl <- data.frame("irn"=CatDash2$irn,
-                               "DarCatalogNumber"=CatDash2$DarCatalogNumber, 
-                               "DarCollector"=CatDash2$DarCollector,
-                               stringsAsFactors = F)
+origwd <- getwd()
+
+tempwd <- "C:/Users/kwebbink/Desktop/dashCollector"
+
+setwd(tempwd)
+TempDarColl1 <- read.csv("dashDeptA.csv", stringsAsFactors = F)
+TempDarColl2 <- read.csv("dashDeptBGZ.csv", stringsAsFactors = F)
+
+TempDarColl <- rbind(TempDarColl1, TempDarColl2)
+TempDarColl <- TempDarColl[,3:4]
+
+setwd(paste0(tempwd, "/dashCatno"))
+TempDarCatno1 <- read.csv("dashCatnA.csv")
+TempDarCatno2 <- read.csv("dashCatnBGZ.csv")
+
+TempDarCatno <- rbind(TempDarCatno1, TempDarCatno2)
+TempDarCatno <- TempDarCatno[,3:4]
+
+TempDarCatnoColl <- merge(TempDarColl, TempDarCatno, by="irn", all= TRUE)
+TempDarCatnoColl <- unique(TempDarCatnoColl)
 
 CatDash03 <- merge(CatDash03, TempDarCatnoColl, by="irn", all.x=T)
 
 
+setwd(origwd)
 
 ##############################
 
 # write the lumped/full/single CSV back out
 write.csv(CatDash03, file="CatDash03bu.csv", row.names = F, na="")
-#write.csv(CatCheck, file="CatCheckIRN.csv", row.names = F)
 
-setwd("..")  # up to /collprep/
-
-print(paste(date(), "-- finished Catalogue data import"))
+setwd(origdir)  # up to /collprep/

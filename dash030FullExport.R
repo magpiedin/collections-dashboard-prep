@@ -1,12 +1,10 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Final prep & export of full dashboard dataset
 
-
-print(paste(date(), "-- started final prep to export full dataset."))
-
+print(paste(date(), "-- ...finished setting up WHO.    Starting final prep - dash030FullExport.R"))
 
 # point to csv's directory
-setwd(paste0(getwd(),"/data01raw"))
+setwd(paste0(origdir,"/data01raw"))
 
 
 # Merge Department column
@@ -47,19 +45,21 @@ FullDash9csv$Where <- gsub("(\\s+\\|)+", " |", FullDash9csv$Where, ignore.case =
 FullDash9csv$Where <- gsub(" Usa ", " U.S.A. ", FullDash9csv$Where, ignore.case = T)
 FullDash9csv$What <- gsub("\\| and \\|", "", FullDash9csv$What, ignore.case = T)
 FullDash9csv$Who <- gsub("^ $|^NA$", "", FullDash9csv$Who, ignore.case = T)
+FullDash9csv$Who <- gsub("^NA\\s+\\|\\s+", "", FullDash9csv$Who, ignore.case = F)
+FullDash9csv$Who <- gsub("\\s+\\|\\s+NA$|\\s+\\|\\s+NA\\s+|^\\s+\\|\\s+|\\s+\\|\\s+$", "", FullDash9csv$Who, ignore.case = F)
+FullDash9csv$WhenAge <- gsub("^NA$", "", FullDash9csv$WhenAge, ignore.case = F)
 
-
-print(paste(date(), "-- finished final prep; starting export of final dataset & LUTs."))
+print(paste(date(), "-- ...finished final prep; starting export of final dataset & LUTs."))
 
 
 # Export dataset CSV ####
-setwd("../output")
+setwd(paste0(origdir,"/output"))
 
-write.csv(FullDash9csv, file = "FullDash11.csv", na="NULL", row.names = FALSE)
+write.csv(FullDash9csv, file = "FullDash12.csv", na="NULL", row.names = FALSE)
 
 
 #  Who LUTs ####
-setwd("../data01raw/")
+setwd(paste0(origdir,"/data01raw"))
 
 Who <- read.csv(file="DirectorsCutWho.csv", stringsAsFactors = F)
 
@@ -70,12 +70,11 @@ Who2$count <- as.integer(Who2$count)
 
 Who2 <- Who2[order(Who2$Collections),]
 
-setwd("../output")
-write.csv(Who2, file="WhoDash2.csv", na = "0", row.names = F)
+setwd(paste0(origdir,"/output"))
+write.csv(Who2, file="WhoDash.csv", na = "0", row.names = F)
 
 
 ## To fix column data-types:
-
 #non_numerics <- plyr::adply(1:ncol(FullDash5), 1, function(x) print(is.numeric(FullDash5[,x])))
 #non_numerics[(grep("Where", colnames(FullDash5))), 2] <- TRUE
 #non_numerics[1:3,2] <- FALSE
@@ -84,21 +83,20 @@ write.csv(Who2, file="WhoDash2.csv", na = "0", row.names = F)
 
 
 # write cleaned lookup tables ####
-#setwd("../output")
-write.csv(WhereLUTall, file="WhereLUT2.csv", row.names=F)
-write.csv(WhatLUTB, file="WhatLUTB2.csv", row.names=F)
-write.csv(WhenAgeLUT, file="WhenAgeLUT2.csv", row.names = F)
+write.csv(WhereLUTall, file="WhereLUT.csv", row.names=F)
+write.csv(WhatLUTB, file="WhatLUTB.csv", row.names=F)
+write.csv(WhenAgeLUT, file="WhenAgeLUT.csv", row.names = F)
 write.csv(WhoLUT, file="WhoLUT.csv", row.names = F)
 
-# write summary stats ####
+
+setwd(paste0(origdir,"/data03check"))
+# write datasets to check ####
+write.csv(WhenAgeLUTcheck, "WhenAgeLUTcheck.csv", row.names=F)
+
+# write summary stats
 write.csv(QualityFull, file="QualityStatsFull.csv", row.names=F)
 write.csv(QualityCatDar, file="QualityStatsCatDar.csv", row.names=F)
 
+setwd(origdir)
 
-# write datasets to check
-write.csv(WhenAgeLUTcheck, "WhenAgeLUTcheck.csv", row.names=F)
-
-setwd("..")
-
-
-print(paste(date(), "-- finished exporting full dataset for dashboard."))
+print(paste(date(), "-- Finished exporting full dataset for dashboard."))

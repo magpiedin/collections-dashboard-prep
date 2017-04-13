@@ -1,11 +1,10 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Setup "What" data
 
-print(paste(date(), "-- started setting up 'What' data."))
-
+print(paste(date(), "-- ...finished setting up WHERE.  Starting dash022What.R"))
 
 # point to csv's directory
-setwd(paste0(getwd(),"/data01raw"))
+setwd(paste0(origdir,"/data01raw"))
 
 
 #  What LUTs ####
@@ -39,12 +38,13 @@ WhatDash4 <- merge(WhatDash4, ItisComName4, by="DarOrder", all.x=T)
 WhatDash4 <- WhatDash4[,c(2,3,1,4:NCOL(WhatDash4))]
 
 
+print(paste("... ",substr(date(), 12, 19), "- cleaning WHAT data..."))
+
 #  3-What: Clean "What" fields ####
-date() # "[[:punct:]]|\\d+"
+date()
 WhatDash4[,3:NCOL(WhatDash4)] <- sapply(WhatDash4[,3:NCOL(WhatDash4)], function (x) gsub("\\[|\\]|[(,)#$%&+<>?@^{~}!=;/:\"*]|[-]|[0-9]", " ", x))
 WhatDash4[,3:NCOL(WhatDash4)] <- sapply(WhatDash4[,3:NCOL(WhatDash4)], function (x) gsub("\\s+", " ", x))
 WhatDash4[,3:NCOL(WhatDash4)] <- sapply(WhatDash4[,3:NCOL(WhatDash4)], function (x) gsub("^\\s+|\\s+$", "", x))
-#WhatDash4[,6:NCOL(WhatDash4)] <- sapply(WhatDash4[,6:NCOL(WhatDash4)], simpleCap)
 date()
 
 WhatDash4$DarCollectionCode <- gsub("Invertebrate Zoology", "Invertebrates", WhatDash4$DarCollectionCode)
@@ -132,6 +132,7 @@ WhatDash4$DesMaterials_tab <- gsub("(\\|\\s+)+", "| ", WhatDash4$DesMaterials_ta
 #WhatDash4b <- WhatDash4 %>% separate(AccDescription, c("AccDesc01", "AccDesc02", "AccDesc03", "AccDesc04"), 
 #                                    sep="\\|", extra="merge", fill="right")
 
+print(paste("... ",substr(date(), 12, 19), "- building WHAT lookup table..."))
 
 #  4-What: Build "What" LUT ####
 
@@ -227,16 +228,6 @@ WhatLUT6 <- data.frame("WhatLUT" = WhatLUT5[which(!WhatLUT5$WhatLUT %in% DesMate
 WhatLUT6$WhatLUT <- gsub("^\\s+|\\s+$", "", WhatLUT6$WhatLUT)
 WhatLUT6 <- unique(WhatLUT6)
 
-#WhatLUT5 <- strsplit(WhatLUT4[,1], " ")
-#WhatLUT5 <- unlist(WhatLUT5)
-#WhatLUT5 <- WhatLUT5[which(nchar(WhatLUT5)>2 & is.na(WhatLUT5)==FALSE)]
-#WhatLUT5 <- as.character(tolower(WhatLUT5))
-#WhatLUT5 <- as.data.frame(cbind("WhatLUT"=unique(WhatLUT5)))
-#WhatLUT5$WhatLUT <- WhatLUT5[order(WhatLUT5$WhatLUT),]
-
-# ALSO TRY REMOVING CHRONOSTRAT? 
-# DarEarliestAge/Eon/Epoch/Era/Period
-
 
 # Alternative WhatLUT  (actually only using this WhatLUTB currently)
 
@@ -254,8 +245,8 @@ WhatLUTB$WhatLUT <- gsub("^and$", "", WhatLUTB$WhatLUT, ignore.case = T)
 WhatLUTB$WhatLUT <- gsub("^NA$|^NANA$", "", WhatLUTB$WhatLUT, ignore.case = T)
 WhatLUTB <- data.frame("WhatLUT"=WhatLUTB[which(nchar(WhatLUTB$WhatLUT)>1),], stringsAsFactors = F)
 
-#WhatLUTB <- unique(WhatLUTB)
 
+print(paste("... ",substr(date(), 12, 19), "- uniting WHAT data..."))
 
 #  5-What: Concat "What" fields ####
 WhatDash5 <- unite(WhatDash4, "What", c(DarCollectionCode,
@@ -266,18 +257,17 @@ WhatDash5 <- unite(WhatDash4, "What", c(DarCollectionCode,
                                         AccDesc01,
                                         AccDesc02,
                                         DarDesc01,
-                                        #                                        DarRelatedInformation,
+                                      # DarRelatedInformation,
                                         DarScientificName,
                                         EcbName
-), sep=" | ", remove=T) 
+                                        ), sep=" | ", remove=T) 
 
 
 WhatDash5$What <- gsub("\\| NA \\|", "|", WhatDash5$What, ignore.case = T)
 WhatDash5$What <- gsub("\\| and \\|", "|", WhatDash5$What, ignore.case = T)
 WhatDash5$What <- gsub("\\s+", " ", WhatDash5$What)
 WhatDash5$What <- gsub("(\\|\\s+)+","| ",WhatDash5$What)
-#FullDash4csv$What <- gsub(" \\| NA","",FullDash4csv$What)
-#FullDash4csv$What <- gsub(" \\|\\s+\\|","",FullDash4csv$What)
+
 
 FullDash4csv <- merge(FullDash3csv, WhatDash5, by=c("irn","RecordType"), all.x=T)
 FullDash4csv <- FullDash4csv[,c("irn","DarLatitude","DarLongitude","Where",
@@ -286,7 +276,4 @@ FullDash4csv <- FullDash4csv[,c("irn","DarLatitude","DarLongitude","Where",
 
 
 # reset working directory
-setwd("..")
-
-
-print(paste(date(), "-- finished setting up 'What' data."))
+setwd(origdir)

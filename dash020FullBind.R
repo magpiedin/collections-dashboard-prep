@@ -1,14 +1,13 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Merge Accession & Catalogue data from EMu
 
-print(paste(date(), "-- merging Accessions & Catalogue data"))
+print(paste(date(), "-- ...finished importing Cat & Acc data.  Starting dash020FullBind.R"))
 
 
 # point to csv's directory
 setwd(paste0(origdir,"/data01raw"))
 
 # Import raw EMu data ####
-#CatDash2 <- read.csv(file="CatDash3BU_old.csv", stringsAsFactors = F, na.strings = "")
 if (exists("CatDash03")==TRUE) {
   CatDash2 <- CatDash03
 } else {
@@ -17,7 +16,7 @@ if (exists("CatDash03")==TRUE) {
 
 
 # Merge any other missing columns, e.g.: 
-#  NOTE -- (Try to restrict this to dash010 script)
+#  NOTE -- (Try to restrict this to 'dash010' script)
 
 DashMMa <- read.csv(file="dashMMa.csv", stringsAsFactors = F)
 DashMMbgz <- read.csv(file="dashMMbgz.csv", stringsAsFactors = F)
@@ -31,19 +30,13 @@ if (NROW(CatDash2$MulHasMultiMedia)==0) {
 }
 
 CatDash2$MulHasMultiMedia <- gsub("Y","1",CatDash2$MulHasMultiMedia)
-CatDash2$MulHasMultiMedia[which(is.na(CatDash2$MulHasMultiMedia)==T)] <- "0"
 CatDash2$MulHasMultiMedia <- gsub("N","0",CatDash2$MulHasMultiMedia)
+CatDash2$MulHasMultiMedia[which(is.na(CatDash2$MulHasMultiMedia)==T)] <- "0"
 CatDash2$DarImageURL <- as.integer(CatDash2$MulHasMultiMedia)
-
-#IPTlatlon <- read.csv(file="dashbdLatLong.csv")
-#IPTlatlon <- IPTlatlon[,2:4]
-#CatDash2 <- merge(IPTlatlon, CatDash2, by="irn", all.y=T)
-#rm(IPTlatlon)
 
 
 CatDash3 <- unique(CatDash2)
 #check <- dplyr::count(CatDash3, irn)
-#CatDash3 <- unique(CatDash3)
 
 
 # Add/Adjust columns for Quality calculation
@@ -72,7 +65,7 @@ CatDash3$TaxIDRank[which(CatDash3$ClaRank == "Kingdom")] <- "Kingdom"
 # Import Accession data ####
 
 if (exists("IPTaccBL3")==TRUE) {
-  AccDash1 <- IPTaccBL3
+  AccDash1 <- AccBL3
 } else {
   AccDash1 <- read.csv(file="AccBacklogBU.csv", stringsAsFactors = F, na.strings = "")
 }
@@ -103,9 +96,12 @@ AccDash2$DarIndividualCount <- as.numeric(AccDash2$DarIndividualCount)
 
 library("plyr")
 
+print(paste("... ", substr(date(), 12, 19), "- binding catalogue & accession records..."))
+
 # Combine Accession + Catalogue datasets
 FullDash <- plyr::rbind.fill(CatDash3, AccDash2)
 
+print(paste("... ",substr(date(), 12, 19), "- cleaning up full data table..."))
 
 # cleanup import
 rm(CatDash2, AccDash1)
@@ -155,5 +151,3 @@ QualityCatDar <- dplyr::count(FullDash2[which(FullDash2$RecordType=="Catalog"),]
 colnames(QualityCatDar)[1] <- "DarFieldsFilled"
 
 setwd(origdir)
-
-print(paste(date(), "-- finished merging Acc. & Cat. data.  Beginning to build WHERE fields"))

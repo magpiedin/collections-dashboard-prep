@@ -1,11 +1,10 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Setup "When" data
 
-print(paste(date(), "-- started setting up 'Who' data."))
-
+print(paste(date(), "-- ...finished setting up WHEN.   Starting dash024Who.R"))
 
 # point to csv's directory
-setwd(paste0(getwd(),"/data01raw"))
+setwd(paste0(origdir,"/data01raw"))
 
 
 #  Who ####
@@ -16,6 +15,9 @@ WhoDashBU <- FullDash3[,c("irn", "RecordType",
                           "AccDescription", "AccDescription2", # might need to cut these?
                           "EcbNameOfObject")]
 WhoDash <- WhoDashBU
+
+
+print(paste("... ",substr(date(), 12, 19), "- cleaning WHO data..."))
 
 date() 
 WhoDash[,3:NCOL(WhoDash)] <- sapply(WhoDash[,3:NCOL(WhoDash)], function (x) gsub("^NA$|^'| a |[/()?]|\\[\\]|probably", " ", x, ignore.case = T))
@@ -40,6 +42,7 @@ date()
 
 WhoDash$AccDescription2[is.na(WhoDash$AccDescription2)==T] <- ""
 #WhoDash$AccDescription2 <- gsub("[[:punct:]]", " ", WhoDash$AccDescription2)
+WhoDash$AccDescription2 <- gsub("[[:digit:]]+", " ", WhoDash$AccDescription2)
 WhoDash$AccDescription2 <- gsub(paste(CutFirst, collapse="|"), " ", WhoDash$AccDescription2, ignore.case = T)
 WhoDash$AccDescription2 <- gsub(paste0(CutWords, collapse="|"), " ", WhoDash$AccDescription2, ignore.case = T)
 WhoDash$AccDescription2 <- gsub(" [[:alpha:]]{1} ", " ", WhoDash$AccDescription2, ignore.case = T)
@@ -51,6 +54,7 @@ WhoDash$AccDescription2 <- sapply (WhoDash$AccDescription2, simpleCap)
 date()
 
 
+print(paste("... ",substr(date(), 12, 19), "- building WHO lookup table..."))
 
 #  2-Wh0 LUTs ####
 # unsplit = 2907
@@ -65,6 +69,9 @@ WhoLUT <- data.frame("WhoLUT" = unique(WhoLUT[which((WhoLUT$WhoLUT %in% WhoCount
                      stringsAsFactors = F)
 WhoLUT <- data.frame("WhoLUT"=WhoLUT[order(WhoLUT$WhoLUT),], stringsAsFactors = F)
 
+
+print(paste("... ",substr(date(), 12, 19), "- uniting WHO data..."))
+
 #  3-Concat 'Who' data ####
 WhoDash2 <- unite(WhoDash, "Who", DesEthnicGroupSubgroup_tab:EcbNameOfObject, sep=" | ", remove=TRUE)
 WhoDash2$Who <- gsub("(\\|\\s+)+", "| ", WhoDash2$Who)
@@ -76,7 +83,4 @@ WhoDash2$Who <- gsub("^\\s+\\|\\s+$", "", WhoDash2$Who)
 FullDash7csv <- merge(FullDash6csv, WhoDash2, by=c("irn","RecordType"), all.x=T)
 
 
-setwd("..")
-
-
-print(paste(date(), "-- finished setting up 'Who' data."))
+setwd(origdir)
