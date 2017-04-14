@@ -49,16 +49,78 @@ FullDash9csv$Who <- gsub("^NA\\s+\\|\\s+", "", FullDash9csv$Who, ignore.case = F
 FullDash9csv$Who <- gsub("\\s+\\|\\s+NA$|\\s+\\|\\s+NA\\s+|^\\s+\\|\\s+|\\s+\\|\\s+$", "", FullDash9csv$Who, ignore.case = F)
 FullDash9csv$WhenAge <- gsub("^NA$", "", FullDash9csv$WhenAge, ignore.case = F)
 
+FullDash9csv$WhenAge[which(is.na(FullDash9csv$WhenAge)==T)] <- ""
+FullDash9csv$Who[which(is.na(FullDash9csv$Who)==T)] <- ""
+FullDash9csv$Where[which(is.na(FullDash9csv$Where)==T)] <- ""
+
+
+# Setup sample dataset
+
+#SampleGroupC <- c(1321,1:5,656944:656946,537448:537450,867365:867370,2099480,2099482,2668290:2668296,54463,50771,136283,2788069,2388945)
+#SampleGroupA <- c(10576,44071,38855,46333,47764,31971,26200,20714,29028,26226,24962,20453,36113,11339)
+
+#AccBacklogSamp1 <- AccDash1[which(AccDash1$irn %in% SampleGroupA),]
+#CatDash03Samp1 <- CatDash2[which(CatDash2$irn %in% SampleGroupC),]
+
+FullDashSample1 <- FullDash9csv[which(((FullDash9csv$irn %in% SampleGroupC) & FullDash9csv$RecordType=="Catalog") |
+                                       ((FullDash9csv$irn %in% SampleGroupA) & FullDash9csv$RecordType=="Accession")),]
+
+# Scrub out irn's and other identifiers
+ScrubCat <- CatDash03Samp1[,c("irn","DarGlobalUniqueIdentifier")]
+colnames(ScrubCat)[2] <- "DarGUIDorig"
+ScrubCat$irnScrub <- seq(12345,by=1,length.out = NROW(ScrubCat))
+ScrubCat$GUIDScrub <- seq(1234,by=1,length.out = NROW(ScrubCat))
+ScrubCat$GUIDScrub <- paste0("a",ScrubCat$irnScrub,"bc-1234-5a67-a123-a1bc23de", ScrubCat$GUIDScrub)
+
+ScrubAcc <- data.frame("irn" = AccBacklogSamp1[,c("irn")])
+ScrubAcc$irnScrub <- seq(54321,by=1,length.out = NROW(ScrubAcc))
+
+ScrubFull <- rbind(ScrubCat[,c("irn","irnScrub")], ScrubAcc[,c("irn","irnScrub")])
+
+# merge
+AccBacklogSamp <- merge(AccBacklogSamp1, ScrubAcc, by="irn", all.x=T)
+CatDash03Samp <- merge(CatDash03Samp1, ScrubCat, by="irn", all.x=T)
+FullDashSample <- merge(FullDashSample1, ScrubFull, by="irn", all.x=T)
+
+# scrub id #s
+AccBacklogSamp$irn <- AccBacklogSamp$irnScrub
+AccBacklogSamp <- select(AccBacklogSamp, -irnScrub)
+AccBacklogSamp$AccAccessionDescription <- gsub("[[:digit:]]","5",AccBacklogSamp$AccAccessionDescription)
+AccBacklogSamp$AccCatalogueNo <- gsub("[[:digit:]]","5",AccBacklogSamp$AccCatalogueNo)
+AccBacklogSamp$AccDescription <- gsub("[[:digit:]]","5",AccBacklogSamp$AccDescription)
+
+CatDash03Samp$irn <- CatDash03Samp$irnScrub
+CatDash03Samp$DarGlobalUniqueIdentifier <- CatDash03Samp$GUIDScrub
+CatDash03Samp <- select(CatDash03Samp, -c(irnScrub,GUIDScrub,DarGUIDorig))
+CatDash03Samp$DarCatalogNumber <- gsub("[[:digit:]]","5",CatDash03Samp$DarCatalogNumber)
+CatDash03Samp$DarImageURL <- gsub("[[:digit:]]","5",CatDash03Samp$DarImageURL)
+CatDash03Samp$DarLatitude <- as.integer(CatDash03Samp$DarLatitude)
+CatDash03Samp$DarLongitude <- as.integer(CatDash03Samp$DarLongitude)
+
+FullDashSample$irn <- FullDashSample$irnScrub
+FullDashSample <- select(FullDashSample, -irnScrub)
+FullDashSample$DarLatitude <- as.integer(FullDashSample$DarLatitude)
+FullDashSample$DarLongitude <- as.integer(FullDashSample$DarLongitude)
+
+
 print(paste(date(), "-- ...finished final prep; starting export of final dataset & LUTs."))
 
 
-# Export dataset CSV ####
+# Export full dataset CSV ####
 setwd(paste0(origdir,"/output"))
 
-write.csv(FullDash9csv, file = "FullDash12.csv", na="NULL", row.names = FALSE)
+write.csv(FullDash9csv, file = "FullDash13.csv", na="NULL", row.names = FALSE)
 
 
-#  Who LUTs ####
+# Export sample dataset CSV ####
+setwd(paste0(origdir,"/outputSample"))
+
+write.csv(AccBacklogSamp, file = "SampleInput_AccBacklogBU.csv", na="", row.names = FALSE)
+write.csv(CatDash03Samp, file = "SampleInput_CatDash03bu.csv", na="", row.names = FALSE)
+write.csv(FullDashSample, file = "FullDash_Sample.csv", na="", row.names = FALSE)
+
+
+#  Who-Staff LUTs ####
 setwd(paste0(origdir,"/data01raw"))
 
 Who <- read.csv(file="DirectorsCutWho.csv", stringsAsFactors = F)

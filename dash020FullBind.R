@@ -29,14 +29,21 @@ if (NROW(CatDash2$MulHasMultiMedia)==0) {
   CatDash2 <- merge(CatDash2, DashMM, by="irn", all.x=T)
 }
 
-CatDash2$MulHasMultiMedia <- gsub("Y","1",CatDash2$MulHasMultiMedia)
-CatDash2$MulHasMultiMedia <- gsub("N","0",CatDash2$MulHasMultiMedia)
-CatDash2$MulHasMultiMedia[which(is.na(CatDash2$MulHasMultiMedia)==T)] <- "0"
-CatDash2$DarImageURL <- as.integer(CatDash2$MulHasMultiMedia)
+
+# Setup sample raw Catalogue data
+SampleGroupC <- c(1321,1:5,656944:656946,537448:537450,867365:867370,2099480,2099482,2668290:2668296,54463,50771,136283,2788069,2388945)
+CatDash03Samp1 <- CatDash2[which(CatDash2$irn %in% SampleGroupC),]
 
 
 CatDash3 <- unique(CatDash2)
 #check <- dplyr::count(CatDash3, irn)
+
+CatDash3$MulHasMultiMedia <- gsub("Y","1",CatDash3$MulHasMultiMedia)
+CatDash3$MulHasMultiMedia <- gsub("N","0",CatDash3$MulHasMultiMedia)
+CatDash3$MulHasMultiMedia[which(is.na(CatDash3$MulHasMultiMedia)==T)] <- "0"
+CatDash3$DarImageURL <- as.integer(CatDash3$MulHasMultiMedia)
+
+
 
 
 # Add/Adjust columns for Quality calculation
@@ -69,6 +76,11 @@ if (exists("IPTaccBL3")==TRUE) {
 } else {
   AccDash1 <- read.csv(file="AccBacklogBU.csv", stringsAsFactors = F, na.strings = "")
 }
+
+# Setup Sample Raw Accession data
+SampleGroupA <- c(10576,44071,38855,46333,47764,31971,26200,20714,29028,26226,24962,20453,36113,11339)
+AccBacklogSamp1 <- AccDash1[which(AccDash1$irn %in% SampleGroupA),]
+
 
 
 # Map Acc fields to Cat fields

@@ -29,7 +29,7 @@ CatDash01 <- do.call(rbind, lapply(DashList, read.csv, stringsAsFactors = F))
 setwd(origdir)  # up to /collprep/data01raw/
 
 
-CatDash02 <- CatDash0[order(CatDash01$irn),-c(1,2)]
+CatDash02 <- CatDash01[order(CatDash01$irn),-c(1,2)]
 CatDash02 <- unique(CatDash02)
 rm(CatDash01)
 
