@@ -109,7 +109,7 @@ print(paste(date(), "-- ...finished final prep; starting export of final dataset
 # Export full dataset CSV ####
 setwd(paste0(origdir,"/output"))
 
-write.csv(FullDash9csv, file = "FullDash13.csv", na="NULL", row.names = FALSE)
+write.csv(FullDash9csv, file = "FullDash13.csv", na="", row.names = FALSE)
 
 
 # Export sample dataset CSV ####
