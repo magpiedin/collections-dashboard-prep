@@ -1,7 +1,7 @@
 # collections-dashboard-prep
 These scripts prepare EMu collections data for a Collections Dashboard.
 
-Catalogue records are combined with Accession records to count catalogged and backlogged items in the collections.
+Catalogue records are combined with Accession records to count catalogued and backlogged items in the collections.
 
 ## How to use these scripts
 1. Clone repo locally.
@@ -113,9 +113,9 @@ A ranking based on the following criteria (poor = 9; good = 1):
  _Full Data_ = Has all 5 of the above
  
 #### RecordType
-Indicates whether the record is "Catalog" or "Accession" data, and therefore part of the catalogged or backlogged items.
+Indicates whether the record is "Catalog" or "Accession" data, and therefore part of the catalogued or backlogged items.
 #### DarIndividualCount
-The number of items catalogged, from the DarIndividualCount field of a catalogue record.
+The number of items catalogued, from the DarIndividualCount field of a catalogue record.
 #### Backlog
 The number of items backlogged = the number of catalogued items subtracted from the number accessioned items.
 #### TaxIDRank
