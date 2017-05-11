@@ -1,7 +1,7 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Final prep & export of full dashboard dataset
 
-print(paste(date(), "-- ...finished setting up WHO.    Starting final prep - dash030FullExport.R"))
+print(paste(date(), "-- ...finished setting up Visitor data.  Starting final prep - dash030FullExport.R"))
 
 # point to csv's directory
 setwd(paste0(origdir,"/data01raw"))
@@ -136,12 +136,10 @@ setwd(paste0(origdir,"/output"))
 write.csv(Who2, file="WhoDash.csv", na = "0", row.names = F)
 
 
-## To fix column data-types:
-#non_numerics <- plyr::adply(1:ncol(FullDash5), 1, function(x) print(is.numeric(FullDash5[,x])))
-#non_numerics[(grep("Where", colnames(FullDash5))), 2] <- TRUE
-#non_numerics[1:3,2] <- FALSE
-##non_numerics[!(grep("Where", colnames(FullDash5))), 2] <- FALSE
-#quote_val <- as.numeric(array(non_numerics[which(!non_numerics$V1), 1]))
+# Institutional summary output (for Experience, Loans, & Visitor data)
+write.csv(Exper2, "WhoExperience.csv", row.names = F)
+write.csv(LoanSumCount, "LoanSumCount.csv", row.names = F)
+write.csv(VisitSumCount, "VisitSumCount.csv", row.names = F)
 
 
 # write cleaned lookup tables ####
@@ -151,13 +149,14 @@ write.csv(WhenAgeLUT, file="WhenAgeLUT.csv", row.names = F)
 write.csv(WhoLUT, file="WhoLUT.csv", row.names = F)
 
 
-setwd(paste0(origdir,"/data03check"))
 # write datasets to check ####
+setwd(paste0(origdir,"/data03check"))
 write.csv(WhenAgeLUTcheck, "WhenAgeLUTcheck.csv", row.names=F)
 
 # write summary stats
 write.csv(QualityFull, file="QualityStatsFull.csv", row.names=F)
 write.csv(QualityCatDar, file="QualityStatsCatDar.csv", row.names=F)
+
 
 setwd(origdir)
 

@@ -50,4 +50,11 @@ source("dash021Where.R")
 source("dash022What.R")
 source("dash023When.R")
 source("dash024Who.R")
+
+# Added these [May-2017]:
+source("dash025Experience.R")
+source("dash026LoansPrep.R")
+source("dash027VisitPrep.R")
+
+# Add exports to ...30FullExport.R for new [commented-out] scripts 16, 17, & 25
 source("dash030FullExport.R")
