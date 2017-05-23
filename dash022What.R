@@ -272,7 +272,8 @@ WhatDash5$What <- gsub("(\\|\\s+)+","| ",WhatDash5$What)
 FullDash4csv <- merge(FullDash3csv, WhatDash5, by=c("irn","RecordType"), all.x=T)
 FullDash4csv <- FullDash4csv[,c("irn","DarLatitude","DarLongitude","Where",
                                 "Quality","RecordType","Backlog","TaxIDRank",
-                                "What","DarCollectionCode","HasMM")]
+                                "What","DarCollectionCode","HasMM",
+                                "DarInstitutionCode")]
 
 
 # reset working directory

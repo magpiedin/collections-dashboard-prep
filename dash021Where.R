@@ -128,7 +128,8 @@ FullDash3 <- subset(FullDash3, select=-c(DarCountry, DarContinent, DarContinentO
 #FullDash7csv <- FullDash3[,c("irn","DarLatitude","DarLongitude","Where","CatFull","DarIndividualCount","Backlog")]
 FullDash3csv <- FullDash3[,c("irn","DarLatitude","DarLongitude","Where",
                              "Quality","RecordType","Backlog","TaxIDRank",
-                             "DarCollectionCode","DarImageURL")]
+                             "DarCollectionCode","DarImageURL",
+                             "DarInstitutionCode")]
 
 FullDash3csv$Where <- gsub(" \\|  \\|  \\|  \\|  \\| ", "", FullDash3csv$Where)
 #FullDash3csv$Where <- gsub("( |)NANA \\|", "", FullDash3csv$Where)

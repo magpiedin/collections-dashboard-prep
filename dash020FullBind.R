@@ -15,6 +15,12 @@ if (exists("CatDash03")==TRUE) {
 }
 
 
+# # # # # DarInstitutionCode
+# NOTE ####
+# - This is temporary; appropriate field should be part of imported dataset
+CatDash2$DarInstitutionCode <- "FMNH"
+
+
 # Merge any other missing columns, e.g.: 
 #  NOTE -- (Try to restrict this to 'dash010' script)
 
@@ -42,8 +48,6 @@ CatDash3$MulHasMultiMedia <- gsub("Y","1",CatDash3$MulHasMultiMedia)
 CatDash3$MulHasMultiMedia <- gsub("N","0",CatDash3$MulHasMultiMedia)
 CatDash3$MulHasMultiMedia[which(is.na(CatDash3$MulHasMultiMedia)==T)] <- "0"
 CatDash3$DarImageURL <- as.integer(CatDash3$MulHasMultiMedia)
-
-
 
 
 # Add/Adjust columns for Quality calculation
@@ -77,6 +81,13 @@ if (exists("IPTaccBL3")==TRUE) {
   AccDash1 <- read.csv(file="AccBacklogBU.csv", stringsAsFactors = F, na.strings = "")
 }
 
+
+# # # # # DarInstitutionCode
+# NOTE ####
+# - This is temporary; appropriate field should be part of imported dataset
+AccDash1$DarInstitutionCode <- "FMNH"
+
+
 # Setup Sample Raw Accession data
 SampleGroupA <- c(10576,44071,38855,46333,47764,31971,26200,20714,29028,26226,24962,20453,36113,11339)
 AccBacklogSamp1 <- AccDash1[which(AccDash1$irn %in% SampleGroupA),]
@@ -101,7 +112,9 @@ AccDash2 <- as.data.frame(cbind("irn" = AccDash1$irn,
                                 "AccCatalogueNo" = AccDash1$AccCatalogueNo,
                                 "RecordType" = "Accession",
                                 "AccTotal" = AccDash1$AccTotal,
-                                "Backlog" = AccDash1$backlog), stringsAsFactors=F)
+                                "Backlog" = AccDash1$backlog),
+                                "DarInstitutionCode" = AccDash1$DarInstitutionCode,
+                          stringsAsFactors=F,)
 
 AccDash2$DarIndividualCount <- as.numeric(AccDash2$DarIndividualCount)
 

@@ -9,7 +9,7 @@ setwd(paste0(origdir,"/data01raw"))
 
 # Merge Department column
 Depts <- read.csv(file="Departments.csv", stringsAsFactors = F)
-FullDash8csv <- merge(FullDash7csv, Depts, by=c("DarCollectionCode"), all.x=T)
+FullDash8csv <- merge(FullDash8, Depts, by=c("DarCollectionCode"), all.x=T)
 rm(Depts)
 
 
@@ -27,13 +27,15 @@ FullDash9csv <- FullDash8csv[,c("irn","DarLatitude","DarLongitude","Where",
                                 "What","DarCollectionCode", "HasMM", "URL",
                                 "WhenAge", "WhenAgeFrom", "WhenAgeTo","DarYearCollected",
                                 "WhenOrder", "WhenTimeLabel", "WhenAgeMid",
-                                "Department", "DarIndividualCount", "Who"
-)]
+                                "Department", "DarIndividualCount", "Who",
+                                "DarInstitutionCode", "Bioregion"
+                                )]
 
 FullDash9csv$DarYearCollected <- as.numeric(FullDash9csv$DarYearCollected)
 
 
 # Last Check/Clean ####
+# Should be consolidated in separate cleaning-script/functions
 FullDash9csv$What <- gsub("\\|\\s+NA\\s+\\||\\|\\s+NANA\\s+\\|", "|", FullDash9csv$What, ignore.case = T)
 FullDash9csv$What <- gsub("NANA", "", FullDash9csv$What, ignore.case = F)
 FullDash9csv$What <- gsub("^NA\\s+|\\s+NA$|^NANA\\s+|\\s+NANA$|\\s+\\|\\s+$", "", FullDash9csv$What, ignore.case = T)
@@ -110,6 +112,13 @@ print(paste(date(), "-- ...finished final prep; starting export of final dataset
 setwd(paste0(origdir,"/output"))
 
 write.csv(FullDash9csv, file = "FullDash13.csv", na="", row.names = FALSE)
+
+
+# Export extra dummy-dataset (with multiple institutions)
+FullDash9alt <- FullDash9csv[c(101:600,15001:20000),]
+FullDash9alt$DarInstitutionCode <- "Mars"
+
+write.csv(FullDash9alt, file = "FullDash13mars.csv", na="", row.names = F)
 
 
 # Export sample dataset CSV ####
