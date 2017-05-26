@@ -1,7 +1,7 @@
 # Output for global collections summary
+# Institution Data (Name, URI, Lat Long)
 
-
-# Institution Localities & URLs
+# Institution Locality & URI
 setwd(paste0(origdir,"/supplementary"))
 
 # retrieved from http://grbio.org/content/data-download-grbio
@@ -215,13 +215,12 @@ GRBioPart3c <- GRBioPart3[which(!GRBioPart3$Institution.Code %in% GRBioLatLonA3b
 
 GRBioLatLonB3c <- merge(GRBioPart3c, GRBioLatLonA3c)
 GRBioLatLonB3c <- GRBioLatLonB3c[,-1]
-
 GRBioLatLonAll <- rbind(GRBioLatLonA,GRBioLatLonA2,GRBioLatLonA3b,GRBioLatLonB3c, GRBioLatLonAll10)
-GRBioLatLonAll <- unique(GRBioLatLonAll)
 
 # merge all searches ####
 # # # If new search for-loops are added, add them here
-GRBioLatLonAll <- rbind(GRBioLatLonA, GRBioLatLonA2, GRBioLatLonA3)  # add GRBioLatLonAll10 HERE + dedup
+GRBioLatLonAll <- rbind(GRBioLatLonA, GRBioLatLonA2, GRBioLatLonAll10)  # add GRBioLatLonAll10 HERE + dedup
+GRBioLatLonAll <- unique(GRBioLatLonAll)
 # GRBioLatLonAll10 <- GRBioLatLonAll  # BU
 
 # merge LatLong with other Institution Data ####
