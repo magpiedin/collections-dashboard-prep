@@ -22,13 +22,13 @@ FullDash8 <- merge(FullDash7csv, DarCtryContOcean, by=c("irn","RecordType"))
 
 
 #install.packages("curl")
-#library(curl)
-#curl::curl_download("http://assets.worldwildlife.org/publications/15/files/original/official_teow.zip?1349272619", destfile = "official.zip")
-#unzip("official.zip")
-#shpfile <- "official/wwf_terr_ecos.shp"
-#
+library(curl)
+curl::curl_download("http://assets.worldwildlife.org/publications/15/files/original/official_teow.zip?1349272619", destfile = "official.zip")
+unzip("official.zip")
+shpfile <- "official/wwf_terr_ecos.shp"
+
 #install.packages("geojsonio")
 #install.packages("rgdal")
-#library(geojsonio)
-#shp <- geojsonio::geojson_read("official/wwf_terr_ecos.shp", method = "local", what = "sp")
+library(geojsonio)
+shp <- geojsonio::geojson_read("official/wwf_terr_ecos.shp", method = "local", what = "sp")
 

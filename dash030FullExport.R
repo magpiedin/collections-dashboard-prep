@@ -4,7 +4,7 @@
 print(paste(date(), "-- ...finished setting up Visitor data.  Starting final prep - dash030FullExport.R"))
 
 # point to csv's directory
-setwd(paste0(origdir,"/data01raw"))
+setwd(paste0(origdir,"/supplementary"))
 
 
 # Merge Department column
@@ -57,12 +57,6 @@ FullDash9csv$Where[which(is.na(FullDash9csv$Where)==T)] <- ""
 
 
 # Setup sample dataset
-
-#SampleGroupC <- c(1321,1:5,656944:656946,537448:537450,867365:867370,2099480,2099482,2668290:2668296,54463,50771,136283,2788069,2388945)
-#SampleGroupA <- c(10576,44071,38855,46333,47764,31971,26200,20714,29028,26226,24962,20453,36113,11339)
-
-#AccBacklogSamp1 <- AccDash1[which(AccDash1$irn %in% SampleGroupA),]
-#CatDash03Samp1 <- CatDash2[which(CatDash2$irn %in% SampleGroupC),]
 
 FullDashSample1 <- FullDash9csv[which(((FullDash9csv$irn %in% SampleGroupC) & FullDash9csv$RecordType=="Catalog") |
                                        ((FullDash9csv$irn %in% SampleGroupA) & FullDash9csv$RecordType=="Accession")),]
