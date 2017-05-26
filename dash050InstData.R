@@ -17,6 +17,8 @@ GRBioFull <- GRBioRaw[,c("Institution.Code", "Institution.Name",
                          "City.Town", "State.Province", "Country", "Postal.Zip.Code",
                          "Cool.URI")]
 
+# setup Address Search fields
+# NOTE - NOT (yet?) USING THESE TO RETRIEVE LATLONGs
 GRBioFull$fullAddress <- paste0(GRBioFull$Physical.Address.1,
                                GRBioFull$Physical.Address.2, GRBioFull$Physical.Address.3, ", ",
                                GRBioFull$City.Town.1, ", ",
@@ -45,10 +47,11 @@ GRBioFull$NameCityCtry <- gsub(" ", "+", GRBioFull$NameCityCtry)
 
 GRBioFull$fullAddress[which(nchar(GRBioFull$fullAddress)<6)] <- GRBioFull$fullAddressALT[which(nchar(GRBioFull$fullAddress)<6)]
 
-InstitutionCodes <- c("AMNH", "DMNS", "FMNH", "LACM", "MFN", "MNHN",
-                      "NHMD", "NHMUK", "NMNH", "NNM", "RBINS", "RMNHD", "ROM")
 
+# 11 Institutions to start with
+#InstitutionCodes <- c("AMNH", "DMNS", "FMNH", "LACM", "MFN", "MNHN", "NHMD", "NHMUK", "NMNH", "NNM", "RBINS", "RMNHD", "ROM")
 #GRBioPart <- GRBioFull[which(GRBioFull$Institution.Code %in% InstitutionCodes),] 
+
 GRBioPart <- GRBioFull
 
 #install.packages("devtools")
@@ -74,8 +77,6 @@ GRBioLatLonA <- data.frame("place_id"=character(),
 GRBioError <- c()
 
 # Search by Institution.Name ####
-## First try searching by institution name :
-# Loop through each institution
 for (i in 1:NROW(GRBioPart)) {
   GRBioLatLonB <- osm_search(GRBioPart$Institution.Name[i],
                               email = "magpiedin@gmail.com", 
@@ -134,106 +135,32 @@ for (i in 1:NROW(GRBioPart2)) {
 }
 
 
-# ...by Country ####
-GRBioPart3 <- GRBioPart2[which(GRBioPart2$Institution.Code %in% GRBioError2),]
+GRBioLatLon11 <- read.csv(file="GRBioInstitutions11.csv", stringsAsFactors = F)
 
-# Setup df for Lat Longs
-GRBioLatLonA3 <- data.frame("place_id"=character(),
-                            "lat"=numeric(),
-                            "lon"=numeric(),
-                            "licence"=character(),
-                            "type"=character(),
-                            "Institution.Code"=character(),
-                            stringsAsFactors = F)
-
-# setup dataframe for Errors
-GRBioError3 <- c()
-
-for (i in 1:NROW(GRBioPart3)) {
-  GRBioLatLonB3 <- osm_geocode(GRBioPart3$Country[i],
-                               email = "magpiedin@gmail.com", 
-                               key = OSMkey, 
-                               limit = 1)
-  
-  if (NROW(GRBioLatLonB3)==1) {
-    GRBioLatLonB3 <- GRBioLatLonB3[,c("place_id","lat","lon","licence","type")]
-    GRBioLatLonB3$Institution.Code <- GRBioPart3$Institution.Code[i]
-    GRBioLatLonA3 <- rbind(GRBioLatLonA3, GRBioLatLonB3)
-    print(paste(GRBioPart3$Institution.Code[i], "lat/long added"))
-  }
-  else {
-    GRBioError3 <- c(GRBioError3, GRBioPart3$Institution.Code[i])
-    print(paste("error:", NROW(GRBioLatLonB3), "lat/long found for", GRBioPart3$Institution.Code[i]))
-  }
-  Sys.sleep(1.4)
-}
-
-# # # # #
-
-# paused & restarted with just unique list of country names
-GRBioPart3ctry <- unique(GRBioPart3$Country)
-GRBioPart3cX <- unique(GRBioPart3$Country[which(GRBioPart3$Institution.Code %in% GRBioError3)])
-GRBioPart3ctry <- GRBioPart3ctry[which(!GRBioPart3ctry %in% GRBioPart3cX)]
-
-#GRBioLatLonA3b <- GRBioLatLonA3
-
-# Setup df for Lat Longs
-GRBioLatLonA3c <- data.frame("place_id"=character(),
-                            "lat"=numeric(),
-                            "lon"=numeric(),
-                            "licence"=character(),
-                            "type"=character(),
-                            "Country"=character(),
-                            stringsAsFactors = F)
-
-# setup dataframe for Errors
-GRBioError3c <- c()
-
-
-for (i in 1:NROW(GRBioPart3ctry)) {
-  GRBioLatLonB3 <- osm_geocode(GRBioPart3ctry[i],
-                               email = "magpiedin@gmail.com", 
-                               key = OSMkey, 
-                               limit = 1)
-  
-  if (NROW(GRBioLatLonB3)==1) {
-    GRBioLatLonB3 <- GRBioLatLonB3[,c("place_id","lat","lon","licence","type")]
-    GRBioLatLonB3$Country <- GRBioPart3ctry[i]
-    GRBioLatLonA3c <- rbind(GRBioLatLonA3c, GRBioLatLonB3)
-    print(paste(GRBioPart3ctry[i], "lat/long added"))
-  }
-  else {
-    GRBioError3 <- c(GRBioError3, GRBioPart3ctry[i])
-    print(paste("error:", NROW(GRBioLatLonB3), "lat/long found for", GRBioPart3ctry[i]))
-  }
-  Sys.sleep(1.4)
-}
-
-
-
-GRBioPart3c <- GRBioPart3[which(!GRBioPart3$Institution.Code %in% GRBioLatLonA3b$Institution.Code),c("Institution.Code","Country")]
-
-GRBioLatLonB3c <- merge(GRBioPart3c, GRBioLatLonA3c)
-GRBioLatLonB3c <- GRBioLatLonB3c[,-1]
-GRBioLatLonAll <- rbind(GRBioLatLonA,GRBioLatLonA2,GRBioLatLonA3b,GRBioLatLonB3c, GRBioLatLonAll10)
 
 # merge all searches ####
 # # # If new search for-loops are added, add them here
-GRBioLatLonAll <- rbind(GRBioLatLonA, GRBioLatLonA2, GRBioLatLonAll10)  # add GRBioLatLonAll10 HERE + dedup
+GRBioLatLonAll <- rbind(GRBioLatLonA, GRBioLatLonA2, GRBioLatLonA11)  # add GRBioLatLonAll10 HERE + dedup
 GRBioLatLonAll <- unique(GRBioLatLonAll)
 # GRBioLatLonAll10 <- GRBioLatLonAll  # BU
 
-# merge LatLong with other Institution Data ####
+
+# merge LatLong with other Institution Data
 GRBioExport <- merge(GRBioPart, GRBioLatLonAll, by="Institution.Code", all.y=T)
 
+
+# setup export fields ####
 GRBioExport <- GRBioExport[,c("Institution.Code",
                               "Institution.Name",
                               "lat", "lon", "Cool.URI")]
 
+
+# check for unique Institution Codes
 GRcheck <- count(GRBioExport, Institution.Code)
 GRcheck <- GRcheck[which(GRcheck$n>1),]
 GRBioExport2 <- GRBioExport[which(!GRBioExport$Institution.Code %in% GRcheck$Institution.Code),]
 
+## If need to check for unique latlong, too:
 #GRBioExport2$latlon <- paste(GRBioExport2$lat, GRBioExport2$lon)
 #GRcheck2 <- count(GRBioExport2, latlon)
 #GRcheck2 <- GRcheck2[which(GRcheck2$n>1),]
