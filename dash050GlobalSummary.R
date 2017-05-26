@@ -168,6 +168,56 @@ for (i in 1:NROW(GRBioPart3)) {
   Sys.sleep(1.4)
 }
 
+# # # # #
+
+# paused & restarted with just unique list of country names
+GRBioPart3ctry <- unique(GRBioPart3$Country)
+GRBioPart3cX <- unique(GRBioPart3$Country[which(GRBioPart3$Institution.Code %in% GRBioError3)])
+GRBioPart3ctry <- GRBioPart3ctry[which(!GRBioPart3ctry %in% GRBioPart3cX)]
+
+#GRBioLatLonA3b <- GRBioLatLonA3
+
+# Setup df for Lat Longs
+GRBioLatLonA3c <- data.frame("place_id"=character(),
+                            "lat"=numeric(),
+                            "lon"=numeric(),
+                            "licence"=character(),
+                            "type"=character(),
+                            "Country"=character(),
+                            stringsAsFactors = F)
+
+# setup dataframe for Errors
+GRBioError3c <- c()
+
+
+for (i in 1:NROW(GRBioPart3ctry)) {
+  GRBioLatLonB3 <- osm_geocode(GRBioPart3ctry[i],
+                               email = "magpiedin@gmail.com", 
+                               key = OSMkey, 
+                               limit = 1)
+  
+  if (NROW(GRBioLatLonB3)==1) {
+    GRBioLatLonB3 <- GRBioLatLonB3[,c("place_id","lat","lon","licence","type")]
+    GRBioLatLonB3$Country <- GRBioPart3ctry[i]
+    GRBioLatLonA3c <- rbind(GRBioLatLonA3c, GRBioLatLonB3)
+    print(paste(GRBioPart3ctry[i], "lat/long added"))
+  }
+  else {
+    GRBioError3 <- c(GRBioError3, GRBioPart3ctry[i])
+    print(paste("error:", NROW(GRBioLatLonB3), "lat/long found for", GRBioPart3ctry[i]))
+  }
+  Sys.sleep(1.4)
+}
+
+
+
+GRBioPart3c <- GRBioPart3[which(!GRBioPart3$Institution.Code %in% GRBioLatLonA3b$Institution.Code),c("Institution.Code","Country")]
+
+GRBioLatLonB3c <- merge(GRBioPart3c, GRBioLatLonA3c)
+GRBioLatLonB3c <- GRBioLatLonB3c[,-1]
+
+GRBioLatLonAll <- rbind(GRBioLatLonA,GRBioLatLonA2,GRBioLatLonA3b,GRBioLatLonB3c, GRBioLatLonAll10)
+GRBioLatLonAll <- unique(GRBioLatLonAll)
 
 # merge all searches ####
 # # # If new search for-loops are added, add them here
@@ -175,10 +225,19 @@ GRBioLatLonAll <- rbind(GRBioLatLonA, GRBioLatLonA2, GRBioLatLonA3)  # add GRBio
 # GRBioLatLonAll10 <- GRBioLatLonAll  # BU
 
 # merge LatLong with other Institution Data ####
-GRBioExport <- merge(GRBioPart, GRBioLatLonAll, by="Institution.Code")
+GRBioExport <- merge(GRBioPart, GRBioLatLonAll, by="Institution.Code", all.y=T)
 
 GRBioExport <- GRBioExport[,c("Institution.Code",
                               "Institution.Name",
                               "lat", "lon", "Cool.URI")]
 
-write.csv(GRBioExport, file="GRBioInstitutions.csv", row.names = F, na="")
+GRcheck <- count(GRBioExport, Institution.Code)
+GRcheck <- GRcheck[which(GRcheck$n>1),]
+GRBioExport2 <- GRBioExport[which(!GRBioExport$Institution.Code %in% GRcheck$Institution.Code),]
+
+#GRBioExport2$latlon <- paste(GRBioExport2$lat, GRBioExport2$lon)
+#GRcheck2 <- count(GRBioExport2, latlon)
+#GRcheck2 <- GRcheck2[which(GRcheck2$n>1),]
+
+
+write.csv(GRBioExport2, file="GRBioInstitutions.csv", row.names = F, na="")
