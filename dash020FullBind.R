@@ -7,7 +7,7 @@ print(paste(date(), "-- ...finished importing Cat & Acc data.  Starting dash020F
 # point to csv's directory
 setwd(paste0(origdir,"/data01raw"))
 
-# Import raw EMu data ####
+# Import raw EMu Catalogue data ####
 if (exists("CatDash03")==TRUE) {
   CatDash2 <- CatDash03
 } else {
@@ -72,6 +72,11 @@ CatDash3$TaxIDRank[which(CatDash3$ClaRank %in% phylum)] <- "Phylum"
 CatDash3$TaxIDRank[which(CatDash3$ClaRank == "Kingdom")] <- "Kingdom"
 
 
+# Import GBIF Catalog data ####
+if (exists("GBIF3")==TRUE) {
+  GBIF4 <- GBIF3
+  rm(GBIF3)
+}
 
 # Import Accession data ####
 
@@ -114,7 +119,7 @@ AccDash2 <- as.data.frame(cbind("irn" = AccDash1$irn,
                                 "AccTotal" = AccDash1$AccTotal,
                                 "Backlog" = AccDash1$backlog),
                                 "DarInstitutionCode" = AccDash1$DarInstitutionCode,
-                          stringsAsFactors=F,)
+                          stringsAsFactors=F)
 
 AccDash2$DarIndividualCount <- as.numeric(AccDash2$DarIndividualCount)
 
