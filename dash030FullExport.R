@@ -116,6 +116,12 @@ write.csv(FullDash9alt, file = "FullDash13mars.csv", na="", row.names = F)
 
 
 # Export sample dataset CSV ####
+if (dir.exists(paste0(origdir,"/outputSample"))==F) {
+  setwd(origdir)
+  dir.create("./outputSample", showWarnings = T)
+  print("'outputSample' directory created.")
+}
+
 setwd(paste0(origdir,"/outputSample"))
 
 write.csv(AccBacklogSamp, file = "SampleInput_AccBacklogBU.csv", na="", row.names = FALSE)
@@ -153,6 +159,12 @@ write.csv(WhoLUT, file="WhoLUT.csv", row.names = F)
 
 
 # write datasets to check ####
+if (dir.exists(paste0(origdir,"/data03check"))==F) {
+  setwd(origdir)
+  dir.create("./data03check", showWarnings = T)
+  print("'data03check' directory created.")
+}
+
 setwd(paste0(origdir,"/data03check"))
 write.csv(WhenAgeLUTcheck, "WhenAgeLUTcheck.csv", row.names=F)
 

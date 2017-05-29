@@ -97,30 +97,43 @@ WhoDashExt2 <- WhoDashExt2[which(WhoDashExt2$Who %in% WhoLUT$WhoLUT),]
 
 WhoDashExt2 <- unique(WhoDashExt2)
 WhoDashExt2 <- WhoDashExt2[order(WhoDashExt2$RecIRN),]
-WhoDashExt2$WhoSeq <- sequence(rle(as.character(WhoDashExt2$RecIRN))$lengths)
-WhoDashExt2 <- WhoDashExt2[,c("RecIRN","WhoSeq","Who")]
-WhoDashExt3 <- tidyr::spread(WhoDashExt2, WhoSeq, Who, sep="_")
+
+# Need to add "if" statement here -- if/when NROW(WhoDashExt2)==0
+if(NROW(WhoDashExt2)>0) {
+  WhoDashExt2$WhoSeq <- sequence(rle(as.character(WhoDashExt2$RecIRN))$lengths)
+  WhoDashExt2 <- WhoDashExt2[,c("RecIRN","WhoSeq","Who")]
+  WhoDashExt3 <- tidyr::spread(WhoDashExt2, WhoSeq, Who, sep="_")
 
 date()
 
-WhoDashExt3 <- separate(WhoDashExt3, RecIRN, c("irn","RecordType"))
-# may need to edit next line if WhoSeq_5 isn't last column
-WhoDashExt3 <- unite(WhoDashExt3, WhoExtra, WhoSeq_1:WhoSeq_5, sep = " | ")
-WhoDashExt3$WhoExtra <- gsub("\\s+NA\\s+|\\s+NA$","",WhoDashExt3$WhoExtra)
-WhoDashExt3$WhoExtra <- gsub("(\\|\\s+)+|\\|+","| ",WhoDashExt3$WhoExtra)
-WhoDashExt3$WhoExtra <- gsub("\\s+\\|\\s+$","",WhoDashExt3$WhoExtra)
+  WhoDashExt3 <- separate(WhoDashExt3, RecIRN, c("irn","RecordType"))
+  # may need to edit next line if WhoSeq_5 isn't last column
+  WhoDashExt3 <- unite(WhoDashExt3, WhoExtra, WhoSeq_1:WhoSeq_5, sep = " | ")
+  WhoDashExt3$WhoExtra <- gsub("\\s+NA\\s+|\\s+NA$","",WhoDashExt3$WhoExtra)
+  WhoDashExt3$WhoExtra <- gsub("(\\|\\s+)+|\\|+","| ",WhoDashExt3$WhoExtra)
+  WhoDashExt3$WhoExtra <- gsub("\\s+\\|\\s+$","",WhoDashExt3$WhoExtra)
 
 date()
+  
+  WhoDash2 <- merge(WhoDash, WhoDashExt3, by=c("irn","RecordType"), all.x=T)
+  WhoDash2 <- WhoDash2[,c("irn","RecordType","DesEthnicGroupSubgroup_tab","WhoExtra")]
+  WhoDash2$WhoExtra[which(is.na(WhoDash2$WhoExtra)==T)] <- ""
+  
+  #  3-Concat 'Who' data ####
+  WhoDash2 <- unite(WhoDash2, "Who", DesEthnicGroupSubgroup_tab:WhoExtra, sep=" | ", remove=TRUE)
+  
+} else {
+  
+  WhoDash2 <- WhoDash[,c("irn","RecordType","DesEthnicGroupSubgroup_tab")]
+  #  alt-3-Concat 'Who' data ####
+  colnames(WhoDash2)[3] <- "Who"
+  
+}
 
 
-WhoDash2 <- merge(WhoDash, WhoDashExt3, by=c("irn","RecordType"), all.x=T)
-WhoDash2 <- WhoDash2[,c("irn","RecordType","DesEthnicGroupSubgroup_tab","WhoExtra")]
-WhoDash2$WhoExtra[which(is.na(WhoDash2$WhoExtra)==T)] <- ""
+print(paste("... ",substr(date(), 12, 19), "- cleaning WHO data..."))
 
-print(paste("... ",substr(date(), 12, 19), "- uniting WHO data..."))
-
-#  3-Concat 'Who' data ####
-WhoDash2 <- unite(WhoDash2, "Who", DesEthnicGroupSubgroup_tab:WhoExtra, sep=" | ", remove=TRUE)
+#  4-Clean concatenated 'Who' data ####
 WhoDash2$Who <- gsub("(\\|\\s+)+", "| ", WhoDash2$Who)
 WhoDash2$Who <- gsub("\\s+\\|\\s+$|^\\s+\\|\\s+", "", WhoDash2$Who)
 #FullDash3 <- subset(FullDash3, select=-c(DarCountry, DarContinent, DarContinentOcean, DarWaterBody, AccLocality, AccGeography))
