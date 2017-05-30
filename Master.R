@@ -47,7 +47,7 @@ usePackage("dplyr")
 # Added DwC-Archive-import script May-2017
 
 DarYN <- readline(prompt="Do you need to import a Darwin Core archive? (Y/N) ")
-if (DarYN="Y") { source("dash005DarPrep.R") }
+if (DarYN=="Y") { source("dash005DarPrep.R") }
 
 if (!file.exists("data01raw/CatDash03bu.csv")) { source("dash010CatPrep.R") }
 if (!file.exists("data01raw/AccBacklogBU.csv")) { source("dash015AccPrep.R") }
