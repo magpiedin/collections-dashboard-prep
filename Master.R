@@ -6,6 +6,7 @@ origdir <- getwd()
 # Instructions
 print("Step 1 - Save scripts repo to computer.")
 print("Step 2 - Save raw data to sub-folder called 'data01raw'.")
+print("Step 3 - ...And supplementary data to sub-folder called 'supplementary'.")
 print(paste("Step 3 - Currently, the working directory is set to: ", getwd()))
 switchYN <- readline(prompt="Do you need to change the working directory to the folder containing the scripts? (Y/N) ")
 
@@ -42,6 +43,12 @@ usePackage("dplyr")
 
 # Run scripts
 
+
+# Added DwC-Archive-import script May-2017
+
+DarYN <- readline(prompt="Do you need to import a Darwin Core archive? (Y/N) ")
+if (DarYN="Y") { source("dash005DarPrep.R") }
+
 if (!file.exists("data01raw/CatDash03bu.csv")) { source("dash010CatPrep.R") }
 if (!file.exists("data01raw/AccBacklogBU.csv")) { source("dash015AccPrep.R") }
 
@@ -55,7 +62,6 @@ source("dash024Who.R")
 source("dash025Experience.R")
 source("dash026LoansPrep.R")
 source("dash027VisitPrep.R")
-
 source("dash028Ecoregions.R")
 
 # Add exports to ...30FullExport.R for new [commented-out] scripts 16, 17, & 25

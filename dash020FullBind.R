@@ -5,15 +5,15 @@ print(paste(date(), "-- ...finished importing Cat & Acc data.  Starting dash020F
 
 
 # Import GBIF Catalog data ####
-if (exists("GBIF3")==TRUE) {
-  GBIF4 <- GBIF3
-  rm(GBIF3)
+if (exists("DWC2")==TRUE) {
+  DWC3 <- DWC2
+  rm(DWC2)
 }
 
 
-# Import raw EMu Catalogue data ####
+# Import raw EMu data ####
 
-# point to EMu CSV's directory
+# point to csv's directory
 setwd(paste0(origdir,"/data01raw"))
 
 if (exists("CatDash03")==TRUE) {
@@ -31,13 +31,13 @@ CatDash2$DarInstitutionCode <- "FMNH"
 
 # Merge any other missing columns, e.g.: 
 #  NOTE -- (Try to restrict this to 'dash010' script)
-if (file.exists("dashMMa.csv")==T) {
-  DashMMa <- read.csv(file="dashMMa.csv", stringsAsFactors = F)
-  DashMMbgz <- read.csv(file="dashMMbgz.csv", stringsAsFactors = F)
-  DashMM <- rbind(DashMMa, DashMMbgz)
-  DashMM <- unique(DashMM[,3:4])
-  #DashMM$MulHasMultiMedia <- gsub("N",0,DashMM$MulHasMultiMedia)
-}
+
+DashMMa <- read.csv(file="dashMMa.csv", stringsAsFactors = F)
+DashMMbgz <- read.csv(file="dashMMbgz.csv", stringsAsFactors = F)
+DashMM <- rbind(DashMMa, DashMMbgz)
+DashMM <- unique(DashMM[,3:4])
+#DashMM$MulHasMultiMedia <- gsub("N",0,DashMM$MulHasMultiMedia)
+
 
 if (NROW(CatDash2$MulHasMultiMedia)==0) {
   CatDash2 <- merge(CatDash2, DashMM, by="irn", all.x=T)
@@ -55,7 +55,7 @@ CatDash2 <- unique(CatDash2)
 
 # Bind GBIF and EMu Catalog data ####
 
-CatDash3 <- rbind(CatDash2,GBIF4)
+CatDash3 <- rbind(CatDash2, DWC3)
 
 CatDash3$MulHasMultiMedia <- gsub("Y","1",CatDash3$MulHasMultiMedia)
 CatDash3$MulHasMultiMedia <- gsub("N","0",CatDash3$MulHasMultiMedia)
@@ -85,6 +85,7 @@ CatDash3$TaxIDRank[which(CatDash3$ClaRank %in% order)] <- "Order"
 CatDash3$TaxIDRank[which(CatDash3$ClaRank %in% class)] <- "Class"
 CatDash3$TaxIDRank[which(CatDash3$ClaRank %in% phylum)] <- "Phylum"
 CatDash3$TaxIDRank[which(CatDash3$ClaRank == "Kingdom")] <- "Kingdom"
+
 
 
 # Import Accession data ####
@@ -178,8 +179,8 @@ FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)  # need to update with Dar
 
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog")] <- 4
 FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>0)] <- 3
-FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>2 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL)<2))] <- 2
-FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual==5 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL)==0))] <- 1
+FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>2 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL))<2)] <- 2
+FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual==5 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL))==0)] <- 1
 
 
 # Quality Summary Count Export ####

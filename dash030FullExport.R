@@ -1,7 +1,7 @@
 ## EMu Data Prep Script -- Collections Dashboard
 # Final prep & export of full dashboard dataset
 
-print(paste(date(), "-- ...finished setting up Visitor data.  Starting final prep - dash030FullExport.R"))
+print(paste(date(), "-- ...finished setting up Ecoregion data.  Starting final prep - dash030FullExport.R"))
 
 # point to csv's directory
 setwd(paste0(origdir,"/supplementary"))
