@@ -149,14 +149,14 @@ FullDash2 <- unique(FullDash)
 
 
 # Qualilty - rank records ####
-FullDash2$Quality <- 9
-FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$AccTotal>0)] <- 8
-FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==8 & (is.na(FullDash2$AccLocality) + is.na(FullDash2$AccGeography) < 2))] <- 7
-FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==7 & is.na(FullDash2$AccCatalogueNo)==FALSE)] <- 6
-FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality<=7 & FullDash2$DarIndividualCount>0)] <- 5
+FullDash2$Quality <- 1
+FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$AccTotal>0)] <- 2
+FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==2 & (is.na(FullDash2$AccLocality) + is.na(FullDash2$AccGeography) < 2))] <- 3
+FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality==3 & is.na(FullDash2$AccCatalogueNo)==FALSE)] <- 4
+FullDash2$Quality[which(FullDash2$RecordType=="Accession" & FullDash2$Quality>=3 & FullDash2$DarIndividualCount>0)] <- 5
 
 # Set Backlog = 1 for Quality=9 (in order to count minimum #records/backlog)
-FullDash2$Backlog[which(FullDash2$Quality==9 & FullDash2$RecordType=="Accession")] <- 1
+FullDash2$Backlog[which(FullDash2$Quality==1 & FullDash2$RecordType=="Accession")] <- 1
 # Set Backlog = 0 for Catalogue records
 FullDash2$Backlog[which(FullDash2$RecordType=="Catalog")] <- 0
 
@@ -177,10 +177,10 @@ FullDash2$CatQual <- 5 - (is.na(FullDash2$DarCountry)  # need to update with Dar
                           +is.na(FullDash2$DarCollector)
                           +as.numeric(!FullDash2$TaxIDRank %in% c("Family", "Genus", "Species")))
 
-FullDash2$Quality[which(FullDash2$RecordType=="Catalog")] <- 4
-FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>0)] <- 3
-FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>2 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL))<2)] <- 2
-FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual==5 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL))==0)] <- 1
+FullDash2$Quality[which(FullDash2$RecordType=="Catalog")] <- 6
+FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>0)] <- 7
+FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual>2 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL))<2)] <- 8
+FullDash2$Quality[which(FullDash2$RecordType=="Catalog" & FullDash2$CatQual==5 & (is.na(FullDash2$DarLatitude)+(1-FullDash2$DarImageURL))==0)] <- 9
 
 
 # Quality Summary Count Export ####
@@ -189,5 +189,7 @@ colnames(QualityFull)[1] <- "QualityRank"
 
 QualityCatDar <- dplyr::count(FullDash2[which(FullDash2$RecordType=="Catalog"),], CatQual)
 colnames(QualityCatDar)[1] <- "DarFieldsFilled"
+
+Log020FullBind <- warnings()
 
 setwd(origdir)
