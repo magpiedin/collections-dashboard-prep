@@ -108,11 +108,19 @@ setwd(paste0(origdir,"/output"))
 write.csv(FullDash9csv, file = "FullDash13.csv", na="", row.names = FALSE)
 
 
-# Export extra dummy-dataset (with multiple institutions)
-FullDash9alt <- FullDash9csv[c(101:600,15001:20000),]
-FullDash9alt$DarInstitutionCode <- "Mars"
+# Bind extra dummy-data (with multiple institutions)
+FullDash9altA <- FullDash9csv[c(101:600,15001:20000),]
+FullDash9altA$DarInstitutionCode <- "Mars"
 
-write.csv(FullDash9alt, file = "FullDash13mars.csv", na="", row.names = F)
+FullDash9altB <- FullDash9csv[c(701:1300,25001:35000),]
+FullDash9altB$DarInstitutionCode <- "Venus"
+
+FullDash9altC <- FullDash9csv[c(1401:2600,450001:550001),]
+FullDash9altC$DarInstitutionCode <- "Pluto"
+
+FullDash9alt <- rbind(FullDash9csv, FullDash9altA, FullDash9altA, FullDash9altA)
+
+write.csv(FullDash9alt, file = "FullDash13alt.csv", na="", row.names = F)
 
 
 # Export sample dataset CSV ####
