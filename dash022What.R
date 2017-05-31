@@ -275,6 +275,7 @@ FullDash4csv <- FullDash4csv[,c("irn","DarLatitude","DarLongitude","Where",
                                 "What","DarCollectionCode","HasMM",
                                 "DarInstitutionCode")]
 
+Log022What <- warnings()
 
 # reset working directory
 setwd(origdir)

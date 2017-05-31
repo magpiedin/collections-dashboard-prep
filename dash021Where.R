@@ -207,6 +207,7 @@ WhereLUTall <- data.frame("WhereLutClean" = unique(WhereLUTall$WhereLUT[which(nc
 WhereLUTall <- data.frame("WhereLutClean"=as.character(WhereLUTall[order(WhereLUTall$WhereLutClean),]), stringsAsFactors = F)
 rm("WhereLUT1", "WhereLUT2", "WhereLUT3", "WhereLUT4", "WhereLUT5", "WhereLUT6")
 
+Log021Where <- warnings()
 
 # reset working directory
 setwd(origdir)

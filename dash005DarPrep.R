@@ -44,7 +44,7 @@ setwd(paste0(origdir,"/data01raw/catDwC"))
 #install.packages("rgbif")
 library(rgbif)
 
-if (Sys.glob(file.path(paste0(origdir,"/data01raw/catDwC"), "*.zip"))==0) {
+if (NROW(Sys.glob(file.path(paste0(origdir,"/data01raw/catDwC"), "*.zip")))==0) {
   print("For acceptable GBIF parameters, see 'Acceptable arguments' - https://www.rdocumentation.org/packages/rgbif/versions/0.9.4/topics/occ_download")
   print("(Alternatively, save datasets as DwC Archive Zip files in the '/data01raw/catDwC' folder)")
   GBIFarg <- readline(prompt="Type a GBIF parameter, e.g. 'datasetKey = abc123'")
@@ -98,9 +98,11 @@ if (Sys.glob(file.path(paste0(origdir,"/data01raw/catDwC"), "*.zip"))==0) {
 #install.packages("jsonlite")
 library(jsonlite)
 
-GBIFcountries <- "http://api.gbif.org/v1/enumeration/country"
-GBIFcountries <- jsonlite::fromJSON(paste(readLines(GBIFcountries), collapse = "")) # error about "incomplete final line" seems ok
-
+if (!exists("GBIFcountries")) {
+  GBIFcountries <- "http://api.gbif.org/v1/enumeration/country"
+  GBIFcountries <- jsonlite::fromJSON(paste(readLines(GBIFcountries), collapse = "")) # error about "incomplete final line" seems ok
+}
+  
 GBIFcountries1 <- GBIFcountries[,c("iso2","title")]
 colnames(GBIFcountries1) <- c("countryCode","country")
 
@@ -144,5 +146,6 @@ DWC2 <- data.frame("irn" = DWC1$gbifID,
                     "MulHasMultiMedia" = 1-as.integer(is.na(DWC1$mediaType)),
                     stringsAsFactors = F)
 
+Log005DarPrep <- warnings()
 
 setwd(origdir)
