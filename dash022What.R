@@ -28,7 +28,8 @@ ItisComName4$ComNam2 <- gsub("\\s+", " ", ItisComName4$ComNam2)
 ItisComName4$ComNam2 <- sapply(ItisComName4$ComNam2, simpleCap)
 
 #WhatDash4 <- FullDash4[,c("irn", "RecordType", "What", "DarOrder")]
-WhatDash4 <- FullDash3[,c("irn", "RecordType", "DarScientificName", "DarOrder",
+WhatDash4 <- FullDash3[,c("irn", "RecordType","DarInstitutionCode", 
+                          "DarScientificName", "DarOrder",
                           "DarCollectionCode", "ComName_tab", "DesMaterials_tab",
                           "EcbNameOfObject",
                           "AccDescription","AccDescription2", "DarRelatedInformation"
@@ -269,7 +270,7 @@ WhatDash5$What <- gsub("\\s+", " ", WhatDash5$What)
 WhatDash5$What <- gsub("(\\|\\s+)+","| ",WhatDash5$What)
 
 
-FullDash4csv <- merge(FullDash3csv, WhatDash5, by=c("irn","RecordType"), all.x=T)
+FullDash4csv <- merge(FullDash3csv, WhatDash5, by=c("irn","RecordType","DarInstitutionCode"), all.x=T)
 FullDash4csv <- FullDash4csv[,c("irn","DarLatitude","DarLongitude","Where",
                                 "Quality","RecordType","Backlog","TaxIDRank",
                                 "What","DarCollectionCode","HasMM",

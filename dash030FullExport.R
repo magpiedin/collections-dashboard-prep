@@ -9,13 +9,14 @@ setwd(paste0(origdir,"/supplementary"))
 
 # Merge Department column
 Depts <- read.csv(file="Departments.csv", stringsAsFactors = F)
+#FullDash8csv$DarCollectionCode <- sapply(FullDash8csv$DarCollectionCode, function(x) simpleCap(x))
 FullDash8csv <- merge(FullDash8, Depts, by=c("DarCollectionCode"), all.x=T)
 rm(Depts)
 
 
 # Merge DarIndividualCount to count # catalogged items in results
-DarIndivCount <- CatDash3[,c("irn","RecordType", "DarIndividualCount")]
-FullDash8csv <- merge(FullDash8csv, DarIndivCount, by=c("irn","RecordType"), all.x=T)
+DarIndivCount <- CatDash3[,c("irn","RecordType", "DarInstitutionCode", "DarIndividualCount")]
+FullDash8csv <- merge(FullDash8csv, DarIndivCount, by=c("irn","RecordType","DarInstitutionCode"), all.x=T)
 FullDash8csv$DarIndividualCount[which(FullDash8csv$RecordType=="Catalog" & is.na(FullDash8csv$DarIndividualCount)==T)] <- 1
 FullDash8csv$DarIndividualCount[which(FullDash8csv$RecordType=="Accession")] <- 0
 rm(DarIndivCount)
@@ -109,13 +110,13 @@ write.csv(FullDash9csv, file = "FullDash13.csv", na="", row.names = FALSE)
 
 
 # Bind extra dummy-data (with multiple institutions)
-FullDash9altA <- FullDash9csv[c(101:600,15001:20000),]
+FullDash9altA <- FullDash9csv[c(2101:15600,15001:20000),]
 FullDash9altA$DarInstitutionCode <- "Mars"
 
-FullDash9altB <- FullDash9csv[c(701:1300,25001:35000),]
+FullDash9altB <- FullDash9csv[c(701:1300,10001:80000),]
 FullDash9altB$DarInstitutionCode <- "Venus"
 
-FullDash9altC <- FullDash9csv[c(1401:2600,450001:550001),]
+FullDash9altC <- FullDash9csv[c(61401:92400,2450001:2550000),]
 FullDash9altC$DarInstitutionCode <- "Pluto"
 
 FullDash9alt <- rbind(FullDash9csv, FullDash9altA, FullDash9altA, FullDash9altA)
@@ -180,6 +181,7 @@ write.csv(WhenAgeLUTcheck, "WhenAgeLUTcheck.csv", row.names=F)
 write.csv(QualityFull, file="QualityStatsFull.csv", row.names=F)
 write.csv(QualityCatDar, file="QualityStatsCatDar.csv", row.names=F)
 
+Log030FullExport <- warnings()
 
 setwd(origdir)
 
