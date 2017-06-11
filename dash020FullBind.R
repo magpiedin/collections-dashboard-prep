@@ -53,9 +53,21 @@ CatDash2 <- unique(CatDash2)
 #check <- dplyr::count(CatDash3, irn)
 
 
-# Bind GBIF and EMu Catalog data ####
+# Bind GBIF and EMu Catalog data + GBIF-backlog data if present ####
 
-CatDash3 <- rbind(CatDash2, DWC3)
+
+library("plyr")
+
+if (exists("DWC2_Back")==T) {
+  
+  # Combine Accession + Catalogue datasets
+  CatDash3 <- plyr::rbind.fill(CatDash2, DWC3, DWC2_Back)
+  
+} else {
+
+  CatDash3 <- rbind(CatDash2, DWC3)
+
+}
 
 CatDash3$MulHasMultiMedia <- gsub("Y","1",CatDash3$MulHasMultiMedia)
 CatDash3$MulHasMultiMedia <- gsub("N","0",CatDash3$MulHasMultiMedia)
@@ -66,7 +78,7 @@ CatDash3$DarImageURL <- as.integer(CatDash3$MulHasMultiMedia)
 # Add/Adjust columns for Quality calculation
 CatDash3$DarIndividualCount <- as.numeric(CatDash3$DarIndividualCount)  # NA's from coercion are ok here
 
-CatDash3$RecordType <- "Catalog"
+CatDash3$RecordType[which(is.na(CatDash3$RecordType)==T)] <- "Catalog"
 
 species <- c("Species","Subspecies","Variety","Subvariety","Form","Subform","Proles","Aberration")
 genus <- c("Genus","Subgenus","Section","Subsection")
@@ -90,7 +102,7 @@ CatDash3$TaxIDRank[which(CatDash3$ClaRank == "Kingdom")] <- "Kingdom"
 
 # Import Accession data ####
 
-if (exists("IPTaccBL3")==TRUE) {
+if (exists("AccBL3")==TRUE) {
   AccDash1 <- AccBL3
 } else {
   AccDash1 <- read.csv(file="AccBacklogBU.csv", stringsAsFactors = F, na.strings = "", encoding="latin1")
@@ -128,18 +140,16 @@ AccDash2 <- as.data.frame(cbind("irn" = AccDash1$irn,
                                 "RecordType" = "Accession",
                                 "AccTotal" = AccDash1$AccTotal,
                                 "Backlog" = AccDash1$backlog),
-                                "DarInstitutionCode" = AccDash1$DarInstitutionCode,
+                                "DarInstitutionCode" = "FMNH",  # AccDash1$DarInstitutionCode,
                           stringsAsFactors=F)
 
 AccDash2$DarIndividualCount <- as.numeric(AccDash2$DarIndividualCount)
 
-
-library("plyr")
-
 print(paste("... ", substr(date(), 12, 19), "- binding catalogue & accession records..."))
 
-# Combine Accession + Catalogue datasets
+# bind catalog and backlog records
 FullDash <- plyr::rbind.fill(CatDash3, AccDash2)
+
 
 print(paste("... ",substr(date(), 12, 19), "- cleaning up full data table..."))
 

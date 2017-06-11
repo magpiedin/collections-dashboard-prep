@@ -106,11 +106,23 @@ print(paste(date(), "-- ...finished final prep; starting export of final dataset
 # Export full dataset CSV ####
 setwd(paste0(origdir,"/output"))
 
-write.csv(FullDash9csv, file = "FullDash13.csv", na="", row.names = FALSE)
+# TEMP FIX # # # #
+FullDash9csv$DarInstitutionCode[which(is.na(FullDash9csv$DarInstitutionCode)==T)] <- "FMNH" 
+
+# Check for duplicates
+FullDash9csv <- unique(FullDash9csv)
+FullD9_check1 <- dplyr::count(FullDash9csv, DarInstitutionCode, RecordType, irn)
+FullD9_check2 <- FullD9_check1[which(FullD9_check1$n>1),]
+
+if (NROW(FullDash9csv)>0 & NROW(FullD9_check2)==0) {
+  write.csv(FullDash9csv, file = "FullDash13.csv", na="", row.names = FALSE)
+} else {
+  print("Error - Check for duplicate records; FullDash13.csv not exported")
+}
 
 
 # Bind extra dummy-data (with multiple institutions)
-FullDash9altA <- FullDash9csv[c(2101:15600,15001:20000),]
+FullDash9altA <- FullDash9csv[c(2101:14600,15001:20000),]
 FullDash9altA$DarInstitutionCode <- "Mars"
 
 FullDash9altB <- FullDash9csv[c(701:1300,10001:80000),]
@@ -119,9 +131,17 @@ FullDash9altB$DarInstitutionCode <- "Venus"
 FullDash9altC <- FullDash9csv[c(61401:92400,2450001:2550000),]
 FullDash9altC$DarInstitutionCode <- "Pluto"
 
-FullDash9alt <- rbind(FullDash9csv, FullDash9altA, FullDash9altA, FullDash9altA)
+FullDash9alt <- rbind(FullDash9csv, FullDash9altA, FullDash9altB, FullDash9altC)
+FullDash9alt <- unique(FullDash9alt)
+FullD9a_check1 <- dplyr::count(FullDash9alt, DarInstitutionCode, RecordType, irn)
+FullD9a_check2 <- FullD9a_check1[which(FullD9a_check1$n>1),]
 
-write.csv(FullDash9alt, file = "FullDash13alt.csv", na="", row.names = F)
+#View(FullDash9csv[which(is.na(FullDash9csv$DarInstitutionCode)==T),])
+if (NROW(FullDash9alt)>0 & NROW(FullD9a_check2)==0) {
+  write.csv(FullDash9alt, file = "FullDash13alt.csv", na="", row.names = F)
+} else {
+  print ("Error - Check for duplicate records; FullDash13alt.csv not exported")
+}
 
 
 # Export sample dataset CSV ####

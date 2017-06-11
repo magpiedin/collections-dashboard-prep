@@ -40,6 +40,8 @@ if (dir.exists(paste0(origdir,"/data01raw/catDwC"))==F) {
 # point to the directory for DwC Archive Zip file/s
 setwd(paste0(origdir,"/data01raw/catDwC"))
 
+# # Alternatively, if need to import a verbatim GBIF dataset
+# GBIFvrb <- read.csv("verbatim.txt", sep="\t", quote="", stringsAsFactors = F, fill=T)
 
 #install.packages("rgbif")
 library(rgbif)
@@ -106,8 +108,16 @@ if (!exists("GBIFcountries")) {
 GBIFcountries1 <- GBIFcountries[,c("iso2","title")]
 colnames(GBIFcountries1) <- c("countryCode","country")
 
-DWC1 <- merge(DWC1, GBIFcountries1, by="countryCode", all.x=T)
+DWC1bu <- merge(DWC1, GBIFcountries1, by="countryCode", all.x=T)
 
+
+# TEMPORARY # # # #
+# Need basisOfRecord=="StorageUnit" to come through + be distinguishable from other Catalog/Non-backlog records
+DWC1_Back <- DWC1bu[which(DWC1bu$datasetKey=="62d82928-dc6f-40dc-85b3-f2be47e7b49a"),]
+DWC1 <- DWC1bu[which(DWC1bu$datasetKey!="62d82928-dc6f-40dc-85b3-f2be47e7b49a"),]
+
+
+# Map DwCA to Dashboard Catalog record fields
 DWC2 <- data.frame("irn" = DWC1$gbifID,
                     "DarGlobalUniqueIdentifier" = DWC1$occurrenceID,
                     "DarOrder" = DWC1$order,
@@ -145,6 +155,45 @@ DWC2 <- data.frame("irn" = DWC1$gbifID,
                     "DarCollector" = DWC1$recordedBy,
                     "MulHasMultiMedia" = 1-as.integer(is.na(DWC1$mediaType)),
                     stringsAsFactors = F)
+
+
+# Map DwCA-storage unit level records to Dashboard Backlog record fields
+DWC2_Back <- as.data.frame(cbind("irn" = DWC1_Back$gbifID,
+                                 "DarGlobalUniqueIdentifier" = DWC1_Back$occurrenceID,
+                                 "DarOrder" = DWC1_Back$order,
+                                 "ClaRank" = DWC1_Back$taxonRank,
+                                 "DarScientificName" = DWC1_Back$scientificName,
+                                 "DarLatitude" = DWC1_Back$decimalLatitude,
+                                 "DarLongitude" = DWC1_Back$decimalLongitude,
+                                 "DarMonthCollected" = DWC1_Back$month,
+                                 "DarYearCollected" = DWC1_Back$year,
+                                 "DarBasisOfRecord" = DWC1_Back$basisOfRecord,
+                                 "DarInstitutionCode" = DWC1_Back$institutionCode,
+                                 "DarCollectionCode" = DWC1_Back$collectionCode,
+                                 "DarCatalogNumber" = DWC1_Back$catalogNumber,
+                                 "AdmDateModified" = DWC1_Back$lastInterpreted,
+                                 "DarImageURL" = DWC1_Back$mediaType,
+                                 "AdmDateInserted"="",
+                                 "DarIndividualCount" = DWC1_Back$individualCount,
+                                 "DarCountry" = DWC1_Back$country,
+                                 "DarContinent"= DWC1_Back$continent,
+                                 "DarContinentOcean" = "",
+                                 "DarWaterBody" = DWC1_Back$waterBody,
+                                 "DarEarliestAge" = DWC1_Back$earliestAgeOrLowestStage,
+                                 "DarEarliestEon" = DWC1_Back$earliestEonOrLowestEonothem,
+                                 "DarEarliestEpoch" = DWC1_Back$earliestEpochOrLowestSeries,
+                                 "DarEarliestEra" = DWC1_Back$earliestEraOrLowestErathem,
+                                 "DarEarliestPeriod" = DWC1_Back$earliestPeriodOrLowestSystem,
+                                 "DarCollector" = DWC1_Back$recordedBy,
+                                 "MulHasMultiMedia" = 1-as.integer(is.na(DWC1_Back$mediaType)),
+                                "RecordType" = "Accession",
+                                "AccTotal" = DWC1_Back$individualCount,
+                                "Backlog" = (DWC1_Back$individualCount-1),
+                                "DarInstitutionCode" = DWC1_Back$institutionCode),
+                          stringsAsFactors=F)
+
+DWC2_Back$DarIndividualCount <- as.numeric(DWC2_Back$DarIndividualCount)
+
 
 Log005DarPrep <- warnings()
 
