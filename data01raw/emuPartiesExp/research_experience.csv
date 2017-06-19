@@ -1,1 +1,47 @@
-
+AddEmuUserId,NamFullName,irn,NAME,NamDepartment,NamBranch,EMu Group,NamRoles_tab,NamPosition,NamSpecialities_tab
+ssmith,smith,1001,smith,Zoology,Invertebrate Zoology,IZIntern,,,
+jjohn,john,1002,john,Anthropology,,AnthroCollections2,Collections Assistant,,
+aadam,adam,1003,adam,Anthropology,,"AnthroCollections2 
+",Collections Assistant,,
+bbo,bo,1004,bo,Anthropology,,AnthroCollections2,Collections Assistant,,
+ffrank,frank,1005,frank,Anthropology,,"AnthroCollections2
+",Collections Assistant,,
+ddan,dan,1006,dan,Zoology,Insects,InsectsUser,"Research Assistant
+Digital Imaging Technician
+Collector",,
+iilsa,ilsa,1007,ilsa,Botany,,"BotanyMgr, GeologyIntern, FishesMgr","Photographer
+Collections Assistant",Digital Imaging Specialist,"Photography
+Image management
+Databasing"
+ppeter,peter,1008,peter,Botany,,BotanyWrite,,,
+rroy,roy,1009,roy,Technology,,Admin,,,
+lleo,leo,1010,leo,Anthropology,,"AnthroConservation
+",,,
+mmo,mo,1011,mo,Zoology,Fishes,FishesUser,Collections Assistant,,
+nnils,nils,1012,nils,Zoology,Invertebrate Zoology,IZIntern,,,
+jjay,jay,1013,jay,Zoology,Invertebrate Zoology,IZAdvancedIntern,,,
+cchris,chris,1014,chris,Zoology,Birds,GlobalRead,,,
+oolly,olly,1015,olly,Zoology,Mammals,MammalsCurator,,,
+ddon,don,1016,don,Zoology,Insects,InsectsMgr,,Imaging Specialist,
+wwill,will,1017,will,Zoology,Fishes,FishesMgr,Curator of Fishes,,
+mmary,mary,1018,mary,Action,,RRCUser,,,
+vviola,viola,1019,viola,Zoology,Mammals,MammalsMgr,,Collections Assistant,
+ssam,sam,1020,sam,Exhibitions,,ExhibitsDevelopment,,Project Manager for Exhbiitions,
+hhow,how,1021,how,Exhibitions,,ExhibitsMount,,Senior Mount Shop Supervisor,
+jjoan,joan,1022,joan,Zoology,Insects,InsectsMgr,"Intern
+Volunteer",Research Assistant,
+pphilip,philip,1023,philip,Zoology,Amphibians and Reptiles,GlobalRead,,,
+ttom,tom,1024,tom,Zoology,Birds,BirdsMgr,,,
+yyuri,yuri,1025,yuri,Zoology,Mammals,MammalsCurator,,,
+nnina,nina,1026,nina,Zoology,Insects,InsectsUser,"Volunteer
+Collector",,
+ddave,dave,1027,dave,Zoology,Fishes,FishesUser,,,
+jjosh,josh,1028,josh,Botany,Fungi,BotanyMgr; InsectsMgr,"Research Assistant
+Volunteer",,Macrofungi
+hholly,holly,1029,holly,Zoology,Birds,BirdsMgr [ReadOnly],,,
+ccurt,curt,1030,curt,Zoology,Birds,BirdsReadOnly,,Volunteer,
+llia,lia,1031,lia,Zoology,Mammals,MammalsCurator,,,
+eerin,erin,1032,erin,Zoology,Birds,BirdsMgr,,Collection Manager,
+aaron,alec,1033,alec,Exhibitions,,ExhibitsRead,,,
+ssue,sue,1034,sue,Zoology,Birds,BirdsReadOnly,,,
+aalan,adam,1035,adam,Zoology,Mammals,MammalsMgr,,Collections Manager,
