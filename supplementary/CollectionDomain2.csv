@@ -1,0 +1,58 @@
+id,Domain,DarCollectionCode
+1,Anthropology,Anthropology
+2,Botany,Botany
+3,Geology,Economic Geology
+4,Geology,Gems
+5,Geology,Physical Geology
+6,Geology,Rocks
+7,IZ,Brachiopoda
+8,IZ,Bryozoa
+10,IZ,Chelicerata and Myriapoda
+11,IZ,Cnidaria
+12,IZ,Coleoptera
+13,IZ,Collembola
+14,IZ,Crustacea
+15,IZ,Diptera
+16,IZ,Echinodermata
+17,IZ,Entomology
+18,IZ,Foraminifera
+19,IZ,Hemiptera
+20,IZ,Hydrozoa
+21,IZ,Hymenoptera
+22,IZ,Insects
+23,IZ,Invertebrate Zoology
+24,IZ,Invertebrates
+25,IZ,Lepidoptera
+26,IZ,Mollusca
+27,IZ,Odonata
+28,IZ,Orthopteroidea
+29,IZ,Porifera
+30,IZ,Remaining insects
+31,IZ,Tunicata
+32,IZ,Vermes
+33,Meteorites,Meteorites
+34,Minerals,Minerals
+35,Paleo,Cainozoic Mollusca
+36,Paleo,Mesozoic Invertebrates
+37,Paleo,Micropaleontology
+38,Paleo,Fossil Birds
+39,Paleo,Fossil Fishes
+40,Paleo,Fossil Herps
+41,Paleo,Fossil Invertebrates
+42,Paleo,Fossil Mammals
+43,Paleo,Fossil Synapsids
+44,Paleo,Fossil Vertebrates
+45,Paleo,Paleontology Invertebrates
+46,Paleo,Paleontology Vertebrates
+47,Paleo,Paleobotany
+48,Paleo,Paleontology
+49,VZ,Amphibia and Reptilia
+50,VZ,Amphibians and Reptiles
+51,VZ,Aves
+52,VZ,Birds
+53,VZ,Birds - Eggs
+54,VZ,Fishes
+55,VZ,Mammalia
+56,VZ,Mammals
+57,VZ,Pisces
+58,VZ,Vertebrates
