@@ -95,6 +95,7 @@ _Where-related fields:_
 ## Notes about fields in the output "FullDash" dataset
 #### Where, What, WhenAge, Who
 These fields are prepped in the respective dash02#Where/What/When/Who.R scripts. They broadly accommodate both cultural and natural history datasets, incorporating standard Darwin Core fields when possible.  The input dataset groupings (listed above) indicate which input fields correspond to these output fields.
+Note: dash022What.R references the `/supplementary/WhatComNames.csv` lookup to join common names from [ITIS](https://www.itis.gov/) with the specimen dataset (on the DarOrder field).
 
 ### 1) Fields prepped in dash020FullBind.R:
 #### Quality
@@ -149,3 +150,8 @@ Labels corresponding to the 53 "WhenOrder" groups, ranging from 4.6 billion year
 ### 3) Extra fields prepped in dash028Ecoregions.R:
 #### Bioregion
 dash028Ecoregions.R references the `/supplementary/EcoRegionCountires.csv` lookup table to map specimens to one of the [WWF-defined ecoregions](http://wwf.panda.org/about_our_earth/ecoregions/ecoregion_list/) based on their country or ocean data. Currently, in cases where countries or oceans are in multiple ecoregions, specimens are likewise associated with multiple ecoregions.
+
+## Data & Development Acknowledgements
+Development and EMu datasets from the [Field Museum](fielmuseum.org) Technology and Science & Education Departments.
+Many thanks to [Naturalis](http://www.naturalis.nl/en/) -- We hope to incorporate more of the data available through [their API](http://netherlands-biodiversity-api-docs.readthedocs.io/en/latest/api_services_summary.html), but for now are working through their [GBIF IPT](http://www.gbif.org/publisher/396d5f30-dea9-11db-8ab4-b8a03c50a862)
+Many thanks to the Smithsonian [National Museum of Natural History](https://naturalhistory.si.edu/) for sharing data and input.
