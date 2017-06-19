@@ -9,8 +9,10 @@ setwd(paste0(origdir,"/data01raw"))
 
 #  What LUTs ####
 #  1-What: Merge Comm & Sci Names ####
+setwd(paste0(origdir,"/supplementary"))
+ItisComName <- read.csv(file="WhatComNames.csv", encoding="UTF-8", stringsAsFactors = F)
+setwd(paste0(origdir,"/data01raw"))
 
-ItisComName <- read.csv(file="OrdComNames.csv", encoding="UTF-8", stringsAsFactors = F)
 ItisKeep <- c("English","unspecified")
 ItisComName <- ItisComName[which(ItisComName$language %in% ItisKeep),]
 ItisComName <- ItisComName[,c("complete_name","vernacular_name")]

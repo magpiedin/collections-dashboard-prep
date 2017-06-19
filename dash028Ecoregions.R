@@ -27,7 +27,7 @@ DarCtryContOcean$CountryOcean[which(nchar(DarCtryContOcean$CountryOcean)<1)] <- 
 # Import Ecoregion/Realms-Country/Ocean join-tables
 setwd(paste0(origdir, "/supplementary"))
 Ecoregions <- read.csv("EcoRegionCountries.csv", stringsAsFactors = F)
-WWFtoESRI <- read.csv("EcoRegionWWF_ESRI.csv", stringsAsFactors = F)
+#WWFtoESRI <- read.csv("EcoRegionWWF_ESRI.csv", stringsAsFactors = F)
 
 Ecoregions <- unique(Ecoregions[which(nchar(Ecoregions$CountryOcean)>0),c("CountryOcean","EcoRegionsEnvironment")])
 Ecocheck <- dplyr::count(Ecoregions, CountryOcean)

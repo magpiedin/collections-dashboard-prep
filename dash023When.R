@@ -8,8 +8,10 @@ setwd(paste0(origdir,"/data01raw"))
 
 
 # Add Collection URLs (from enarratives) ####
-
+setwd(paste0(origdir,"/supplementary"))
 collURL <- read.csv(file="CollDashEd.csv", stringsAsFactors = F)
+setwd(paste0(origdir,"/data01raw"))
+
 collURL <- collURL[,c("DesSubjects", "MulIdentifier")] 
 colnames(collURL)[1] <- "DarCollectionCode"
 colnames(collURL)[2] <- "URL"
@@ -104,10 +106,11 @@ WhenDash$WhenAge[which(is.na(WhenDash$AttPeriod_tab)==F)] <- WhenDash$AttPeriod_
 print(paste("... ",substr(date(), 12, 19), "- building WHEN lookup table..."))
 
 # Merge WhenLUTs ####
-
+setwd(paste0(origdir,"/supplementary"))
 AgeAnthroLUT <- read.csv(file="WhenAttPerLUT.csv", stringsAsFactors = F)
-
 AgeGeoLUT <- read.csv(file="WhenChronoLUTemu.csv", stringsAsFactors = F)
+setwd(paste0(origdir,"/data01raw"))
+
 AgeGeoLUT$Eon[which(nchar(AgeGeoLUT$Eon)<1)] = NA
 AgeGeoLUT$Era[which(nchar(AgeGeoLUT$Era)<1)] = NA
 AgeGeoLUT$Period[which(nchar(AgeGeoLUT$Period)<1)] = NA
@@ -210,7 +213,10 @@ WhenDash4$WhenAgeMid[which(WhenDash4$Department=="Botany" | WhenDash4$Department
 
 
 # Add in AgePeriod Order & Name for WhenAge chart
+setwd(paste0(origdir, "/supplementary"))
 WhenChart <- read.csv("WhenYearRanges2.csv", stringsAsFactors = F)
+setwd(paste0(origdir,"/data01raw"))
+
 colnames(WhenChart)[4] <- "TimePeriodName"
 
 WhenDash4$Order <- .bincode(WhenDash4$WhenAgeMid, WhenChart$From, right=F, include.lowest = T)
