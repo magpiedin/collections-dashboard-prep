@@ -157,7 +157,9 @@ Lookup tables are exported for What, When, Where, and Who fields.  These are use
 #### WhoExperience.csv
 A count of individuals in each type of staff role (Collections, Research, Volunteer, Other) in each collection. 
 This is produced by the dash025Experience.R script, using the `/data01raw/emuPartiesExp/` dataset (sample data provided), which includes NamDepartment, NamBranch, EMu Group, and NamRoles_tab fields from eparties records for emu-users.
+
 (In EMu/eparties, retrieve EMu user records, and report the above fields)
+
 #### LoanSumCount.csv
 A count of total items loaned and total loans per year per collection. 
 This is produced by the dash026LoansPrep.R script, using the `/data01raw/emuLoans/` dataset (sample data provided), which includes the following fields from efmnhtransactions records for loans:
@@ -168,6 +170,7 @@ This is produced by the dash026LoansPrep.R script, using the `/data01raw/emuLoan
 - description (InvDescription_tab, InvGeography_tab)
 
 (In EMu/efmnhtransactions, retrieve loan records, and run the "DashboardTrans - Copy" report)
+
 #### VisitSumCount.csv
 A count of total visitors and total visits per year per collection. 
 This is produced by the dash027VisitPrep.R script, using the `/data01raw/emuConsult/` dataset (sample data provided), which includes the following fields from efmnhrepatriation records for collection visits:
