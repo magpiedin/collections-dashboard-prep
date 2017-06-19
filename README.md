@@ -1,7 +1,7 @@
 # collections-dashboard-prep
 These scripts prepare EMu and GBIF collections data for a Collections Dashboard.
 
-Catalogue records are combined with Accession records to count catalogued and backlogged items in the collections.
+Catalogue/Specimen records are combined with Accession/Storage Unit records to count catalogued and backlogged items in the collections.
 
 ## How to use these scripts
 1. Clone repo locally.
@@ -150,6 +150,31 @@ Labels corresponding to the 53 "WhenOrder" groups, ranging from 4.6 billion year
 ### 3) Extra fields prepped in dash028Ecoregions.R:
 #### Bioregion
 dash028Ecoregions.R references the `/supplementary/EcoRegionCountires.csv` lookup table to map specimens to one of the [WWF-defined ecoregions](http://wwf.panda.org/about_our_earth/ecoregions/ecoregion_list/) based on their country or ocean data. Currently, in cases where countries or oceans are in multiple ecoregions, specimens are likewise associated with multiple ecoregions.
+
+## Notes about extra output datasets
+#### LUTs (WhatLUTB.csv, WhenAgeLUT.csv, WhereLUT.csv, WhoLUT.csv)
+Lookup tables are exported for What, When, Where, and Who fields.  These are used by the dashboard search fields.
+#### WhoExperience.csv
+A count of individuals in each type of staff role (Collections, Research, Volunteer, Other) in each collection. 
+This is produced by the dash025Experience.R script, using the `/data01raw/emuPartiesExp/` dataset (sample data provided), which includes NamDepartment, NamBranch, EMu Group, and NamRoles_tab fields from eparties records for emu-users.
+(In EMu/eparties, retrieve EMu user records, and report the above fields)
+#### LoanSumCount.csv
+A count of total items loaned and total loans per year per collection. 
+This is produced by the dash026LoansPrep.R script, using the `/data01raw/emuLoans/` dataset (sample data provided), which includes the following fields from efmnhtransactions records for loans:
+- item counts (InvCount_tab, ObcTotalItems, ObcTotalObjects, ObuTotalItems, ObuTotalObjects, TraTotalInvoiceItems, TraTotalItemsLoaned, TraTotalItemsOutstanding)
+- loan types (InvTransactionType_tab, LoaLoanType, LoaStatus, TraTransactionType)
+- loan dates (TraDateAuthorized, TraDateProcessed)
+- department (AccCatalogue, SumDepartment)
+- description (InvDescription_tab, InvGeography_tab)
+(In EMu/efmnhtransactions, retrieve loan records, and run the "DashboardTrans - Copy" report)
+#### VisitSumCount.csv
+A count of total visitors and total visits per year per collection. 
+This is produced by the dash027VisitPrep.R script, using the `/data01raw/emuConsult/` dataset (sample data provided), which includes the following fields from efmnhrepatriation records for collection visits:
+- department (SecDepartment_tab)
+- total visitors (ResNoOfVisitors, ResResearchersRef_tab[eparties].NamBriefName)
+- dates (ResCommencementDate, ResCompletionDate)
+- record type (InfRecordType)
+(In EMu/efmnhrepatriation, retrieve research visit records, and run the "VisitorDays - Copy" report)
 
 ## Data & Development Acknowledgements
 Development and EMu datasets from the [Field Museum](fielmuseum.org) Technology and Science & Education Departments.
