@@ -92,11 +92,11 @@ _Where-related fields:_
  - AccCollectionEventRef.ColSiteRef.LocCountry_tab
  - AccCollectionEventRef.ColSiteRef.LocOcean_tab
 
-### Notes about fields in the output "FullDash" dataset
+## Notes about fields in the output "FullDash" dataset
 #### Where, What, WhenAge, Who
 These fields are prepped in the respective dash02#Where/What/When/Who.R scripts. They broadly accommodate both cultural and natural history datasets, incorporating standard Darwin Core fields when possible.  The input dataset groupings (listed above) indicate which input fields correspond to these output fields.
 
-#### 1) Fields prepped in dash020FullBind.R:
+### 1) Fields prepped in dash020FullBind.R:
 #### Quality
 A ranking based on the following criteria (poor = 1; good = 9):
  - 1 = Digital accession record exists
@@ -132,7 +132,7 @@ A binary value where "1" = has Multimedia attached, and "0" = no Multimedia atta
 The name of the institution and collection to which a record belongs. 
 NOTE: The donut chart references the `/supplementary/CollectionDomain2.csv` lookup table to group collections into domains. Institutions would be invited to specify their own collection-to-domain mappings. (Standardized vocabulary needed from the community.)
 
-#### 2) Extra fields prepped in dash023When.R:
+### 2) Extra fields prepped in dash023When.R:
 #### Department
 The name of the department to which a record belongs. 
 NOTE: dash023When.R references the `/supplementary/Departments.csv` lookup table to standardize department names while calculating specimen ages. Institutions would be invited to specify their own collection-to-department mappings. (This vocabulary should be standardized and/or consolidated with CollectionDomain2.csv)
@@ -146,6 +146,6 @@ Ordinal values between 1 and 53 to group numeric ages into time-groups; necessar
 #### WhenTimeLabel
 Labels corresponding to the 53 "WhenOrder" groups, ranging from 4.6 billion years ago to 2020. Loosely, ranges are grouped by geologic periods/epochs/eras prior to ~18th century dates, and grouped by decade after 18th century dates. Chart labels and corresponding date ranges are listed in `/supplementary/WhenYearRanges2.csv`. Range divisions were chosen in attempt to fit data to the current chart layout, but please tell us if you know of more valid/sensible alternatives.
 
-#### 3) Extra fields prepped in dash028Ecoregions.R:
+### 3) Extra fields prepped in dash028Ecoregions.R:
 #### Bioregion
 dash028Ecoregions.R references the `/supplementary/EcoRegionCountires.csv` lookup table to map specimens to one of the [WWF-defined ecoregions](http://wwf.panda.org/about_our_earth/ecoregions/ecoregion_list/) based on their country or ocean data. Currently, in cases where countries or oceans are in multiple ecoregions, specimens are likewise associated with multiple ecoregions.
