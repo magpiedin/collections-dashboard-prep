@@ -1,1 +1,26 @@
-
+efmnhtransactions_key,irn,AccCatalogue,LoaLoanType,LoaStatus,ObcTotalItems,ObcTotalObjects,ObuTotalItems,ObuTotalObjects,SumDepartment,TraDateAuthorized,TraDateProcessed,TraTotalInvoiceItems,TraTotalItemsLoaned,TraTotalItemsOutstanding,TraTransactionType
+1,1001,Mammals,,Open,5,33,,,Zoology,,2017-01-01,,33,,Outgoing Loan
+2,1002,Amphibians and Reptiles,,Open,,,,1,Zoology,2017-01-01,2017-01-02,,,,Incoming Loan
+3,1003,Birds,,Open,55,333,,,Zoology,,2017-01-03,,333,100,Outgoing Loan
+4,1004,Birds,,Open,555,3,,,Zoology,,2017-01-04,,33,10,Outgoing Loan
+5,1005,Fishes,,Open,5,3,,,Zoology,2017-01-01,2017-01-05,,3,1,Outgoing Loan
+6,1006,Botany,Outgoing Loan,Closed,,,333,1,Botany,,2017-01-01,55,333,,
+7,1007,Botany,Outgoing Loan,Closed,,,33,1,Botany,,2017-01-02,,55,,
+8,1008,Fishes,,Open,55,3,,,Zoology,2017-01-01,2017-01-03,,5,3,Outgoing Loan
+9,1009,Botany,Outgoing Loan,Open,5,3,3,1,Botany,,2017-01-04,,555,33,
+10,1010,Fishes,,Open,555,3,,,Zoology,2017-01-01,2017-01-05,,55,33,Outgoing Loan
+11,1011,Invertebrate Zoology,,Closed,,,,,Zoology,,2017-01-01,,,,Outgoing Loan
+12,1012,Invertebrate Zoology,,Closed,,,,,Zoology,,2017-01-02,,,,Outgoing Loan
+13,1013,Invertebrate Zoology,,Closed,,3,,,Zoology,,2017-01-03,,,,Outgoing Loan
+14,1014,Insects,,Closed,,,333,1,Zoology,,2017-01-04,,555,,Incoming Loan
+15,1015,Insects,,Open,,,33,7,Zoology,,2017-01-05,,55,33,Outgoing Loan
+16,1016,Insects,,Open,,,33,2,Zoology,,2017-01-01,,555,333,Outgoing Loan
+17,1017,Insects,,Closed,5,3,3,1,Zoology,,2017-01-02,,55,,Outgoing Loan
+18,1018,Fishes,,,,,,,Zoology,,1996,,,,Outgoing Loan
+19,1019,Fishes,,,,,,,Zoology,,1998,,,,Outgoing Loan
+20,1020,Fishes,,,,,,,Zoology,,1998,,,,Outgoing Loan
+21,1021,Fishes,,,,,,,Zoology,,1999,,,,Outgoing Loan
+22,1022,Fishes,,,,,,,Zoology,,1999,,,,Outgoing Loan
+23,1023,Fishes,,,555,33,,,Zoology,,1999,,555,33,Outgoing Loan
+24,1024,Fishes,,,,,,,Zoology,,2000,,,,Outgoing Loan
+25,1025,Amphibians and Reptiles,,Closed,5,3,,,Zoology,2016-01-01,2016-02-10,,5,3,Outgoing Loan
