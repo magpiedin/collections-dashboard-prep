@@ -166,6 +166,7 @@ This is produced by the dash026LoansPrep.R script, using the `/data01raw/emuLoan
 - loan dates (TraDateAuthorized, TraDateProcessed)
 - department (AccCatalogue, SumDepartment)
 - description (InvDescription_tab, InvGeography_tab)
+
 (In EMu/efmnhtransactions, retrieve loan records, and run the "DashboardTrans - Copy" report)
 #### VisitSumCount.csv
 A count of total visitors and total visits per year per collection. 
@@ -174,9 +175,10 @@ This is produced by the dash027VisitPrep.R script, using the `/data01raw/emuCons
 - total visitors (ResNoOfVisitors, ResResearchersRef_tab[eparties].NamBriefName)
 - dates (ResCommencementDate, ResCompletionDate)
 - record type (InfRecordType)
+
 (In EMu/efmnhrepatriation, retrieve research visit records, and run the "VisitorDays - Copy" report)
 
 ## Data & Development Acknowledgements
-Development and EMu datasets from the [Field Museum](fielmuseum.org) Technology and Science & Education Departments.
-Many thanks to [Naturalis](http://www.naturalis.nl/en/) -- We hope to incorporate more of the data available through [their API](http://netherlands-biodiversity-api-docs.readthedocs.io/en/latest/api_services_summary.html), but for now are working through their [GBIF IPT](http://www.gbif.org/publisher/396d5f30-dea9-11db-8ab4-b8a03c50a862)
-Many thanks to the Smithsonian [National Museum of Natural History](https://naturalhistory.si.edu/) for sharing data and input.
+- Development and EMu datasets from the [Field Museum](fielmuseum.org) Technology and Science & Education Departments.
+- Many thanks to [Naturalis](http://www.naturalis.nl/en/) -- We hope to incorporate more of the data available through [their API](http://netherlands-biodiversity-api-docs.readthedocs.io/en/latest/api_services_summary.html), but for now are working through their [GBIF IPT](http://www.gbif.org/publisher/396d5f30-dea9-11db-8ab4-b8a03c50a862)
+- Many thanks to the Smithsonian [National Museum of Natural History](https://naturalhistory.si.edu/) for sharing data and input.
